@@ -86,7 +86,7 @@
 <span class="hljs-keyword">import</span> axios <span class="hljs-keyword">from</span> <span class="hljs-string">"axios"</span>;
 
 measure(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> axios.get(<span class="hljs-string">"http://www.httpbin.org/get"</span>))
-    .then(<span class="hljs-function"><span class="hljs-params">measurement</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Mean: <span class="hljs-subst">${measurement.mean}</span>`</span> ms););</code></pre>
+    .then(<span class="hljs-function"><span class="hljs-params">measurement</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Mean: <span class="hljs-subst">${measurement.mean}</span> ms`</span>));</code></pre>
 				<p>If you measure a function that returns a promise, Kelonio will automatically
 					measure the time until it&#39;s resolved as well. The resulting <code>measurement</code>
 				exposes various stats, like maximum time and standard deviation.</p>
