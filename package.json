@@ -1,0 +1,38 @@
+{
+  "name": "kelonio",
+  "version": "0.1.0",
+  "description": "Performance testing library",
+  "homepage": "https://github.com/mtkennerly/kelonio",
+  "license": "MIT",
+  "author": "Matthew T. Kennerly <mtkennerly@gmail.com>",
+  "files": [
+    "out/*"
+  ],
+  "main": "out/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mtkennerly/kelonio.git"
+  },
+  "scripts": {
+    "build": "npx tsc -p ./",
+    "docs": "npx typedoc ./src/index.ts --out docs --excludeNotExported --excludePrivate --excludeExternals",
+    "lint": "npx tslint --fix src/*.ts tests/*.ts",
+    "prepack": "npm run build",
+    "test": "npx jest --verbose --silent --coverage --runInBand"
+  },
+  "dependencies": {
+    "mathjs": "^6.2.3"
+  },
+  "devDependencies": {
+    "@types/jest": "^24.0.21",
+    "@types/mathjs": "^6.0.2",
+    "@types/mocha": "^5.2.7",
+    "@types/node": "^12.12.5",
+    "jest": "^24.9.0",
+    "strip-indent": "^3.0.0",
+    "ts-jest": "^24.1.0",
+    "tslint": "^5.20.0",
+    "typedoc": "^0.15.0",
+    "typescript": "^3.6.4"
+  }
+}

@@ -1,0 +1,14 @@
+coverage/
+dist/
+docs/
+logs/
+node_modules/
+out/
+public/*.bundle.js
+tmp*/
+.vscode/
+.vagrant/
+*.tgz
+*.log
+junit.xml
+.kelonio.state.json

@@ -1,0 +1,41 @@
+{
+  "rules": {
+    "class-name": true,
+    "curly": true,
+    "member-access": [
+      true,
+      "no-public"
+    ],
+    "no-duplicate-variable": true,
+    "no-string-throw": true,
+    "no-unused-expression": true,
+    "no-var-keyword": true,
+    "ordered-imports": true,
+    "quotemark": [
+      true,
+      "double",
+      "avoid-escape",
+      "avoid-template"
+    ],
+    "semicolon": [
+      true,
+      "always"
+    ],
+    "triple-equals": true,
+    "typedef": [
+      true,
+      "call-signature",
+      "parameter",
+      "property-declaration",
+      "member-variable-declaration"
+    ],
+    "variable-name": {
+      "options": [
+        "ban-keywords",
+        "check-format",
+        "require-const-for-all-caps"
+      ]
+    }
+  },
+  "defaultSeverity": "warning"
+}

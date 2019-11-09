@@ -1,0 +1,23 @@
+{
+  "name": "kelonio-example-jest",
+  "version": "0.1.0",
+  "description": "Dummy project for using Kelonio with Jest",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mtkennerly/kelonio.git"
+  },
+  "scripts": {
+    "test": "npx jest --verbose"
+  },
+  "dependencies": {
+    "kelonio": "file:../.."
+  },
+  "devDependencies": {
+    "@types/jest": "^24.0.21",
+    "@types/node": "^12.12.5",
+    "jest": "^24.9.0",
+    "ts-jest": "^24.1.0",
+    "typescript": "^3.6.4"
+  }
+}
