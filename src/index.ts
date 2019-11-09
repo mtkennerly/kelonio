@@ -275,9 +275,8 @@ export class Benchmark {
      * @param fn - Function to measure. If it returns a promise,
      *     then it will be `await`ed automatically as part of the iteration.
      * @param options - Options to customize the measurement.
-     *     Note that `verify` will be overridden to `true`.
      */
-    async record(fn: () => any, options?: Partial<MeasureOptions>): Promise<Measurement>;
+    async record(fn: () => any, options?: Partial<Omit<MeasureOptions, "verify">>): Promise<Measurement>;
     /**
      * Measure the time it takes for a function to execute.
      * In addition to returning the measurement itself, this method also
@@ -290,9 +289,8 @@ export class Benchmark {
      * @param fn - Function to measure. If it returns a promise,
      *     then it will be `await`ed automatically as part of the iteration.
      * @param options - Options to customize the measurement.
-     *     Note that `verify` will be overridden to `true`.
      */
-    async record(description: string | Array<string>, fn: () => any, options?: Partial<MeasureOptions>): Promise<Measurement>;
+    async record(description: string | Array<string>, fn: () => any, options?: Partial<Omit<MeasureOptions, "verify">>): Promise<Measurement>;
     async record(a: any, b: any, c?: any): Promise<Measurement> {
         let description: string | Array<string>;
         let descriptionSpecified = false;
