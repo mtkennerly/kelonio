@@ -8,7 +8,7 @@
     "url": "https://github.com/mtkennerly/kelonio.git"
   },
   "scripts": {
-    "test": "npx jest --verbose"
+    "test": "npx jest --verbose --silent --runInBand"
   },
   "dependencies": {
     "kelonio": "file:../.."
