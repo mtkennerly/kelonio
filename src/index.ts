@@ -2,7 +2,7 @@ import fs from "fs";
 import * as mathjs from "mathjs";
 import { STATE_FILE } from "./etc";
 import JestReporter from "./jestReporter";
-import MochaReporter from "./MochaReporter";
+import MochaReporter from "./mochaReporter";
 
 export { JestReporter, MochaReporter };
 

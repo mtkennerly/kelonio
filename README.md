@@ -1,4 +1,8 @@
 # Kelonio
+[![Build Status](https://travis-ci.org/mtkennerly/kelonio.svg?branch=master)](https://travis-ci.org/mtkennerly/kelonio)
+[![Version](https://img.shields.io/npm/v/kelonio)](https://www.npmjs.com/package/kelonio)
+[![License: MIT](https://img.shields.io/badge/license-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 Kelonio is a performance testing library for Node.js, written in TypeScript.
 Whereas many similar projects are test frameworks in and of themselves,
 Kelonio is fundamentally a **library** and therefore aims to integrate with
@@ -10,7 +14,8 @@ and you can use it in the console and scripts as well. Kelonio also comes with
 reporters for Jest and Mocha built-in, without any dependency on those frameworks.
 
 ## Usage
-Full API documentation: https://mtkennerly.github.io/kelonio/modules/_index_.html
+Full API documentation:
+[https://mtkennerly.github.io/kelonio/modules/\_index\_.html](https://mtkennerly.github.io/kelonio/modules/_index_.html)
 
 For simple, one-off checks, like in the console or a script, use the `measure`
 function:
