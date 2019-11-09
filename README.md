@@ -25,7 +25,7 @@ import { measure } from "kelonio";
 import axios from "axios";
 
 measure(() => axios.get("http://www.httpbin.org/get"))
-    .then(measurement => console.log(`Mean: ${measurement.mean}` ms););
+    .then(measurement => console.log(`Mean: ${measurement.mean} ms`));
 ```
 
 If you measure a function that returns a promise, Kelonio will automatically
