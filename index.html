@@ -96,8 +96,7 @@ measure(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</s
 					<summary>Example: Jest</summary>
 					<div style="padding-left: 5px; border-left: 1px solid black;">
 						<p>  Jest doesn&#39;t currently expose a way to get each individual test&#39;s name
-							while running, so you have to provide a description to <code>record()</code>,
-						such as if one test performs several different measurements.</p>
+						while running, so you have to provide a description to <code>record()</code>.</p>
 						<p>  Tests:</p>
 						<pre><code class="language-typescript">  <span class="hljs-keyword">import</span> { benchmark } <span class="hljs-keyword">from</span> <span class="hljs-string">"kelonio"</span>;
   <span class="hljs-keyword">import</span> axios <span class="hljs-keyword">from</span> <span class="hljs-string">"axios"</span>;
@@ -147,7 +146,8 @@ measure(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</s
 					<summary>Example: Mocha</summary>
 					<div style="padding-left: 5px; border-left: 1px solid black;">
 						<p>  The Mocha reporter can automatically infer the descriptions from the test
-						names, but you&#39;re still free to pass additional descriptions to <code>record()</code>.</p>
+							names, but you&#39;re still free to pass additional descriptions to <code>record()</code>,
+						such as if one test performs several different measurements.</p>
 						<p>  Tests:</p>
 						<pre><code class="language-typescript">  <span class="hljs-keyword">import</span> { benchmark } <span class="hljs-keyword">from</span> <span class="hljs-string">"kelonio"</span>;
   <span class="hljs-keyword">import</span> axios <span class="hljs-keyword">from</span> <span class="hljs-string">"axios"</span>;
@@ -180,7 +180,7 @@ measure(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</s
 
   - - - - - - - - - - - - - - - - - Performance - - - - - - - - - - - - - - - - -
   An HTTP client:
-    can send POST requests:
+    can send <span class="hljs-builtin-name">GET</span> requests:
       83.25152 ms (+/- 58.77542 ms) <span class="hljs-keyword">from</span> 100 iterations
     can send POST requests:
       49.43074 ms (+/- 2.39217 ms) <span class="hljs-keyword">from</span> 10 iterations
