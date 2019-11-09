@@ -240,8 +240,21 @@ function verifyMeasurement(measurement: Measurement, options: MeasureOptions): v
  * Aggregator for performance results of various tests.
  */
 export class Benchmark {
+    /**
+     * Raw data collected from [[Benchmark.record]].
+     */
     data: BenchmarkData = {};
+
+    /**
+     * Options for customizing [[Benchmark]] behavior.
+     */
     config: BenchmarkConfig;
+
+    /**
+     * Default description to prepend to any description passed to
+     * [[Benchmark.record]]. This is mainly for use by reporters,
+     * which would set this to each test name as they run.
+     */
     baseDescription: Array<string> = [];
 
     constructor() {
@@ -272,8 +285,8 @@ export class Benchmark {
      *
      * @param description - Name of what is being tested.
      *     This can be a series of names for nested categories.
-     *     Must not be empty, unless [[Benchmark.baseDescription]] is set.
-     *     If both are set, then they will be concatenated.
+     *     Must not be empty. If [[Benchmark.baseDescription]] is also set,
+     *     then the two groups will be concatenated.
      * @param fn - Function to measure. If it returns a promise,
      *     then it will be `await`ed automatically as part of the iteration.
      * @param options - Options to customize the measurement.

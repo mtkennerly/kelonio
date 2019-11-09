@@ -15,6 +15,7 @@
   },
   "scripts": {
     "build": "npx tsc -p ./",
+    "deploy": "npm run docs && touch docs/.nojekyll && grep -rl 'Defined in C:/' docs | xargs sed -ri 's/^.+Defined in C:.+$//g' && npx gh-pages --dist docs --dotfiles --src **/*",
     "docs": "npx typedoc ./src/index.ts --out docs --excludeNotExported --excludePrivate --excludeExternals",
     "lint": "npx tslint --fix src/*.ts tests/*.ts",
     "prepack": "npm run build",
@@ -28,6 +29,7 @@
     "@types/mathjs": "^6.0.2",
     "@types/mocha": "^5.2.7",
     "@types/node": "^12.12.5",
+    "gh-pages": "^2.1.1",
     "jest": "^24.9.0",
     "strip-indent": "^3.0.0",
     "ts-jest": "^24.1.0",

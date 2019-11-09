@@ -7,11 +7,3 @@
   rev: v1.1.7
   hooks:
     - id: forbid-tabs
-- repo: local
-  hooks:
-    - id: Linting
-      name: Linting
-      language: system
-      entry: npm run lint
-      pass_filenames: false
-      files: '\.(tsx?|jsx?)$'

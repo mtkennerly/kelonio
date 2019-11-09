@@ -10,6 +10,8 @@ and you can use it in the console and scripts as well. Kelonio also comes with
 reporters for Jest and Mocha built-in, without any dependency on those frameworks.
 
 ## Usage
+Full API documentation: https://mtkennerly.github.io/kelonio/modules/_index_.html
+
 For simple, one-off checks, like in the console or a script, use the `measure`
 function:
 
