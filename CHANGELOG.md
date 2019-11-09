@@ -1,4 +1,4 @@
-## Unreleased
+## v0.2.0 (2019-11-09)
 
 * Made `JestReporter.initializeKelonio()` enable data serialization so that
   you do not have to do that explicitly in your `jest.setup.js`.

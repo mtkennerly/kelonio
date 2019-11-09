@@ -144,7 +144,7 @@ Click to expand an example:
 
   - - - - - - - - - - - - - - - - - Performance - - - - - - - - - - - - - - - - -
   An HTTP client:
-    can send POST requests:
+    can send GET requests:
       83.25152 ms (+/- 58.77542 ms) from 100 iterations
     can send POST requests:
       49.43074 ms (+/- 2.39217 ms) from 10 iterations
