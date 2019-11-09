@@ -1,0 +1,322 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>kelonio</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.js" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">kelonio</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="globals.html">Globals</a>
+				</li>
+			</ul>
+			<h1> kelonio</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<a href="#kelonio" id="kelonio" style="color: inherit; text-decoration: none;">
+					<h1>Kelonio</h1>
+				</a>
+				<p>Kelonio is a performance testing library for Node.js, written in TypeScript.
+					Whereas many similar projects are test frameworks in and of themselves,
+					Kelonio is fundamentally a <strong>library</strong> and therefore aims to integrate with
+					existing test frameworks seamlessly instead of reinventing the wheel.
+					You can use it inside of your existing tests from frameworks such as
+					<a href="https://www.npmjs.com/package/jest">Jest</a> and <a href="https://www.npmjs.com/package/mocha">Mocha</a>
+					(along with any loaders like <a href="https://www.npmjs.com/package/ts-jest">ts-jest</a>),
+					and you can use it in the console and scripts as well. Kelonio also comes with
+				reporters for Jest and Mocha built-in, without any dependency on those frameworks.</p>
+				<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
+					<h2>Usage</h2>
+				</a>
+				<p>For simple, one-off checks, like in the console or a script, use the <code>measure</code>
+				function:</p>
+				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> { measure } <span class="hljs-keyword">from</span> <span class="hljs-string">"kelonio"</span>;
+<span class="hljs-keyword">import</span> axios <span class="hljs-keyword">from</span> <span class="hljs-string">"axios"</span>;
+
+measure(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> axios.get(<span class="hljs-string">"http://www.httpbin.org/get"</span>))
+    .then(<span class="hljs-function"><span class="hljs-params">measurement</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Mean: <span class="hljs-subst">${measurement.mean}</span>`</span> ms););</code></pre>
+				<p>If you measure a function that returns a promise, Kelonio will automatically
+					measure the time until it&#39;s resolved as well. The resulting <code>measurement</code>
+				exposes various stats, like maximum time and standard deviation.</p>
+				<p>For aggregating results inside of a test framework, use <code>benchmark.record</code>.
+				Click to expand an example:</p>
+				<details>
+					<summary>Example: Jest</summary>
+					<div style="padding-left: 5px; border-left: 1px solid black;">
+						<p>  Jest doesn&#39;t currently expose a way to get each individual test&#39;s name
+							while running, so you have to provide a description to <code>record()</code>,
+						such as if one test performs several different measurements.</p>
+						<p>  Tests:</p>
+						<pre><code class="language-typescript">  <span class="hljs-keyword">import</span> { benchmark } <span class="hljs-keyword">from</span> <span class="hljs-string">"kelonio"</span>;
+  <span class="hljs-keyword">import</span> axios <span class="hljs-keyword">from</span> <span class="hljs-string">"axios"</span>;
+
+  describe(<span class="hljs-string">"An HTTP client"</span>, <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+      it(<span class="hljs-string">"can send GET requests"</span>, <span class="hljs-keyword">async</span> () =&gt; {
+          <span class="hljs-keyword">await</span> benchmark.record(
+              [<span class="hljs-string">"HTTP client"</span>, <span class="hljs-string">"GET"</span>],
+              <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> axios.get(<span class="hljs-string">"http://www.httpbin.org/get"</span>)
+          );
+      }, <span class="hljs-number">30</span>_000);
+
+      it(<span class="hljs-string">"can send POST requests"</span>, <span class="hljs-keyword">async</span> () =&gt; {
+          <span class="hljs-keyword">await</span> benchmark.record(
+              [<span class="hljs-string">"HTTP client"</span>, <span class="hljs-string">"POST"</span>],
+              <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> axios.post(<span class="hljs-string">"http://www.httpbin.org/post"</span>),
+              { iterations: <span class="hljs-number">10</span>, meanUnder: <span class="hljs-number">10</span> },
+          );
+      }, <span class="hljs-number">30</span>_000);
+  });</code></pre>
+						<p>  Output:</p>
+						<pre><code>  FAIL ./index.test.ts (16.576s)
+    An HTTP<span class="hljs-built_in"> client
+</span>      √ can send <span class="hljs-builtin-name">GET</span> requests (8332ms)
+      × can send POST requests (508ms)
+
+    ● An HTTP<span class="hljs-built_in"> client </span>› can send POST requests
+
+      Mean time of 49.43073600000001 ms exceeded threshold of 10 ms
+
+  Test Suites: 1 failed, 1 total
+  Tests:       1 failed, 1 passed, 2 total
+  Snapshots:   0 total
+  Time:        18.296s
+
+  - - - - - - - - - - - - - - - - - Performance - - - - - - - - - - - - - - - - -
+  HTTP client:
+    GET:
+      83.25152 ms (+/- 58.77542 ms) <span class="hljs-keyword">from</span> 100 iterations
+    POST:
+      49.43074 ms (+/- 2.39217 ms) <span class="hljs-keyword">from</span> 10 iterations
+  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</code></pre><p>  The first time on each line is the mean duration, and the <code>+/-</code> time is
+						the margin of error at a 95% confidence level.</p>
+					</div>
+				</details>
+				<details>
+					<summary>Example: Mocha</summary>
+					<div style="padding-left: 5px; border-left: 1px solid black;">
+						<p>  The Mocha reporter can automatically infer the descriptions from the test
+						names, but you&#39;re still free to pass additional descriptions to <code>record()</code>.</p>
+						<p>  Tests:</p>
+						<pre><code class="language-typescript">  <span class="hljs-keyword">import</span> { benchmark } <span class="hljs-keyword">from</span> <span class="hljs-string">"kelonio"</span>;
+  <span class="hljs-keyword">import</span> axios <span class="hljs-keyword">from</span> <span class="hljs-string">"axios"</span>;
+
+  describe(<span class="hljs-string">"An HTTP client"</span>, <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+      it(<span class="hljs-string">"can send GET requests"</span>, <span class="hljs-keyword">async</span> () =&gt; {
+          <span class="hljs-keyword">await</span> benchmark.record(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> axios.get(<span class="hljs-string">"http://www.httpbin.org/get"</span>));
+      }, <span class="hljs-number">30</span>_000);
+
+      it(<span class="hljs-string">"can send POST requests"</span>, <span class="hljs-keyword">async</span> () =&gt; {
+          <span class="hljs-keyword">await</span> benchmark.record(
+              <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> axios.post(<span class="hljs-string">"http://www.httpbin.org/post"</span>),
+              { iterations: <span class="hljs-number">10</span>, meanUnder: <span class="hljs-number">10</span> },
+          );
+      }, <span class="hljs-number">30</span>_000);
+  });</code></pre>
+						<p>  Output:</p>
+						<pre><code>    An HTTP<span class="hljs-built_in"> client
+</span>      √ can send <span class="hljs-builtin-name">GET</span> requests
+      1) can send POST requests
+
+
+    1 passing (8332ms)
+    1 failing
+
+    1) An HTTP<span class="hljs-built_in"> client
+</span>        can send POST requests:
+      Error: Mean time of 49.43073600000001 ms exceeded threshold of 10 ms
+
+
+  - - - - - - - - - - - - - - - - - Performance - - - - - - - - - - - - - - - - -
+  An HTTP client:
+    can send POST requests:
+      83.25152 ms (+/- 58.77542 ms) <span class="hljs-keyword">from</span> 100 iterations
+    can send POST requests:
+      49.43074 ms (+/- 2.39217 ms) <span class="hljs-keyword">from</span> 10 iterations
+  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</code></pre><p>  The first time on each line is the mean duration, and the <code>+/-</code> time is
+						the margin of error at a 95% confidence level.</p>
+					</div>
+				</details>
+				<p>Refer to the <code>examples</code> folder for sample projects that integrate Kelonio with
+				different test frameworks.</p>
+				<a href="#versioning" id="versioning" style="color: inherit; text-decoration: none;">
+					<h2>Versioning</h2>
+				</a>
+				<p>This project uses <a href="https://semver.org">Semantic Versioning</a>. Public API:</p>
+				<ul>
+					<li>All items that can be imported <code>from &quot;kelonio&quot;</code> and their public attributes.</li>
+					<li>The location of reporter modules:<ul>
+							<li><code>node_modules/kelonio/out/jestReporter.js</code>.</li>
+							<li><code>node_modules/kelonio/out/mochaReporter.js</code>.</li>
+						</ul>
+					</li>
+				</ul>
+				<a href="#comparison-with-other-tools" id="comparison-with-other-tools" style="color: inherit; text-decoration: none;">
+					<h2>Comparison with other tools</h2>
+				</a>
+				<ul>
+					<li><a href="https://www.npmjs.com/package/benchmark">Benchmark</a>:<ul>
+							<li>Requires defining tests in its own framework.</li>
+							<li>Doesn&#39;t provide a default report format, so you have to write your own
+							reporting in callbacks.</li>
+							<li>Callbacks must be classic <code>function () {}</code> style because they need access
+								to <code>this</code>, which is not accounted for by
+							<a href="https://www.npmjs.com/package/@types/benchmark">@types/benchmark</a>.</li>
+						</ul>
+					</li>
+					<li><a href="https://www.npmjs.com/package/nanobench">Nanobench</a>:<ul>
+							<li>Requires defining tests in its own framework.</li>
+							<li>The CLI can only handle JavaScript code, so in a TypeScript project,
+								you either have to compile the tests in addition to the main source
+							or you have to use <code>ts-node</code> (which appears to degrade the performance results).</li>
+							<li>No typings available for TypeScript.</li>
+						</ul>
+					</li>
+					<li><a href="https://www.npmjs.com/package/matcha">Matcha</a>:<ul>
+							<li>Requires defining tests in its own framework.</li>
+							<li>The CLI can only handle JavaScript code, so in a TypeScript project,
+								you either have to compile the tests instead of just the main source
+							or you have to use <code>ts-node</code> (which appears to degrade the performance results).</li>
+							<li>No typings available for TypeScript.</li>
+							<li>Depends on <a href="https://www.npmjs.com/package/electron">Electron</a>.</li>
+						</ul>
+					</li>
+				</ul>
+				<a href="#development" id="development" style="color: inherit; text-decoration: none;">
+					<h2>Development</h2>
+				</a>
+				<p>Please refer to <a href="./CONTRIBUTING.md">CONTRIBUTING.md</a>.</p>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="globals.html"><em>Globals</em></a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_index_.html">"index"</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-module"><span class="tsd-kind-icon">Module</span></li>
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+				<li class="tsd-kind-enum-member"><span class="tsd-kind-icon">Enumeration member</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-enum"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-enum"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-interface"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-class"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
+				<li class="tsd-kind-call-signature tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="assets/js/search.js"><' + '/script>');</script>
+</body>
+</html>
