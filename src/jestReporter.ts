@@ -6,6 +6,7 @@ class JestReporter implements jest.Reporter {
     private activeKelonioBenchmark: Benchmark = benchmark;
 
     static initializeKelonio(): void {
+        benchmark.config.serializeData = true;
         try { fs.unlinkSync(STATE_FILE); } catch { }
     }
 

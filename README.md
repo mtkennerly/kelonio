@@ -40,8 +40,7 @@ Click to expand an example:
   <div style="padding-left: 5px; border-left: 1px solid black;">
 
   Jest doesn't currently expose a way to get each individual test's name
-  while running, so you have to provide a description to `record()`,
-  such as if one test performs several different measurements.
+  while running, so you have to provide a description to `record()`.
 
   Tests:
 
@@ -104,7 +103,8 @@ Click to expand an example:
   <div style="padding-left: 5px; border-left: 1px solid black;">
 
   The Mocha reporter can automatically infer the descriptions from the test
-  names, but you're still free to pass additional descriptions to `record()`.
+  names, but you're still free to pass additional descriptions to `record()`,
+  such as if one test performs several different measurements.
 
   Tests:
 

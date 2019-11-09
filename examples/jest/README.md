@@ -5,12 +5,11 @@
   * Add `jest.setup.js` to `setupFilesAfterEnv`.
   * Enable Kelonio's Jest reporter.
 * In `jest.setup.js`:
-  * Enable benchmark serialization.
-  * Call `JestReporter.initializeKelonio()` to ensure no serialized results
-    from a prior test run are present. This is necessary because Jest does not
-    expose an event for the start of the test run. If you omit this, the
-    reporter will still delete the serialized data after the report is done,
-    but if the tests are aborted midway, it may not have a chance to do that.
+  * Call `JestReporter.initializeKelonio()`, which will:
+    * Enable benchmark serialization, because otherwise the reporter does not
+      have access to performance data from the test run. The data will be in
+      `.kelonio.state.json`, which will be deleted at the end of the tests.
+    * Ensure no serialized results from a prior test run are present.
 * In `index.test.ts` or any other test file:
   * Call `benchmark.record()`.
 
