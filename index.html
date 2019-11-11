@@ -153,16 +153,18 @@ measure(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</s
   <span class="hljs-keyword">import</span> axios <span class="hljs-keyword">from</span> <span class="hljs-string">"axios"</span>;
 
   describe(<span class="hljs-string">"An HTTP client"</span>, <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
-      it(<span class="hljs-string">"can send GET requests"</span>, <span class="hljs-keyword">async</span> () =&gt; {
+      it(<span class="hljs-string">"can send GET requests"</span>, <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"><span class="hljs-keyword">this</span>: Mocha.Test</span>) </span>{
+          <span class="hljs-keyword">this</span>.timeout(<span class="hljs-number">30</span>_000);
           <span class="hljs-keyword">await</span> benchmark.record(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> axios.get(<span class="hljs-string">"http://www.httpbin.org/get"</span>));
-      }, <span class="hljs-number">30</span>_000);
+      });
 
-      it(<span class="hljs-string">"can send POST requests"</span>, <span class="hljs-keyword">async</span> () =&gt; {
+      it(<span class="hljs-string">"can send POST requests"</span>, <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"><span class="hljs-keyword">this</span>: Mocha.Test</span>) </span>{
+          <span class="hljs-keyword">this</span>.timeout(<span class="hljs-number">30</span>_000);
           <span class="hljs-keyword">await</span> benchmark.record(
               <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> axios.post(<span class="hljs-string">"http://www.httpbin.org/post"</span>),
               { iterations: <span class="hljs-number">10</span>, meanUnder: <span class="hljs-number">10</span> },
           );
-      }, <span class="hljs-number">30</span>_000);
+      });
   });</code></pre>
 						<p>  Output:</p>
 						<pre><code>    An HTTP<span class="hljs-built_in"> client
