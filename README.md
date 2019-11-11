@@ -113,16 +113,18 @@ Click to expand an example:
   import axios from "axios";
 
   describe("An HTTP client", () => {
-      it("can send GET requests", async () => {
+      it("can send GET requests", async function (this: Mocha.Test) {
+          this.timeout(30_000);
           await benchmark.record(() => axios.get("http://www.httpbin.org/get"));
-      }, 30_000);
+      });
 
-      it("can send POST requests", async () => {
+      it("can send POST requests", async function (this: Mocha.Test) {
+          this.timeout(30_000);
           await benchmark.record(
               () => axios.post("http://www.httpbin.org/post"),
               { iterations: 10, meanUnder: 10 },
           );
-      }, 30_000);
+      });
   });
   ```
 
