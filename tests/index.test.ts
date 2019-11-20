@@ -1,7 +1,6 @@
-import fs from "fs";
 import stripIndent from "strip-indent";
 import { Benchmark, measure, Measurement, PerformanceError } from "../src";
-import { STATE_FILE } from "../src/etc";
+import { FOOTER, HEADER } from "../src/etc";
 
 // Using `await util.promisify(setTimeout)(500)` leads to this error in some tests:
 // "Async callback was not invoked within the 5000ms timeout"
@@ -135,24 +134,16 @@ describe("Benchmark", () => {
             expect(benchmark.data[description].durations).toHaveLength(3);
         });
 
-        it("allows omitting the description if baseDescription is set", async () => {
-            benchmark.baseDescription = ["bar"];
+        it("does not record data when no description is provided", async () => {
             await benchmark.record(() => { });
-            expect(benchmark.data.bar.durations).toHaveLength(100);
-        });
-
-        it("does not allow omitting the description if baseDescription is not set", async () => {
-            await expect(
-                benchmark.record(() => { })
-            ).rejects.toThrow(new Error("The description must not be empty"));
+            expect(Object.keys(benchmark.data)).toEqual([]);
         });
 
         it("handles options when no description is provided", async () => {
-            benchmark.baseDescription = ["bar"];
             await expect(
                 benchmark.record(async () => await sleep(100), { meanUnder: 50, iterations: 3 })
             ).rejects.toThrow(PerformanceError);
-            expect(benchmark.data.bar.durations).toHaveLength(3);
+            expect(Object.keys(benchmark.data)).toEqual([]);
         });
 
         it("supports multiple descriptions", async () => {
@@ -177,39 +168,35 @@ describe("Benchmark", () => {
             ).rejects.toThrow(new Error("The description must not be empty"));
         });
 
-        it.each([
-            ["string", ""],
-            ["array", []],
-        ])("rejects an empty %s description even when baseDescription is set", async (...args) => {
-            benchmark.baseDescription = ["bar"];
-            await expect(
-                benchmark.record(args[1], async () => await sleep(100))
-            ).rejects.toThrow(new Error("The description must not be empty"));
+        it("emits a `record` event without a description", async done => {
+            benchmark.events.on("record", (description, measurement) => {
+                expect(description).toEqual([]);
+                expect(measurement.durations).toHaveLength(100);
+                done();
+            });
+            await benchmark.record(() => { });
         });
 
-        it("handles serialization when the record file does not already exist", async () => {
-            try { fs.unlinkSync(STATE_FILE); } catch { }
+        it("emits a `record` event with a description", async done => {
+            benchmark.events.on("record", (description, measurement) => {
+                expect(description).toEqual(["foo"]);
+                expect(measurement.durations).toHaveLength(100);
+                done();
+            });
+            await benchmark.record("foo", () => { });
+        });
+    });
 
-            benchmark.config.serializeData = true;
-            await benchmark.record(description, () => { });
-
-            expect(fs.existsSync(STATE_FILE)).toBeTruthy();
-            const serialized = JSON.parse(fs.readFileSync(STATE_FILE, "utf-8"));
-            expect(serialized.foo).toEqual(benchmark.data.foo);
+    describe("incorporate", () => {
+        it("adds data to the benchmark", () => {
+            benchmark.incorporate(["foo"], new Measurement([1, 2, 3]));
+            expect(benchmark.data.foo.durations).toEqual([1, 2, 3]);
         });
 
-        it("handles serialization when the record file already exists", async () => {
-            const bar = { durations: [1, 2, 3], children: {} };
-            try { fs.unlinkSync(STATE_FILE); } catch { }
-            fs.writeFileSync(STATE_FILE, JSON.stringify({ bar }), "utf-8");
-
-            benchmark.config.serializeData = true;
-            await benchmark.record(description, () => { });
-
-            expect(fs.existsSync(STATE_FILE)).toBeTruthy();
-            const serialized = JSON.parse(fs.readFileSync(STATE_FILE, "utf-8"));
-            expect(serialized.foo).toEqual(benchmark.data.foo);
-            expect(serialized.bar).toEqual(bar);
+        it("rejects an empty description", () => {
+            expect(
+                () => benchmark.incorporate([], new Measurement([1, 2, 3]))
+            ).toThrow(new Error("The description must not be empty"));
         });
     });
 
@@ -226,8 +213,10 @@ describe("Benchmark", () => {
                 }
             };
             expect(benchmark.report()).toBe(normalize(`
+                - - - - - - - - - - - - - - - - - Performance - - - - - - - - - - - - - - - - -
                 foo:
                   2.5 ms (+/- 1.26517 ms) from 4 iterations
+                - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
             `));
         });
 
@@ -243,10 +232,12 @@ describe("Benchmark", () => {
                 }
             };
             expect(benchmark.report()).toBe(normalize(`
+                ${HEADER}
                 foo:
                   1 ms (+/- 0 ms) from 1 iterations
                 bar:
                   2 ms (+/- 0 ms) from 1 iterations
+                ${FOOTER}
             `));
         });
 
@@ -263,11 +254,13 @@ describe("Benchmark", () => {
                 }
             };
             expect(benchmark.report()).toBe(normalize(`
+                ${HEADER}
                 foo:
                   1 ms (+/- 0 ms) from 1 iterations
 
                   bar:
                     2 ms (+/- 0 ms) from 1 iterations
+                ${FOOTER}
             `));
         });
 
@@ -284,9 +277,11 @@ describe("Benchmark", () => {
                 }
             };
             expect(benchmark.report()).toBe(normalize(`
+                ${HEADER}
                 foo:
                   bar:
                     2 ms (+/- 0 ms) from 1 iterations
+                ${FOOTER}
             `));
         });
     });

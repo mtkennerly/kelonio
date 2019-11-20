@@ -2,14 +2,12 @@
 * In `package.json`:
   * Pass `--runInBand` to Jest to ensure accurate performance measurements.
 * In `jest.config.js`:
-  * Add `jest.setup.js` to `setupFilesAfterEnv`.
-  * Enable Kelonio's Jest reporter.
-* In `jest.setup.js`:
-  * Call `JestReporter.initializeKelonio()`, which will:
+  * Add Kelonio's `jestReporterSetup.js` to `setupFilesAfterEnv`, which will:
     * Enable benchmark serialization, because otherwise the reporter does not
       have access to performance data from the test run. The data will be in
       `.kelonio.state.json`, which will be deleted at the end of the tests.
     * Ensure no serialized results from a prior test run are present.
+  * Enable Kelonio's Jest reporter.
 * In `index.test.ts` or any other test file:
   * Call `benchmark.record()`.
 

@@ -1,0 +1,25 @@
+{
+  "name": "kelonio-example-karma",
+  "version": "0.1.0",
+  "description": "Dummy project for using Kelonio with Karma",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mtkennerly/kelonio.git"
+  },
+  "scripts": {
+    "test": "npx karma start"
+  },
+  "dependencies": {
+    "kelonio": "file:../.."
+  },
+  "devDependencies": {
+    "@types/node": "^12.12.5",
+    "browserify": "^16.5.0",
+    "karma": "^4.4.1",
+    "karma-browserify": "^6.1.0",
+    "karma-chrome-launcher": "^3.1.0",
+    "karma-jasmine": "^2.0.1",
+    "karma-spec-reporter": "0.0.32"
+  }
+}

@@ -4,9 +4,9 @@
 * In `.mocha-multi.json`:
   * Enable Kelonio's Mocha reporter.
   * Enable (default) or disable test description inference. When enabled, the
-    current Mocha test name (including any nested `describe` calls) will be
-    included in the performance report, in addition to any more specific
-    descriptions that you pass to `benchmark.record()`.
+    current test name (including any nested `describe` calls) will be included
+    in the performance report, in addition to any more specific descriptions
+    that you pass to `benchmark.record()`.
 * In `index.test.ts` or any other test file:
   * Call `benchmark.record()`.
 

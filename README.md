@@ -4,14 +4,19 @@
 [![License: MIT](https://img.shields.io/badge/license-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 Kelonio is a performance testing library for Node.js, written in TypeScript.
-Whereas many similar projects are test frameworks in and of themselves,
-Kelonio is fundamentally a **library** and therefore aims to integrate with
-existing test frameworks seamlessly instead of reinventing the wheel.
-You can use it inside of your existing tests from frameworks such as
-[Jest](https://www.npmjs.com/package/jest) and [Mocha](https://www.npmjs.com/package/mocha)
-(along with any loaders like [ts-jest](https://www.npmjs.com/package/ts-jest)),
-and you can use it in the console and scripts as well. Kelonio also comes with
-reporters for Jest and Mocha built-in, without any dependency on those frameworks.
+Whereas many similar projects are test frameworks in and of themselves, Kelonio
+is fundamentally a **library** and therefore aims to integrate with existing
+test frameworks seamlessly instead of reinventing the wheel. You can use it
+inside of your existing tests from frameworks such as Jest and Mocha (along
+with any loaders like [ts-jest](https://www.npmjs.com/package/ts-jest)),
+and you can use it in the console and scripts as well.
+
+Kelonio also comes with built-in reporters for these test frameworks,
+but without any extra dependency on them:
+
+* [Jest](https://www.npmjs.com/package/jest)
+* [Mocha](https://www.npmjs.com/package/mocha)
+* [Karma](https://www.npmjs.com/package/karma)
 
 ## Usage
 Full API documentation:
@@ -167,8 +172,11 @@ This project uses [Semantic Versioning](https://semver.org). Public API:
 
 * All items that can be imported `from "kelonio"` and their public attributes.
 * The location of reporter modules:
-  * `node_modules/kelonio/out/jestReporter.js`.
-  * `node_modules/kelonio/out/mochaReporter.js`.
+  * `node_modules/kelonio/out/plugin/jestReporter.js`.
+    * `node_modules/kelonio/out/plugin/jestReporterSetup.js`.
+  * `node_modules/kelonio/out/plugin/karmaReporter.js`.
+    * `node_modules/kelonio/out/plugin/karmaReporterSetup.js`.
+  * `node_modules/kelonio/out/plugin/mochaReporter.js`.
 
 ## Comparison with other tools
 * [Benchmark](https://www.npmjs.com/package/benchmark):

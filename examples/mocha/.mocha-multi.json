@@ -1,6 +1,6 @@
 {
   "spec": "-",
-  "kelonio/out/mochaReporter": {
+  "kelonio/out/plugin/mochaReporter": {
     "stdout": "-",
     "options": {
       "inferDescriptions": true

@@ -1,10 +1,18 @@
-import fs from "fs";
+import hrtime from "browser-process-hrtime";
+import { EventEmitter } from "events";
 import * as mathjs from "mathjs";
-import { STATE_FILE } from "./etc";
-import JestReporter from "./jestReporter";
-import MochaReporter from "./mochaReporter";
+import { FOOTER, HEADER } from "./etc";
+import { JestReporter, KarmaReporter, MochaReporter } from "./reporters";
 
-export { JestReporter, MochaReporter };
+export { JestReporter, KarmaReporter, MochaReporter };
+
+export declare interface BenchmarkEventEmitter {
+    emit(event: "record", description: Array<string>, measurement: Measurement): boolean;
+    on(event: "record", listener: (description: Array<string>, measurement: Measurement) => void): this;
+    once(event: "record", listener: (description: Array<string>, measurement: Measurement) => void): this;
+}
+
+export class BenchmarkEventEmitter extends EventEmitter { }
 
 /**
  * Base error for benchmark failures, such as a function taking too long
@@ -149,20 +157,6 @@ export interface BenchmarkData {
     };
 }
 
-/**
- * Options for customizing [[Benchmark]] behavior.
- */
-export interface BenchmarkConfig {
-    /**
-     * Whether to write the performance data to a file (`.kelonio.state.json`)
-     * during tests and then use it for reporting at the end of the test run.
-     * This is mainly needed for test frameworks where the reporting phase
-     * runs in an isolated context from the tests themselves.
-     * @default false
-     */
-    serializeData: boolean;
-}
-
 async function maybePromise(fn: () => any): Promise<void> {
     const ret = fn();
     if (ret instanceof Promise) {
@@ -191,9 +185,9 @@ export async function measure(fn: () => any, options: Partial<MeasureOptions> = 
                 await maybePromise(mergedOptions.beforeEach);
             }
 
-            const startTime = process.hrtime();
+            const startTime = hrtime();
             await maybePromise(fn);
-            const [durationSec, durationNano] = process.hrtime(startTime);
+            const [durationSec, durationNano] = hrtime(startTime);
             durations.push(durationSec * 1e3 + durationNano / 1e6);
 
             if (mergedOptions.afterEach !== undefined) {
@@ -246,31 +240,22 @@ export class Benchmark {
     data: BenchmarkData = {};
 
     /**
-     * Options for customizing [[Benchmark]] behavior.
+     * Event emitter.
+     *
+     * * `record` is emitted after [[Benchmark.record]] finishes all iterations.
+     *
+     * Refer to [[BenchmarkEventEmitter.on]] for the event callback signatures.
      */
-    config: BenchmarkConfig;
-
-    /**
-     * Default description to prepend to any description passed to
-     * [[Benchmark.record]]. This is mainly for use by reporters,
-     * which would set this to each test name as they run.
-     */
-    baseDescription: Array<string> = [];
-
-    constructor() {
-        this.config = {
-            serializeData: false,
-        };
-    }
+    events: BenchmarkEventEmitter = new BenchmarkEventEmitter();
 
     /**
      * Measure the time it takes for a function to execute.
      * In addition to returning the measurement itself, this method also
      * stores the result in [[Benchmark.data]] for later use/reporting.
      *
-     * With this overload, the function will try to get the description from
-     * [[Benchmark.baseDescription]]. If that is empty, then this function
-     * will throw.
+     * With this overload, since no description is provided, the data will not
+     * be recorded directly. However, a `record` event will still be emitted,
+     * allowing any listeners (such as reporters) to act on it.
      *
      * @param fn - Function to measure. If it returns a promise,
      *     then it will be `await`ed automatically as part of the iteration.
@@ -280,12 +265,12 @@ export class Benchmark {
     /**
      * Measure the time it takes for a function to execute.
      * In addition to returning the measurement itself, this method also
-     * stores the result in [[Benchmark.data]] for later use/reporting.
+     * stores the result in [[Benchmark.data]] for later use/reporting,
+     * and [[Benchmark.events]] emits a `record` event for any listeners.
      *
      * @param description - Name of what is being tested.
      *     This can be a series of names for nested categories.
-     *     Must not be empty. If [[Benchmark.baseDescription]] is also set,
-     *     then the two groups will be concatenated.
+     *     Must not be empty.
      * @param fn - Function to measure. If it returns a promise,
      *     then it will be `await`ed automatically as part of the iteration.
      * @param options - Options to customize the measurement.
@@ -310,27 +295,35 @@ export class Benchmark {
 
         const mergedOptions = { ...defaultMeasureOptions, ...options };
 
-        if ((descriptionSpecified && description.length === 0) || (!descriptionSpecified && this.baseDescription.length === 0)) {
+        if ((descriptionSpecified && description.length === 0)) {
             throw new Error("The description must not be empty");
-        } else if (typeof description === "string") {
+        }
+        if (typeof description === "string") {
             description = [description];
         }
-        description = this.baseDescription.concat(description);
 
         const measurement = await measure(fn, { ...mergedOptions, verify: false });
 
-        this.addBenchmarkDurations(this.data, description, measurement.durations);
-        if (this.config.serializeData) {
-            let data: BenchmarkData = this.data;
-            if (fs.existsSync(STATE_FILE)) {
-                data = JSON.parse(fs.readFileSync(STATE_FILE, "utf-8"));
-                this.addBenchmarkDurations(data, description, measurement.durations);
-            }
-            fs.writeFileSync("./.kelonio.state.json", JSON.stringify(data), "utf-8");
+        if (description.length > 0) {
+            this.incorporate(description, measurement);
         }
-
+        this.events.emit("record", description, measurement);
         verifyMeasurement(measurement, { ...mergedOptions, verify: true });
         return measurement;
+    }
+
+    /**
+     * Add a measurement directly to [[Benchmark.data]].
+     *
+     * @param description - Name of what is being tested.
+     *     Must not be empty.
+     * @param measurement - Measurement to add to the benchmark data.
+     */
+    incorporate(description: Array<string>, measurement: Measurement): void {
+        if ((description.length === 0)) {
+            throw new Error("The description must not be empty");
+        }
+        this.addBenchmarkDurations(this.data, description, measurement.durations);
     }
 
     private addBenchmarkDurations(data: BenchmarkData, categories: Array<string>, durations: Array<number>): void {
@@ -372,11 +365,12 @@ export class Benchmark {
      * Create a report of all the benchmark results.
      */
     report(): string {
-        let data: BenchmarkData = this.data;
-        if (this.config.serializeData && fs.existsSync(STATE_FILE)) {
-            data = JSON.parse(fs.readFileSync(STATE_FILE, "utf-8"));
+        const lines = this.reportLevel(this.data, 0);
+        if (lines.length === 0) {
+            return "";
+        } else {
+            return [HEADER, ...this.reportLevel(this.data, 0), FOOTER].join("\n");
         }
-        return this.reportLevel(data, 0).join("\n");
     }
 }
 

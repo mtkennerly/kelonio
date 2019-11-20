@@ -5,7 +5,8 @@
     "outDir": "out",
     "declaration": true,
     "lib": [
-      "es5"
+      "es5",
+      "dom"
     ],
     "sourceMap": true,
     "rootDir": "src",
@@ -15,7 +16,8 @@
     "skipLibCheck": true
   },
   "include": [
-    "src/*.ts"
+    "src/*.ts",
+    "src/**/*.ts"
   ],
   "exclude": [
     "node_modules"
