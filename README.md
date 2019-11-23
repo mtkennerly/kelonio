@@ -11,8 +11,11 @@ inside of your existing tests from frameworks such as Jest and Mocha (along
 with any loaders like [ts-jest](https://www.npmjs.com/package/ts-jest)),
 and you can use it in the console and scripts as well.
 
-Kelonio also comes with built-in reporters for these test frameworks,
-but without any extra dependency on them:
+Kelonio also works in the browser (as long as you use a tool like
+[Webpack](https://www.npmjs.com/package/webpack) or
+[Browserify](https://www.npmjs.com/package/browserify)),
+and it comes with built-in reporters for the following test frameworks without
+any direct dependency on them:
 
 * [Jest](https://www.npmjs.com/package/jest)
 * [Mocha](https://www.npmjs.com/package/mocha)

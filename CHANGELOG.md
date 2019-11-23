@@ -1,4 +1,4 @@
-## Unreleased
+## v0.3.0 (2019-11-22)
 
 * Added a reporter for Karma and a corresponding example project.
 * Adjusted Kelonio so that it can work in the browser (at least in conjunction
