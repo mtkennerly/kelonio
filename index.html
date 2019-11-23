@@ -67,14 +67,22 @@
 					<a href="https://www.npmjs.com/package/kelonio"><img src="https://img.shields.io/npm/v/kelonio" alt="Version"></a>
 				<a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/license-MIT-yellow.svg" alt="License: MIT"></a></p>
 				<p>Kelonio is a performance testing library for Node.js, written in TypeScript.
-					Whereas many similar projects are test frameworks in and of themselves,
-					Kelonio is fundamentally a <strong>library</strong> and therefore aims to integrate with
-					existing test frameworks seamlessly instead of reinventing the wheel.
-					You can use it inside of your existing tests from frameworks such as
-					<a href="https://www.npmjs.com/package/jest">Jest</a> and <a href="https://www.npmjs.com/package/mocha">Mocha</a>
-					(along with any loaders like <a href="https://www.npmjs.com/package/ts-jest">ts-jest</a>),
-					and you can use it in the console and scripts as well. Kelonio also comes with
-				reporters for Jest and Mocha built-in, without any dependency on those frameworks.</p>
+					Whereas many similar projects are test frameworks in and of themselves, Kelonio
+					is fundamentally a <strong>library</strong> and therefore aims to integrate with existing
+					test frameworks seamlessly instead of reinventing the wheel. You can use it
+					inside of your existing tests from frameworks such as Jest and Mocha (along
+					with any loaders like <a href="https://www.npmjs.com/package/ts-jest">ts-jest</a>),
+				and you can use it in the console and scripts as well.</p>
+				<p>Kelonio also works in the browser (as long as you use a tool like
+					<a href="https://www.npmjs.com/package/webpack">Webpack</a> or
+					<a href="https://www.npmjs.com/package/browserify">Browserify</a>),
+					and it comes with built-in reporters for the following test frameworks without
+				any direct dependency on them:</p>
+				<ul>
+					<li><a href="https://www.npmjs.com/package/jest">Jest</a></li>
+					<li><a href="https://www.npmjs.com/package/mocha">Mocha</a></li>
+					<li><a href="https://www.npmjs.com/package/karma">Karma</a></li>
+				</ul>
 				<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
 					<h2>Usage</h2>
 				</a>
@@ -199,8 +207,15 @@ measure(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</s
 				<ul>
 					<li>All items that can be imported <code>from &quot;kelonio&quot;</code> and their public attributes.</li>
 					<li>The location of reporter modules:<ul>
-							<li><code>node_modules/kelonio/out/jestReporter.js</code>.</li>
-							<li><code>node_modules/kelonio/out/mochaReporter.js</code>.</li>
+							<li><code>node_modules/kelonio/out/plugin/jestReporter.js</code>.<ul>
+									<li><code>node_modules/kelonio/out/plugin/jestReporterSetup.js</code>.</li>
+								</ul>
+							</li>
+							<li><code>node_modules/kelonio/out/plugin/karmaReporter.js</code>.<ul>
+									<li><code>node_modules/kelonio/out/plugin/karmaReporterSetup.js</code>.</li>
+								</ul>
+							</li>
+							<li><code>node_modules/kelonio/out/plugin/mochaReporter.js</code>.</li>
 						</ul>
 					</li>
 				</ul>

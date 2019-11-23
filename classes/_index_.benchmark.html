@@ -85,22 +85,16 @@
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
-							<h3>Constructors</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="_index_.benchmark.html#constructor" class="tsd-kind-icon">constructor</a></li>
-							</ul>
-						</section>
-						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_index_.benchmark.html#basedescription" class="tsd-kind-icon">base<wbr>Description</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_index_.benchmark.html#config" class="tsd-kind-icon">config</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_index_.benchmark.html#data" class="tsd-kind-icon">data</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_index_.benchmark.html#events" class="tsd-kind-icon">events</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_index_.benchmark.html#incorporate" class="tsd-kind-icon">incorporate</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_index_.benchmark.html#record" class="tsd-kind-icon">record</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_index_.benchmark.html#report" class="tsd-kind-icon">report</a></li>
 							</ul>
@@ -109,66 +103,14 @@
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Constructors</h2>
-				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
-					<a name="constructor" class="tsd-anchor"></a>
-					<h3>constructor</h3>
-					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Benchmark<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_index_.benchmark.html" class="tsd-signature-type">Benchmark</a></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/mtkennerly/kelonio/blob/c3e0617/src/index.ts#L258">index.ts:258</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-returns-title">Returns <a href="_index_.benchmark.html" class="tsd-signature-type">Benchmark</a></h4>
-						</li>
-					</ul>
-				</section>
-			</section>
-			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="basedescription" class="tsd-anchor"></a>
-					<h3>base<wbr>Description</h3>
-					<div class="tsd-signature tsd-kind-icon">base<wbr>Description<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;[]</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/mtkennerly/kelonio/blob/c3e0617/src/index.ts#L258">index.ts:258</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Default description to prepend to any description passed to
-								<a href="_index_.benchmark.html#record">Benchmark.record</a>. This is mainly for use by reporters,
-							which would set this to each test name as they run.</p>
-						</div>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="config" class="tsd-anchor"></a>
-					<h3>config</h3>
-					<div class="tsd-signature tsd-kind-icon">config<span class="tsd-signature-symbol">:</span> <a href="../interfaces/_index_.benchmarkconfig.html" class="tsd-signature-type">BenchmarkConfig</a></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/mtkennerly/kelonio/blob/c3e0617/src/index.ts#L251">index.ts:251</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Options for customizing <a href="_index_.benchmark.html">Benchmark</a> behavior.</p>
-						</div>
-					</div>
-				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="data" class="tsd-anchor"></a>
 					<h3>data</h3>
 					<div class="tsd-signature tsd-kind-icon">data<span class="tsd-signature-symbol">:</span> <a href="../interfaces/_index_.benchmarkdata.html" class="tsd-signature-type">BenchmarkData</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/mtkennerly/kelonio/blob/c3e0617/src/index.ts#L246">index.ts:246</a></li>
+							<li>Defined in <a href="https://github.com/mtkennerly/kelonio/blob/527dc65/src/index.ts#L240">index.ts:240</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -177,9 +119,66 @@
 						</div>
 					</div>
 				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="events" class="tsd-anchor"></a>
+					<h3>events</h3>
+					<div class="tsd-signature tsd-kind-icon">events<span class="tsd-signature-symbol">:</span> <a href="_index_.benchmarkeventemitter.html" class="tsd-signature-type">BenchmarkEventEmitter</a><span class="tsd-signature-symbol"> =&nbsp;new BenchmarkEventEmitter()</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/mtkennerly/kelonio/blob/527dc65/src/index.ts#L249">index.ts:249</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Event emitter.</p>
+						</div>
+						<ul>
+							<li><code>record</code> is emitted after <a href="_index_.benchmark.html#record">Benchmark.record</a> finishes all iterations.</li>
+						</ul>
+						<p>Refer to <a href="_index_.benchmarkeventemitter.html#on">BenchmarkEventEmitter.on</a> for the event callback signatures.</p>
+					</div>
+				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="incorporate" class="tsd-anchor"></a>
+					<h3>incorporate</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">incorporate<span class="tsd-signature-symbol">(</span>description<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span>, measurement<span class="tsd-signature-symbol">: </span><a href="_index_.measurement.html" class="tsd-signature-type">Measurement</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/mtkennerly/kelonio/blob/527dc65/src/index.ts#L322">index.ts:322</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Add a measurement directly to <a href="_index_.benchmark.html#data">Benchmark.data</a>.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>description: <span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Name of what is being tested.
+										Must not be empty.</p>
+									</div>
+								</li>
+								<li>
+									<h5>measurement: <a href="_index_.measurement.html" class="tsd-signature-type">Measurement</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Measurement to add to the benchmark data.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 					<a name="record" class="tsd-anchor"></a>
 					<h3>record</h3>
@@ -191,7 +190,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/mtkennerly/kelonio/blob/c3e0617/src/index.ts#L279">index.ts:279</a></li>
+									<li>Defined in <a href="https://github.com/mtkennerly/kelonio/blob/527dc65/src/index.ts#L264">index.ts:264</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -200,9 +199,9 @@
 										In addition to returning the measurement itself, this method also
 									stores the result in <a href="_index_.benchmark.html#data">Benchmark.data</a> for later use/reporting.</p>
 								</div>
-								<p>With this overload, the function will try to get the description from
-									<a href="_index_.benchmark.html#basedescription">Benchmark.baseDescription</a>. If that is empty, then this function
-								will throw.</p>
+								<p>With this overload, since no description is provided, the data will not
+									be recorded directly. However, a <code>record</code> event will still be emitted,
+								allowing any listeners (such as reporters) to act on it.</p>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
@@ -237,14 +236,15 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/mtkennerly/kelonio/blob/c3e0617/src/index.ts#L293">index.ts:293</a></li>
+									<li>Defined in <a href="https://github.com/mtkennerly/kelonio/blob/527dc65/src/index.ts#L278">index.ts:278</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
 									<p>Measure the time it takes for a function to execute.
 										In addition to returning the measurement itself, this method also
-									stores the result in <a href="_index_.benchmark.html#data">Benchmark.data</a> for later use/reporting.</p>
+										stores the result in <a href="_index_.benchmark.html#data">Benchmark.data</a> for later use/reporting,
+									and <a href="_index_.benchmark.html#events">Benchmark.events</a> emits a <code>record</code> event for any listeners.</p>
 								</div>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -254,8 +254,7 @@
 									<div class="tsd-comment tsd-typography">
 										<p>Name of what is being tested.
 											This can be a series of names for nested categories.
-											Must not be empty. If <a href="_index_.benchmark.html#basedescription">Benchmark.baseDescription</a> is also set,
-										then the two groups will be concatenated.</p>
+										Must not be empty.</p>
 									</div>
 								</li>
 								<li>
@@ -298,7 +297,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/mtkennerly/kelonio/blob/c3e0617/src/index.ts#L374">index.ts:374</a></li>
+									<li>Defined in <a href="https://github.com/mtkennerly/kelonio/blob/527dc65/src/index.ts#L367">index.ts:367</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -330,17 +329,14 @@
 					<li class="current tsd-kind-class tsd-parent-kind-external-module">
 						<a href="_index_.benchmark.html" class="tsd-kind-icon">Benchmark</a>
 						<ul>
-							<li class=" tsd-kind-constructor tsd-parent-kind-class">
-								<a href="_index_.benchmark.html#constructor" class="tsd-kind-icon">constructor</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="_index_.benchmark.html#basedescription" class="tsd-kind-icon">base<wbr>Description</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="_index_.benchmark.html#config" class="tsd-kind-icon">config</a>
-							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="_index_.benchmark.html#data" class="tsd-kind-icon">data</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="_index_.benchmark.html#events" class="tsd-kind-icon">events</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_index_.benchmark.html#incorporate" class="tsd-kind-icon">incorporate</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="_index_.benchmark.html#record" class="tsd-kind-icon">record</a>
@@ -353,13 +349,13 @@
 				</ul>
 				<ul class="after-current">
 					<li class=" tsd-kind-class tsd-parent-kind-external-module">
+						<a href="_index_.benchmarkeventemitter.html" class="tsd-kind-icon">Benchmark<wbr>Event<wbr>Emitter</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-external-module">
 						<a href="_index_.measurement.html" class="tsd-kind-icon">Measurement</a>
 					</li>
 					<li class=" tsd-kind-class tsd-parent-kind-external-module">
 						<a href="_index_.performanceerror.html" class="tsd-kind-icon">Performance<wbr>Error</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="../interfaces/_index_.benchmarkconfig.html" class="tsd-kind-icon">Benchmark<wbr>Config</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
 						<a href="../interfaces/_index_.benchmarkdata.html" class="tsd-kind-icon">Benchmark<wbr>Data</a>
