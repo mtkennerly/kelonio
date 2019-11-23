@@ -10,6 +10,18 @@ function makeMochaReporter(reporterOptions: any = {}): [EventEmitter, MochaRepor
     return [runner, reporter];
 }
 
+function makeKarmaReporter(reporterOptions: any = {}): [any, KarmaReporter] {
+    const writer = jest.fn();
+    const reporter = new KarmaReporter(
+        (self: any) => { self.write = writer; },
+        reporterOptions,
+        undefined,
+        undefined,
+        undefined,
+    );
+    return [writer, reporter];
+}
+
 afterEach(() => {
     jest.restoreAllMocks();
     benchmark.events.removeAllListeners();
@@ -105,11 +117,16 @@ describe("KarmaReporter", () => {
     let writer: any;
 
     beforeEach(() => {
-        writer = jest.fn();
-        reporter = new KarmaReporter((self: any) => { self.write = writer; }, {}, undefined, undefined, undefined);
+        [writer, reporter] = makeKarmaReporter({});
     });
 
-    it("reports on data received from the browser", () => {
+    it("prints an empty report if no data is received", () => {
+        // @ts-ignore
+        reporter.onRunComplete();
+        expect(writer.mock.calls[0][0]).toBe("\n");
+    });
+
+    it("reports on data received from the browser and infers the browser name by default", () => {
         // @ts-ignore
         reporter.onBrowserLog("any", `'{"description":["foo"],"durations":[1,2,3]}'`, "kelonio");
         // @ts-ignore
@@ -123,10 +140,19 @@ describe("KarmaReporter", () => {
         `).trim() + "\n");
     });
 
-    it("prints an empty report if no data is received", () => {
+    it("does not infer browser names when disabled", () => {
+        [writer, reporter] = makeKarmaReporter({ kelonioReporter: { inferBrowsers: false } });
+
+        // @ts-ignore
+        reporter.onBrowserLog("any", `'{"description":["foo"],"durations":[1,2,3]}'`, "kelonio");
         // @ts-ignore
         reporter.onRunComplete();
-        expect(writer.mock.calls[0][0]).toBe("\n");
+        expect(writer.mock.calls[0][0]).toBe(stripIndent(`
+            ${HEADER}
+            foo:
+              2 ms (+/- 1.13161 ms) from 3 iterations
+            ${FOOTER}
+        `).trim() + "\n");
     });
 });
 

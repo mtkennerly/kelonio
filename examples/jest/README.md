@@ -14,6 +14,7 @@
 ## Output
 Run `npm install` and `npm test` to try it out:
 
+```
 FAIL ./index.test.ts (5.398s)
   A Jest test
     √ can use Kelonio with a simple description (4ms)
