@@ -15,7 +15,16 @@ interface KarmaReporterOptions {
     inferBrowsers?: boolean;
 }
 
+interface JestReporterOptions {
+    keepState: boolean;
+}
 export class JestReporter implements jest.Reporter {
+    options: JestReporterOptions = { keepState: false };
+    constructor(testData?: any, options?: JestReporterOptions) {
+        if (options) {
+            this.options = { ...this.options, ...options };
+        }
+    }
     static initializeKelonio(): void {
         const state = new BenchmarkFileState();
         state.delete();
@@ -42,7 +51,9 @@ export class JestReporter implements jest.Reporter {
         b.data = state.read();
         console.log(`\n${b.report()}`);
 
-        state.delete();
+        if (!this.options.keepState) {
+            state.delete();
+        }
     }
 }
 
