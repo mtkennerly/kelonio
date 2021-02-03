@@ -109,6 +109,33 @@ describe("JestReporter", () => {
             `).trimRight());
             expect(fs.existsSync(STATE_FILE)).toBeFalsy();
         });
+
+        describe("options", () => {
+            it("respects keepStateAtEnd = true", () => {
+                JestReporter.initializeKelonio();
+                const reporter = new JestReporter({}, {keepStateAtEnd: true});
+                const spy = jest.spyOn(console, "log");
+                fs.writeFileSync(STATE_FILE, JSON.stringify({
+                    foo: {
+                        durations: [1, 2, 3],
+                        children: {},
+                    }
+                }));
+                benchmark.events.emit("record", ["bar"], new Measurement([4, 5, 6]));
+
+                reporter.onRunComplete();
+
+                expect(spy.mock.calls[0][0]).toBe(stripIndent(`
+                    ${HEADER}
+                    foo:
+                      2 ms (+/- 1.13161 ms) from 3 iterations
+                    bar:
+                      5 ms (+/- 1.13161 ms) from 3 iterations
+                    ${FOOTER}
+                `).trimRight());
+                expect(fs.existsSync(STATE_FILE)).toBeTruthy();
+            });
+        });
     });
 });
 
