@@ -1,7 +1,7 @@
 module.exports = {
     "reporters": [
         "default",
-        "<rootDir>/node_modules/kelonio/out/plugin/jestReporter",
+        ["<rootDir>/node_modules/kelonio/out/plugin/jestReporter", {keepStateAtEnd: false}]
     ],
     "transform": {
         "^.+\\.tsx?$": "ts-jest",
