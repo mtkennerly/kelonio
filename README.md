@@ -1,5 +1,4 @@
 # Kelonio
-[![Build Status](https://travis-ci.org/mtkennerly/kelonio.svg?branch=master)](https://travis-ci.org/mtkennerly/kelonio)
 [![Version](https://img.shields.io/npm/v/kelonio)](https://www.npmjs.com/package/kelonio)
 [![License: MIT](https://img.shields.io/badge/license-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
