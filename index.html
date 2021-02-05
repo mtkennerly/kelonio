@@ -4,16 +4,17 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>kelonio</title>
-	<meta name="description" content="">
+	<meta name="description" content="Documentation for kelonio">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="assets/css/main.css">
+	<script async src="assets/js/search.js" id="search-script"></script>
 </head>
 <body>
 <header>
 	<div class="tsd-page-toolbar">
 		<div class="container">
 			<div class="table-wrap">
-				<div class="table-cell" id="tsd-search" data-index="assets/js/search.js" data-base=".">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.json" data-base=".">
 					<div class="field">
 						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
 						<input id="tsd-search-field" type="text" />
@@ -47,12 +48,7 @@
 	</div>
 	<div class="tsd-page-title">
 		<div class="container">
-			<ul class="tsd-breadcrumb">
-				<li>
-					<a href="globals.html">Globals</a>
-				</li>
-			</ul>
-			<h1> kelonio</h1>
+			<h1>kelonio</h1>
 		</div>
 	</div>
 </header>
@@ -90,11 +86,12 @@
 				<a href="https://mtkennerly.github.io/kelonio/modules/_index_.html">https://mtkennerly.github.io/kelonio/modules/_index_.html</a></p>
 				<p>For simple, one-off checks, like in the console or a script, use the <code>measure</code>
 				function:</p>
-				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> { measure } <span class="hljs-keyword">from</span> <span class="hljs-string">"kelonio"</span>;
-<span class="hljs-keyword">import</span> axios <span class="hljs-keyword">from</span> <span class="hljs-string">"axios"</span>;
+				<pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">measure</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;kelonio&quot;</span><span style="color: #000000">;</span>
+<span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">axios</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;axios&quot;</span><span style="color: #000000">;</span>
 
-measure(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> axios.get(<span class="hljs-string">"http://www.httpbin.org/get"</span>))
-    .then(<span class="hljs-function"><span class="hljs-params">measurement</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Mean: <span class="hljs-subst">${measurement.mean}</span> ms`</span>));</code></pre>
+<span style="color: #795E26">measure</span><span style="color: #000000">(() </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">axios</span><span style="color: #000000">.</span><span style="color: #795E26">get</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;http://www.httpbin.org/get&quot;</span><span style="color: #000000">))</span>
+<span style="color: #000000">    .</span><span style="color: #795E26">then</span><span style="color: #000000">(</span><span style="color: #001080">measurement</span><span style="color: #000000"> </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #A31515">`Mean: </span><span style="color: #0000FF">${</span><span style="color: #001080">measurement</span><span style="color: #000000FF">.</span><span style="color: #001080">mean</span><span style="color: #0000FF">}</span><span style="color: #A31515"> ms`</span><span style="color: #000000">));</span>
+</code></pre>
 				<p>If you measure a function that returns a promise, Kelonio will automatically
 					measure the time until it&#39;s resolved as well. The resulting <code>measurement</code>
 				exposes various stats, like maximum time and standard deviation.</p>
@@ -106,47 +103,50 @@ measure(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</s
 						<p>  Jest doesn&#39;t currently expose a way to get each individual test&#39;s name
 						while running, so you have to provide a description to <code>record()</code>.</p>
 						<p>  Tests:</p>
-						<pre><code class="language-typescript">  <span class="hljs-keyword">import</span> { benchmark } <span class="hljs-keyword">from</span> <span class="hljs-string">"kelonio"</span>;
-  <span class="hljs-keyword">import</span> axios <span class="hljs-keyword">from</span> <span class="hljs-string">"axios"</span>;
+						<pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">benchmark</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;kelonio&quot;</span><span style="color: #000000">;</span>
+<span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">axios</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;axios&quot;</span><span style="color: #000000">;</span>
 
-  describe(<span class="hljs-string">"An HTTP client"</span>, <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
-      it(<span class="hljs-string">"can send GET requests"</span>, <span class="hljs-keyword">async</span> () =&gt; {
-          <span class="hljs-keyword">await</span> benchmark.record(
-              [<span class="hljs-string">"HTTP client"</span>, <span class="hljs-string">"GET"</span>],
-              <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> axios.get(<span class="hljs-string">"http://www.httpbin.org/get"</span>)
-          );
-      }, <span class="hljs-number">30</span>_000);
+<span style="color: #795E26">describe</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;An HTTP client&quot;</span><span style="color: #000000">, () </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #795E26">it</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;can send GET requests&quot;</span><span style="color: #000000">, </span><span style="color: #0000FF">async</span><span style="color: #000000"> () </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">        </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">benchmark</span><span style="color: #000000">.</span><span style="color: #795E26">record</span><span style="color: #000000">(</span>
+<span style="color: #000000">            [</span><span style="color: #A31515">&quot;HTTP client&quot;</span><span style="color: #000000">, </span><span style="color: #A31515">&quot;GET&quot;</span><span style="color: #000000">],</span>
+<span style="color: #000000">            () </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">axios</span><span style="color: #000000">.</span><span style="color: #795E26">get</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;http://www.httpbin.org/get&quot;</span><span style="color: #000000">)</span>
+<span style="color: #000000">        );</span>
+<span style="color: #000000">    }, </span><span style="color: #098658">30_000</span><span style="color: #000000">);</span>
 
-      it(<span class="hljs-string">"can send POST requests"</span>, <span class="hljs-keyword">async</span> () =&gt; {
-          <span class="hljs-keyword">await</span> benchmark.record(
-              [<span class="hljs-string">"HTTP client"</span>, <span class="hljs-string">"POST"</span>],
-              <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> axios.post(<span class="hljs-string">"http://www.httpbin.org/post"</span>),
-              { iterations: <span class="hljs-number">10</span>, meanUnder: <span class="hljs-number">10</span> },
-          );
-      }, <span class="hljs-number">30</span>_000);
-  });</code></pre>
+<span style="color: #000000">    </span><span style="color: #795E26">it</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;can send POST requests&quot;</span><span style="color: #000000">, </span><span style="color: #0000FF">async</span><span style="color: #000000"> () </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">        </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">benchmark</span><span style="color: #000000">.</span><span style="color: #795E26">record</span><span style="color: #000000">(</span>
+<span style="color: #000000">            [</span><span style="color: #A31515">&quot;HTTP client&quot;</span><span style="color: #000000">, </span><span style="color: #A31515">&quot;POST&quot;</span><span style="color: #000000">],</span>
+<span style="color: #000000">            () </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">axios</span><span style="color: #000000">.</span><span style="color: #795E26">post</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;http://www.httpbin.org/post&quot;</span><span style="color: #000000">),</span>
+<span style="color: #000000">            { </span><span style="color: #001080">iterations:</span><span style="color: #000000"> </span><span style="color: #098658">10</span><span style="color: #000000">, </span><span style="color: #001080">meanUnder:</span><span style="color: #000000"> </span><span style="color: #098658">10</span><span style="color: #000000"> },</span>
+<span style="color: #000000">        );</span>
+<span style="color: #000000">    }, </span><span style="color: #098658">30_000</span><span style="color: #000000">);</span>
+<span style="color: #000000">});</span>
+</code></pre>
 						<p>  Output:</p>
-						<pre><code>  FAIL ./index.test.ts (16.576s)
-    An HTTP<span class="hljs-built_in"> client
-</span>      √ can send <span class="hljs-builtin-name">GET</span> requests (8332ms)
-      × can send POST requests (508ms)
+						<pre><code><span style="color: #0070C1">FAIL</span><span style="color: #000000"> ./</span><span style="color: #001080">index</span><span style="color: #000000">.</span><span style="color: #001080">test</span><span style="color: #000000">.</span><span style="color: #795E26">ts</span><span style="color: #000000"> (16.576</span><span style="color: #001080">s</span><span style="color: #000000">)</span>
+<span style="color: #000000">  </span><span style="color: #001080">An</span><span style="color: #000000"> </span><span style="color: #0070C1">HTTP</span><span style="color: #000000"> </span><span style="color: #001080">client</span>
+<span style="color: #000000">    √ </span><span style="color: #001080">can</span><span style="color: #000000"> </span><span style="color: #001080">send</span><span style="color: #000000"> </span><span style="color: #0070C1">GET</span><span style="color: #000000"> </span><span style="color: #795E26">requests</span><span style="color: #000000"> (8332</span><span style="color: #001080">ms</span><span style="color: #000000">)</span>
+<span style="color: #000000">    × </span><span style="color: #001080">can</span><span style="color: #000000"> </span><span style="color: #001080">send</span><span style="color: #000000"> </span><span style="color: #0070C1">POST</span><span style="color: #000000"> </span><span style="color: #795E26">requests</span><span style="color: #000000"> (508</span><span style="color: #001080">ms</span><span style="color: #000000">)</span>
 
-    ● An HTTP<span class="hljs-built_in"> client </span>› can send POST requests
+<span style="color: #000000">  ● </span><span style="color: #001080">An</span><span style="color: #000000"> </span><span style="color: #0070C1">HTTP</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000"> › </span><span style="color: #001080">can</span><span style="color: #000000"> </span><span style="color: #001080">send</span><span style="color: #000000"> </span><span style="color: #0070C1">POST</span><span style="color: #000000"> </span><span style="color: #001080">requests</span>
 
-      Mean time of 49.43073600000001 ms exceeded threshold of 10 ms
+<span style="color: #000000">    </span><span style="color: #001080">Mean</span><span style="color: #000000"> </span><span style="color: #001080">time</span><span style="color: #000000"> </span><span style="color: #0000FF">of</span><span style="color: #000000"> </span><span style="color: #098658">49.43073600000001</span><span style="color: #000000"> </span><span style="color: #001080">ms</span><span style="color: #000000"> </span><span style="color: #001080">exceeded</span><span style="color: #000000"> </span><span style="color: #001080">threshold</span><span style="color: #000000"> </span><span style="color: #0000FF">of</span><span style="color: #000000"> </span><span style="color: #098658">10</span><span style="color: #000000"> </span><span style="color: #001080">ms</span>
 
-  Test Suites: 1 failed, 1 total
-  Tests:       1 failed, 1 passed, 2 total
-  Snapshots:   0 total
-  Time:        18.296s
+<span style="color: #001080">Test</span><span style="color: #000000"> Suites: </span><span style="color: #098658">1</span><span style="color: #000000"> </span><span style="color: #001080">failed</span><span style="color: #000000">, </span><span style="color: #098658">1</span><span style="color: #000000"> </span><span style="color: #001080">total</span>
+<span style="color: #000000">Tests:       </span><span style="color: #098658">1</span><span style="color: #000000"> </span><span style="color: #001080">failed</span><span style="color: #000000">, </span><span style="color: #098658">1</span><span style="color: #000000"> </span><span style="color: #001080">passed</span><span style="color: #000000">, </span><span style="color: #098658">2</span><span style="color: #000000"> </span><span style="color: #001080">total</span>
+<span style="color: #000000">Snapshots:   </span><span style="color: #098658">0</span><span style="color: #000000"> </span><span style="color: #001080">total</span>
+<span style="color: #000000">Time:        18.296</span><span style="color: #001080">s</span>
 
-  - - - - - - - - - - - - - - - - - Performance - - - - - - - - - - - - - - - - -
-  HTTP client:
-    GET:
-      83.25152 ms (+/- 58.77542 ms) <span class="hljs-keyword">from</span> 100 iterations
-    POST:
-      49.43074 ms (+/- 2.39217 ms) <span class="hljs-keyword">from</span> 10 iterations
-  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</code></pre><p>  The first time on each line is the mean duration, and the <code>+/-</code> time is
+<span style="color: #000000">- - - - - - - - - - - - - - - - - </span><span style="color: #001080">Performance</span><span style="color: #000000"> - - - - - - - - - - - - - - - - -</span>
+<span style="color: #0070C1">HTTP</span><span style="color: #000000"> client:</span>
+<span style="color: #000000">  GET:</span>
+<span style="color: #000000">    </span><span style="color: #098658">83.25152</span><span style="color: #000000"> </span><span style="color: #795E26">ms</span><span style="color: #000000"> (+/- </span><span style="color: #098658">58.77542</span><span style="color: #000000"> </span><span style="color: #001080">ms</span><span style="color: #000000">) </span><span style="color: #001080">from</span><span style="color: #000000"> </span><span style="color: #098658">100</span><span style="color: #000000"> </span><span style="color: #001080">iterations</span>
+<span style="color: #000000">  POST:</span>
+<span style="color: #000000">    </span><span style="color: #098658">49.43074</span><span style="color: #000000"> </span><span style="color: #795E26">ms</span><span style="color: #000000"> (+/- </span><span style="color: #098658">2.39217</span><span style="color: #000000"> </span><span style="color: #001080">ms</span><span style="color: #000000">) </span><span style="color: #001080">from</span><span style="color: #000000"> </span><span style="color: #098658">10</span><span style="color: #000000"> </span><span style="color: #001080">iterations</span>
+<span style="color: #000000">- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span>
+</code></pre>
+						<p>  The first time on each line is the mean duration, and the <code>+/-</code> time is
 						the margin of error at a 95% confidence level.</p>
 					</div>
 				</details>
@@ -157,44 +157,47 @@ measure(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</s
 							names, but you&#39;re still free to pass additional descriptions to <code>record()</code>,
 						such as if one test performs several different measurements.</p>
 						<p>  Tests:</p>
-						<pre><code class="language-typescript">  <span class="hljs-keyword">import</span> { benchmark } <span class="hljs-keyword">from</span> <span class="hljs-string">"kelonio"</span>;
-  <span class="hljs-keyword">import</span> axios <span class="hljs-keyword">from</span> <span class="hljs-string">"axios"</span>;
+						<pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">benchmark</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;kelonio&quot;</span><span style="color: #000000">;</span>
+<span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">axios</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;axios&quot;</span><span style="color: #000000">;</span>
 
-  describe(<span class="hljs-string">"An HTTP client"</span>, <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
-      it(<span class="hljs-string">"can send GET requests"</span>, <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"><span class="hljs-keyword">this</span>: Mocha.Test</span>) </span>{
-          <span class="hljs-keyword">this</span>.timeout(<span class="hljs-number">30</span>_000);
-          <span class="hljs-keyword">await</span> benchmark.record(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> axios.get(<span class="hljs-string">"http://www.httpbin.org/get"</span>));
-      });
+<span style="color: #795E26">describe</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;An HTTP client&quot;</span><span style="color: #000000">, () </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #795E26">it</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;can send GET requests&quot;</span><span style="color: #000000">, </span><span style="color: #0000FF">async</span><span style="color: #000000"> </span><span style="color: #0000FF">function</span><span style="color: #000000"> (</span><span style="color: #0000FF">this</span><span style="color: #000000">: </span><span style="color: #267F99">Mocha</span><span style="color: #000000">.</span><span style="color: #267F99">Test</span><span style="color: #000000">) {</span>
+<span style="color: #000000">        </span><span style="color: #0000FF">this</span><span style="color: #000000">.</span><span style="color: #795E26">timeout</span><span style="color: #000000">(</span><span style="color: #098658">30_000</span><span style="color: #000000">);</span>
+<span style="color: #000000">        </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">benchmark</span><span style="color: #000000">.</span><span style="color: #795E26">record</span><span style="color: #000000">(() </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">axios</span><span style="color: #000000">.</span><span style="color: #795E26">get</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;http://www.httpbin.org/get&quot;</span><span style="color: #000000">));</span>
+<span style="color: #000000">    });</span>
 
-      it(<span class="hljs-string">"can send POST requests"</span>, <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"><span class="hljs-keyword">this</span>: Mocha.Test</span>) </span>{
-          <span class="hljs-keyword">this</span>.timeout(<span class="hljs-number">30</span>_000);
-          <span class="hljs-keyword">await</span> benchmark.record(
-              <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> axios.post(<span class="hljs-string">"http://www.httpbin.org/post"</span>),
-              { iterations: <span class="hljs-number">10</span>, meanUnder: <span class="hljs-number">10</span> },
-          );
-      });
-  });</code></pre>
+<span style="color: #000000">    </span><span style="color: #795E26">it</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;can send POST requests&quot;</span><span style="color: #000000">, </span><span style="color: #0000FF">async</span><span style="color: #000000"> </span><span style="color: #0000FF">function</span><span style="color: #000000"> (</span><span style="color: #0000FF">this</span><span style="color: #000000">: </span><span style="color: #267F99">Mocha</span><span style="color: #000000">.</span><span style="color: #267F99">Test</span><span style="color: #000000">) {</span>
+<span style="color: #000000">        </span><span style="color: #0000FF">this</span><span style="color: #000000">.</span><span style="color: #795E26">timeout</span><span style="color: #000000">(</span><span style="color: #098658">30_000</span><span style="color: #000000">);</span>
+<span style="color: #000000">        </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">benchmark</span><span style="color: #000000">.</span><span style="color: #795E26">record</span><span style="color: #000000">(</span>
+<span style="color: #000000">            () </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">axios</span><span style="color: #000000">.</span><span style="color: #795E26">post</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;http://www.httpbin.org/post&quot;</span><span style="color: #000000">),</span>
+<span style="color: #000000">            { </span><span style="color: #001080">iterations:</span><span style="color: #000000"> </span><span style="color: #098658">10</span><span style="color: #000000">, </span><span style="color: #001080">meanUnder:</span><span style="color: #000000"> </span><span style="color: #098658">10</span><span style="color: #000000"> },</span>
+<span style="color: #000000">        );</span>
+<span style="color: #000000">    });</span>
+<span style="color: #000000">});</span>
+</code></pre>
 						<p>  Output:</p>
-						<pre><code>    An HTTP<span class="hljs-built_in"> client
-</span>      √ can send <span class="hljs-builtin-name">GET</span> requests
-      1) can send POST requests
+						<pre><code><span style="color: #000000">  </span><span style="color: #001080">An</span><span style="color: #000000"> </span><span style="color: #0070C1">HTTP</span><span style="color: #000000"> </span><span style="color: #001080">client</span>
+<span style="color: #000000">    √ </span><span style="color: #001080">can</span><span style="color: #000000"> </span><span style="color: #001080">send</span><span style="color: #000000"> </span><span style="color: #0070C1">GET</span><span style="color: #000000"> </span><span style="color: #001080">requests</span>
+<span style="color: #000000">    </span><span style="color: #098658">1</span><span style="color: #000000">) </span><span style="color: #001080">can</span><span style="color: #000000"> </span><span style="color: #001080">send</span><span style="color: #000000"> </span><span style="color: #0070C1">POST</span><span style="color: #000000"> </span><span style="color: #001080">requests</span>
 
 
-    1 passing (8332ms)
-    1 failing
+<span style="color: #000000">  </span><span style="color: #098658">1</span><span style="color: #000000"> </span><span style="color: #795E26">passing</span><span style="color: #000000"> (8332</span><span style="color: #001080">ms</span><span style="color: #000000">)</span>
+<span style="color: #000000">  </span><span style="color: #098658">1</span><span style="color: #000000"> </span><span style="color: #001080">failing</span>
 
-    1) An HTTP<span class="hljs-built_in"> client
-</span>        can send POST requests:
-      Error: Mean time of 49.43073600000001 ms exceeded threshold of 10 ms
+<span style="color: #000000">  </span><span style="color: #098658">1</span><span style="color: #000000">) </span><span style="color: #001080">An</span><span style="color: #000000"> </span><span style="color: #0070C1">HTTP</span><span style="color: #000000"> </span><span style="color: #001080">client</span>
+<span style="color: #000000">      </span><span style="color: #001080">can</span><span style="color: #000000"> </span><span style="color: #001080">send</span><span style="color: #000000"> </span><span style="color: #0070C1">POST</span><span style="color: #000000"> requests:</span>
+<span style="color: #000000">    Error: </span><span style="color: #001080">Mean</span><span style="color: #000000"> </span><span style="color: #001080">time</span><span style="color: #000000"> </span><span style="color: #0000FF">of</span><span style="color: #000000"> </span><span style="color: #098658">49.43073600000001</span><span style="color: #000000"> </span><span style="color: #001080">ms</span><span style="color: #000000"> </span><span style="color: #001080">exceeded</span><span style="color: #000000"> </span><span style="color: #001080">threshold</span><span style="color: #000000"> </span><span style="color: #0000FF">of</span><span style="color: #000000"> </span><span style="color: #098658">10</span><span style="color: #000000"> </span><span style="color: #001080">ms</span>
 
 
-  - - - - - - - - - - - - - - - - - Performance - - - - - - - - - - - - - - - - -
-  An HTTP client:
-    can send <span class="hljs-builtin-name">GET</span> requests:
-      83.25152 ms (+/- 58.77542 ms) <span class="hljs-keyword">from</span> 100 iterations
-    can send POST requests:
-      49.43074 ms (+/- 2.39217 ms) <span class="hljs-keyword">from</span> 10 iterations
-  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</code></pre><p>  The first time on each line is the mean duration, and the <code>+/-</code> time is
+<span style="color: #000000">- - - - - - - - - - - - - - - - - </span><span style="color: #001080">Performance</span><span style="color: #000000"> - - - - - - - - - - - - - - - - -</span>
+<span style="color: #001080">An</span><span style="color: #000000"> </span><span style="color: #0070C1">HTTP</span><span style="color: #000000"> client:</span>
+<span style="color: #000000">  </span><span style="color: #001080">can</span><span style="color: #000000"> </span><span style="color: #001080">send</span><span style="color: #000000"> </span><span style="color: #0070C1">GET</span><span style="color: #000000"> requests:</span>
+<span style="color: #000000">    </span><span style="color: #098658">83.25152</span><span style="color: #000000"> </span><span style="color: #795E26">ms</span><span style="color: #000000"> (+/- </span><span style="color: #098658">58.77542</span><span style="color: #000000"> </span><span style="color: #001080">ms</span><span style="color: #000000">) </span><span style="color: #001080">from</span><span style="color: #000000"> </span><span style="color: #098658">100</span><span style="color: #000000"> </span><span style="color: #001080">iterations</span>
+<span style="color: #000000">  </span><span style="color: #001080">can</span><span style="color: #000000"> </span><span style="color: #001080">send</span><span style="color: #000000"> </span><span style="color: #0070C1">POST</span><span style="color: #000000"> requests:</span>
+<span style="color: #000000">    </span><span style="color: #098658">49.43074</span><span style="color: #000000"> </span><span style="color: #795E26">ms</span><span style="color: #000000"> (+/- </span><span style="color: #098658">2.39217</span><span style="color: #000000"> </span><span style="color: #001080">ms</span><span style="color: #000000">) </span><span style="color: #001080">from</span><span style="color: #000000"> </span><span style="color: #098658">10</span><span style="color: #000000"> </span><span style="color: #001080">iterations</span>
+<span style="color: #000000">- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span>
+</code></pre>
+						<p>  The first time on each line is the mean duration, and the <code>+/-</code> time is
 						the margin of error at a 95% confidence level.</p>
 					</div>
 				</details>
@@ -259,16 +262,46 @@ measure(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</s
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
 			<nav class="tsd-navigation primary">
 				<ul>
-					<li class="globals  ">
-						<a href="globals.html"><em>Globals</em></a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_index_.html">"index"</a>
+					<li class=" ">
+						<a href="modules.html">Exports</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-class">
+						<a href="classes/benchmark.html" class="tsd-kind-icon">Benchmark</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/benchmarkeventemitter.html" class="tsd-kind-icon">Benchmark<wbr>Event<wbr>Emitter</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/jestreporter.html" class="tsd-kind-icon">Jest<wbr>Reporter</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/karmareporter.html" class="tsd-kind-icon">Karma<wbr>Reporter</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/measurement.html" class="tsd-kind-icon">Measurement</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/mochareporter.html" class="tsd-kind-icon">Mocha<wbr>Reporter</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/performanceerror.html" class="tsd-kind-icon">Performance<wbr>Error</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/benchmarkdata.html" class="tsd-kind-icon">Benchmark<wbr>Data</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/measureoptions.html" class="tsd-kind-icon">Measure<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="modules.html#benchmark" class="tsd-kind-icon">benchmark</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#measure" class="tsd-kind-icon">measure</a>
+					</li>
 				</ul>
 			</nav>
 		</div>
@@ -279,57 +312,18 @@ measure(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</s
 		<h2>Legend</h2>
 		<div class="tsd-legend-group">
 			<ul class="tsd-legend">
-				<li class="tsd-kind-module"><span class="tsd-kind-icon">Module</span></li>
-				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
-				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
-				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
-				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
-				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
-				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
-				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
-				<li class="tsd-kind-enum-member"><span class="tsd-kind-icon">Enumeration member</span></li>
-				<li class="tsd-kind-property tsd-parent-kind-enum"><span class="tsd-kind-icon">Property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-enum"><span class="tsd-kind-icon">Method</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
-				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
-				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
-				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
-				<li class="tsd-kind-index-signature tsd-parent-kind-interface"><span class="tsd-kind-icon">Index signature</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
-				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
 				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
 				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
 				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
-				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
-				<li class="tsd-kind-index-signature tsd-parent-kind-class"><span class="tsd-kind-icon">Index signature</span></li>
 			</ul>
 			<ul class="tsd-legend">
-				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
-				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
-				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
-				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected accessor</span></li>
 			</ul>
 			<ul class="tsd-legend">
-				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
-				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private accessor</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
-				<li class="tsd-kind-call-signature tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
 			</ul>
 		</div>
 	</div>
@@ -339,6 +333,5 @@ measure(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</s
 </div>
 <div class="overlay"></div>
 <script src="assets/js/main.js"></script>
-<script>if (location.protocol == 'file:') document.write('<script src="assets/js/search.js"><' + '/script>');</script>
 </body>
 </html>
