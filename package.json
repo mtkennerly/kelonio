@@ -32,9 +32,9 @@
     "@types/mocha": "^5.2.7",
     "@types/node": "^12.12.5",
     "gh-pages": "^2.1.1",
-    "jest": "^24.9.0",
+    "jest": "^26.6.3",
     "strip-indent": "^3.0.0",
-    "ts-jest": "^24.1.0",
+    "ts-jest": "^26.5.0",
     "tslint": "^5.20.0",
     "typedoc": "^0.15.0",
     "typescript": "^3.6.4"
