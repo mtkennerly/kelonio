@@ -111,6 +111,18 @@ export interface MeasureOptions {
     maxUnder?: number;
 
     /**
+    * If the margin of error at 95% confidence level duration exceeds this many milliseconds,
+    * throw a [[PerformanceError]].
+    */
+   marginOfErrorUnder?: number;
+
+    /**
+    * If the standard deviation of all durations measured exceeds this many milliseconds,
+    * throw a [[PerformanceError]].
+    */
+   standardDeviationUnder?: number;
+
+    /**
      * Callback to invoke before each iteration.
      */
     beforeEach?: () => any;
@@ -226,6 +238,16 @@ function verifyMeasurement(measurement: Measurement, options: MeasureOptions): v
     if (options.maxUnder !== undefined) {
         if (measurement.max > options.maxUnder) {
             throw new PerformanceError(`Maximum time of ${measurement.max} ms exceeded threshold of ${options.maxUnder} ms`);
+        }
+    }
+    if (options.marginOfErrorUnder !== undefined) {
+        if (measurement.marginOfError > options.marginOfErrorUnder) {
+            throw new PerformanceError(`Margin of error time of ${measurement.marginOfError} ms exceeded threshold of ${options.marginOfErrorUnder} ms`);
+        }
+    }
+    if (options.standardDeviationUnder !== undefined) {
+        if (measurement.standardDeviation > options.standardDeviationUnder) {
+            throw new PerformanceError(`Standard deviation time of ${measurement.standardDeviation} ms exceeded threshold of ${options.standardDeviationUnder} ms`);
         }
     }
 }
