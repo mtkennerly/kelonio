@@ -1,3 +1,10 @@
+## Unreleased
+
+* Added `keepStateAtEnd` option for the Jest reporter.
+  ([Contributed by thomaschaplin and electblake](https://github.com/mtkennerly/kelonio/pull/2))
+* Added `marginOfErrorUnder` and `standardDeviationUnder` measurement options.
+  ([Contributed by thomaschaplin](https://github.com/mtkennerly/kelonio/pull/3))
+
 ## v0.3.0 (2019-11-22)
 
 * Added a reporter for Karma and a corresponding example project.

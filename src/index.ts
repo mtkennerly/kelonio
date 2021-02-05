@@ -105,22 +105,22 @@ export interface MeasureOptions {
     minUnder?: number;
 
     /**
-    * If the maximum measured duration exceeds this many milliseconds,
-    * throw a [[PerformanceError]].
-    */
+     * If the maximum measured duration exceeds this many milliseconds,
+     * throw a [[PerformanceError]].
+     */
     maxUnder?: number;
 
     /**
-    * If the margin of error at 95% confidence level duration exceeds this many milliseconds,
-    * throw a [[PerformanceError]].
-    */
-   marginOfErrorUnder?: number;
+     * If the margin of error at 95% confidence level exceeds this many milliseconds,
+     * throw a [[PerformanceError]].
+     */
+    marginOfErrorUnder?: number;
 
     /**
-    * If the standard deviation of all durations measured exceeds this many milliseconds,
-    * throw a [[PerformanceError]].
-    */
-   standardDeviationUnder?: number;
+     * If the standard deviation of all durations measured exceeds this many milliseconds,
+     * throw a [[PerformanceError]].
+     */
+    standardDeviationUnder?: number;
 
     /**
      * Callback to invoke before each iteration.
@@ -133,7 +133,7 @@ export interface MeasureOptions {
     afterEach?: () => any;
 
     /**
-     * Whether to make use of the meanUnder/minUnder/maxUnder options.
+     * Whether to make use of the options like `meanUnder` and `minUnder`.
      * @default true
      */
     verify: boolean;

@@ -1,17 +1,18 @@
-- repo: https://github.com/pre-commit/pre-commit-hooks
-  rev: v2.3.0
-  hooks:
-    - id: trailing-whitespace
-    - id: end-of-file-fixer
-- repo: https://github.com/Lucas-C/pre-commit-hooks
-  rev: v1.1.7
-  hooks:
-    - id: forbid-tabs
-- repo: local
-  hooks:
-    - id: Linting
-      name: Linting
-      language: system
-      entry: npm run lint
-      pass_filenames: false
-      files: '\.(tsx?|jsx?)$'
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v2.3.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+  - repo: https://github.com/Lucas-C/pre-commit-hooks
+    rev: v1.1.7
+    hooks:
+      - id: forbid-tabs
+  - repo: local
+    hooks:
+      - id: Linting
+        name: Linting
+        language: system
+        entry: npm run lint
+        pass_filenames: false
+        files: '\.(tsx?|jsx?)$'
