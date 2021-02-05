@@ -16,8 +16,8 @@
   },
   "scripts": {
     "build": "rm -rf out && npx tsc -p ./",
-    "deploy": "npm run docs && touch docs/.nojekyll && grep -rl 'Defined in C:/' docs | xargs sed -ri 's/^.+Defined in C:.+$//g' && npx gh-pages --dist docs --dotfiles --src **/*",
-    "docs": "npx typedoc ./src/index.ts --out docs --excludeNotExported --excludePrivate --excludeExternals",
+    "deploy": "npm run docs && touch docs/.nojekyll && npx gh-pages --dist docs --dotfiles --src **/*",
+    "docs": "npx typedoc ./src/index.ts --out docs --excludePrivate --excludeExternals",
     "lint": "npx tslint --fix src/*.ts tests/*.ts",
     "prepack": "npm run build",
     "test": "npx jest --verbose --silent --coverage --runInBand"
@@ -36,7 +36,7 @@
     "strip-indent": "^3.0.0",
     "ts-jest": "^26.5.0",
     "tslint": "^5.20.0",
-    "typedoc": "^0.15.0",
+    "typedoc": "^0.20.0",
     "typescript": "^3.8.3"
   }
 }
