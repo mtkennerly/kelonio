@@ -1,6 +1,6 @@
 {
   "name": "kelonio",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Performance testing library",
   "homepage": "https://github.com/mtkennerly/kelonio",
   "license": "MIT",
@@ -37,6 +37,6 @@
     "ts-jest": "^26.5.0",
     "tslint": "^5.20.0",
     "typedoc": "^0.15.0",
-    "typescript": "^3.6.4"
+    "typescript": "^3.8.3"
   }
 }

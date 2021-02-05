@@ -1,4 +1,4 @@
-## Unreleased
+## v0.4.0 (2021-02-05)
 
 * Added `keepStateAtEnd` option for the Jest reporter.
   ([Contributed by thomaschaplin and electblake](https://github.com/mtkennerly/kelonio/pull/2))
