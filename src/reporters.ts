@@ -16,11 +16,11 @@ interface KarmaReporterOptions {
 }
 
 interface JestReporterOptions {
-    keepStateAtEnd: boolean;
-    printResultsAtEnd?: boolean;
+    keepStateAtEnd?: boolean;
+    printReportAtEnd?: boolean;
 }
 export class JestReporter implements jest.Reporter {
-    options: JestReporterOptions = { keepStateAtEnd: false, printResultsAtEnd: true };
+    options: JestReporterOptions = { keepStateAtEnd: false, printReportAtEnd: true };
     constructor(testData?: any, options?: JestReporterOptions) {
         if (options) {
             this.options = { ...this.options, ...options };
@@ -51,7 +51,7 @@ export class JestReporter implements jest.Reporter {
         const b = new Benchmark();
         b.data = state.read();
 
-        if (this.options.printResultsAtEnd) {
+        if (this.options.printReportAtEnd) {
             console.log(`\n${b.report()}`);
         }
 

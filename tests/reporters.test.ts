@@ -161,9 +161,9 @@ describe("JestReporter", () => {
                 expect(fs.existsSync(STATE_FILE)).toBeFalsy();
             });
 
-            it("respects printResultsAtEnd = true", () => {
+            it("respects printReportAtEnd = true", () => {
                 JestReporter.initializeKelonio();
-                const reporter = new JestReporter({}, {keepStateAtEnd: false, printResultsAtEnd: true});
+                const reporter = new JestReporter({}, {printReportAtEnd: true});
                 const spy = jest.spyOn(console, "log");
                 fs.writeFileSync(STATE_FILE, JSON.stringify({
                     foo: {
@@ -185,9 +185,9 @@ describe("JestReporter", () => {
                 `).trimRight());
             });
 
-            it("respects printResultsAtEnd = false", () => {
+            it("respects printReportAtEnd = false", () => {
                 JestReporter.initializeKelonio();
-                const reporter = new JestReporter({}, {keepStateAtEnd: false, printResultsAtEnd: false});
+                const reporter = new JestReporter({}, {keepStateAtEnd: false, printReportAtEnd: false});
                 const spy = jest.spyOn(console, "log");
                 fs.writeFileSync(STATE_FILE, JSON.stringify({
                     foo: {
