@@ -15,49 +15,21 @@ Run `npm install` and `npm test` to try it out:
 
 ```
   A Karma test
-    ✓ can use Kelonio with a simple description
-    ✗ can use Kelonio with a nested description
-        Error: Minimum time of 0 ms exceeded threshold of -1 ms
-        error properties: null({ constructor: Function })
-            at new PerformanceError (/var/folders/63/jm0km8_n1m12nql44vwptcqm0000gn/T/552c5fa3af2352e1c126889f63a58ad9.browserify.js:84884:28)
-            at verifyMeasurement (/var/folders/63/jm0km8_n1m12nql44vwptcqm0000gn/T/552c5fa3af2352e1c126889f63a58ad9.browserify.js:85071:19)
-            at Benchmark.<anonymous> (/var/folders/63/jm0km8_n1m12nql44vwptcqm0000gn/T/552c5fa3af2352e1c126889f63a58ad9.browserify.js:85140:25)
-            at step (/var/folders/63/jm0km8_n1m12nql44vwptcqm0000gn/T/552c5fa3af2352e1c126889f63a58ad9.browserify.js:84843:23)
-            at Object.next (/var/folders/63/jm0km8_n1m12nql44vwptcqm0000gn/T/552c5fa3af2352e1c126889f63a58ad9.browserify.js:84824:53)
-            at fulfilled (/var/folders/63/jm0km8_n1m12nql44vwptcqm0000gn/T/552c5fa3af2352e1c126889f63a58ad9.browserify.js:84815:58)
+    √ can use Kelonio with a simple description
+    × can use Kelonio with a nested description
+        Error: Minimum time of 0.004999 ms exceeded threshold of -1 ms
 
-Chrome 88.0.4324 (Mac OS X 10.15.6) A Karma test can use Kelonio with a nested description FAILED
-        Error: Minimum time of 0 ms exceeded threshold of -1 ms
-        error properties: null({ constructor: Function })
-            at new PerformanceError (/var/folders/63/jm0km8_n1m12nql44vwptcqm0000gn/T/552c5fa3af2352e1c126889f63a58ad9.browserify.js:84884:28)
-            at verifyMeasurement (/var/folders/63/jm0km8_n1m12nql44vwptcqm0000gn/T/552c5fa3af2352e1c126889f63a58ad9.browserify.js:85071:19)
-            at Benchmark.<anonymous> (/var/folders/63/jm0km8_n1m12nql44vwptcqm0000gn/T/552c5fa3af2352e1c126889f63a58ad9.browserify.js:85140:25)
-            at step (/var/folders/63/jm0km8_n1m12nql44vwptcqm0000gn/T/552c5fa3af2352e1c126889f63a58ad9.browserify.js:84843:23)
-            at Object.next (/var/folders/63/jm0km8_n1m12nql44vwptcqm0000gn/T/552c5fa3af2352e1c126889f63a58ad9.browserify.js:84824:53)
-            at fulfilled (/var/folders/63/jm0km8_n1m12nql44vwptcqm0000gn/T/552c5fa3af2352e1c126889f63a58ad9.browserify.js:84815:58)
 
-Chrome 88.0.4324 (Mac OS X 10.15.6): Executed 2 of 2 (1 FAILED) (0.014 secs / 0.008 secs)
+Chrome 78.0.3904 (Windows 10.0.0): Executed 2 of 2 (1 FAILED) (0.116 secs / 0.016 secs)
 TOTAL: 1 FAILED, 1 SUCCESS
 
 
-1) can use Kelonio with a nested description
-     A Karma test
-     Error: Minimum time of 0 ms exceeded threshold of -1 ms
-error properties: null({ constructor: Function })
-    at new PerformanceError (/var/folders/63/jm0km8_n1m12nql44vwptcqm0000gn/T/552c5fa3af2352e1c126889f63a58ad9.browserify.js:84884:28)
-    at verifyMeasurement (/var/folders/63/jm0km8_n1m12nql44vwptcqm0000gn/T/552c5fa3af2352e1c126889f63a58ad9.browserify.js:85071:19)
-    at Benchmark.<anonymous> (/var/folders/63/jm0km8_n1m12nql44vwptcqm0000gn/T/552c5fa3af2352e1c126889f63a58ad9.browserify.js:85140:25)
-    at step (/var/folders/63/jm0km8_n1m12nql44vwptcqm0000gn/T/552c5fa3af2352e1c126889f63a58ad9.browserify.js:84843:23)
-    at Object.next (/var/folders/63/jm0km8_n1m12nql44vwptcqm0000gn/T/552c5fa3af2352e1c126889f63a58ad9.browserify.js:84824:53)
-    at fulfilled (/var/folders/63/jm0km8_n1m12nql44vwptcqm0000gn/T/552c5fa3af2352e1c126889f63a58ad9.browserify.js:84815:58)
-
-
 - - - - - - - - - - - - - - - - - Performance - - - - - - - - - - - - - - - - -
-Chrome 88.0.4324 (Mac OS X 10.15.6):
+Chrome 78.0.3904 (Windows 10.0.0):
   simple description:
-    0.00615 ms (+/- 0.00322 ms) from 100 iterations
+    0.01015 ms (+/- 0.00294 ms) from 100 iterations
   nested:
     description:
-      0.0042 ms (+/- 0.0008 ms) from 100 iterations
+      0.00935 ms (+/- 0.00149 ms) from 100 iterations
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 ```
