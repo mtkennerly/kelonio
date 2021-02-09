@@ -187,7 +187,7 @@ describe("JestReporter", () => {
 
             it("respects printReportAtEnd = false", () => {
                 JestReporter.initializeKelonio();
-                const reporter = new JestReporter({}, {keepStateAtEnd: false, printReportAtEnd: false});
+                const reporter = new JestReporter({}, {printReportAtEnd: false});
                 const spy = jest.spyOn(console, "log");
                 fs.writeFileSync(STATE_FILE, JSON.stringify({
                     foo: {
