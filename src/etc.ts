@@ -1,5 +1,4 @@
 import * as fsModule from "fs";
-import { BenchmarkData } from ".";
 
 export const STATE_FILE = ".kelonio.state.json";
 const HEADER_SIDE = "- ".repeat(17).trim();
