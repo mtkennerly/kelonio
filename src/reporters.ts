@@ -28,7 +28,7 @@ export class JestReporter implements jest.Reporter {
     }
     static initializeKelonio(): void {
         const state = new BenchmarkFileState();
-        state.delete();
+        state.write({});
         benchmark.events.on("record", (description, measurement) => {
             const b = new Benchmark();
             if (state.exists()) {
