@@ -1,4 +1,4 @@
-## Unreleased
+## v0.5.0 (2021-02-11)
 
 * Added `printReportAtEnd` reporter option.
   ([Contributed by thomaschaplin](https://github.com/mtkennerly/kelonio/pull/4))
