@@ -3,7 +3,8 @@
   "kelonio/out/plugin/mochaReporter": {
     "stdout": "-",
     "options": {
-      "inferDescriptions": true
+      "inferDescriptions": true,
+      "printReportAtEnd": true
     }
   }
 }

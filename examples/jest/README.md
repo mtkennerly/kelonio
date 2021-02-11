@@ -7,7 +7,11 @@
       have access to performance data from the test run. The data will be in
       `.kelonio.state.json`, which will be deleted at the end of the tests.
     * Ensure no serialized results from a prior test run are present.
-  * Enable Kelonio's Jest reporter.
+  * Enable Kelonio's Jest reporter. Available configuration:
+    * `keepStateAtEnd` (boolean): Whether to retain the state file at the end of the test run,
+      instead of deleting it like normal. Default: false.
+    * `printReportAtEnd` (boolean): Print the performance report at the end of the test run.
+      Default: true.
 * In `index.test.ts` or any other test file:
   * Call `benchmark.record()`.
 

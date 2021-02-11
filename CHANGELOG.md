@@ -1,3 +1,10 @@
+## Unreleased
+
+* Added `printReportAtEnd` reporter option.
+  ([Contributed by thomaschaplin](https://github.com/mtkennerly/kelonio/pull/4))
+* Fixed an error in the Jest reporter when no Kelonio tests were executed.
+  ([Contributed by thomaschaplin](https://github.com/mtkennerly/kelonio/pull/6))
+
 ## v0.4.0 (2021-02-05)
 
 * Added `keepStateAtEnd` option for the Jest reporter.

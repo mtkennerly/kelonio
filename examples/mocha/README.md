@@ -7,6 +7,7 @@
     current test name (including any nested `describe` calls) will be included
     in the performance report, in addition to any more specific descriptions
     that you pass to `benchmark.record()`.
+  * Enable (default) or disable printing the performance report at the end of the test run.
 * In `index.test.ts` or any other test file:
   * Call `benchmark.record()`.
 

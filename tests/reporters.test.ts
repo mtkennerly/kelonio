@@ -253,6 +253,16 @@ describe("KarmaReporter", () => {
             ${FOOTER}
         `).trim() + "\n");
     });
+
+    it("does not print a report when printReportAtEnd is false", async () => {
+        [writer, reporter] = makeKarmaReporter({ kelonioReporter: { printReportAtEnd: false } });
+
+        // @ts-ignore
+        reporter.onBrowserLog("any", `'{"description":["foo"],"durations":[1,2,3]}'`, "kelonio");
+        // @ts-ignore
+        reporter.onRunComplete();
+        expect(writer.mock.calls).toEqual([]);
+    });
 });
 
 describe("MochaReporter", () => {
@@ -288,5 +298,16 @@ describe("MochaReporter", () => {
               2 ms (+/- 1.13161 ms) from 3 iterations
             ${FOOTER}
         `).trimRight());
+    });
+
+    it("does not print a report when printReportAtEnd is false", async () => {
+        const [runner, reporter] = makeMochaReporter({ printReportAtEnd: false });
+        const spy = jest.spyOn(console, "log");
+
+        runner.emit("test", { titlePath: () => ["A", "B"] });
+        benchmark.events.emit("record", ["foo"], new Measurement([1, 2, 3]));
+        runner.emit("end");
+
+        expect(spy.mock.calls).toEqual([]);
     });
 });

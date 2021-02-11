@@ -24,6 +24,7 @@ module.exports = config => {
         },
         kelonioReporter: {
             inferBrowsers: true,
+            printReportAtEnd: true,
         },
     });
 };

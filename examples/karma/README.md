@@ -7,6 +7,7 @@
     you will see logging for all of the raw performance measurements.
   * Enable (default) or disable browser inference. When enabled, the current
     browser name will be included in the performance report.
+  * Enable (default) or disable printing the performance report at the end of the test run.
 * In `index.test.js` or any other test file:
   * Call `benchmark.record()`.
 

@@ -8,11 +8,13 @@ type KarmaLoggedRecord = { description: Array<string>, durations: Array<number> 
 interface MochaReporterOptions {
     reporterOptions: {
         inferDescriptions?: boolean;
+        printReportAtEnd?: boolean;
     };
 }
 
 interface KarmaReporterOptions {
     inferBrowsers?: boolean;
+    printReportAtEnd?: boolean;
 }
 
 interface JestReporterOptions {
@@ -73,7 +75,7 @@ export class KarmaReporter {
 
     constructor(baseReporterDecorator: any, config: { kelonioReporter?: KarmaReporterOptions }, logger: unknown, helper: unknown, formatError: unknown) {
         baseReporterDecorator(this);
-        const activeConfig = { ...{ inferBrowsers: true }, ...config.kelonioReporter };
+        const activeConfig = { ...{ inferBrowsers: true, printReportAtEnd: true }, ...config.kelonioReporter };
         const b = new Benchmark();
 
         this.onBrowserLog = (browser: string, log: string, type: string) => {
@@ -85,7 +87,9 @@ export class KarmaReporter {
         };
 
         this.onRunComplete = () => {
-            (<any>this).write(`${b.report()}\n`);
+            if (activeConfig.printReportAtEnd) {
+                (<any>this).write(`${b.report()}\n`);
+            }
         };
     }
 }
@@ -94,18 +98,21 @@ export class MochaReporter {
     constructor(runner: Mocha.Runner, options: MochaReporterOptions) {
         const b = new Benchmark();
         let baseDescription: Array<string> = [];
-        const inferDescriptions = options.reporterOptions.inferDescriptions;
+        const inferDescriptions = options.reporterOptions.inferDescriptions ?? true;
+        const printReportAtEnd = options.reporterOptions.printReportAtEnd ?? true;
 
         benchmark.events.on("record", (description, measurement) => {
             b.incorporate(baseDescription.concat(description), measurement);
         });
-        if (inferDescriptions === true || inferDescriptions === undefined) {
+        if (inferDescriptions) {
             runner.on(MOCHA_EVENT_TEST_BEGIN, test => {
                 baseDescription = test.titlePath();
             });
         }
         runner.once(MOCHA_EVENT_RUN_END, () => {
-            console.log(`\n${b.report()}`);
+            if (printReportAtEnd) {
+                console.log(`\n${b.report()}`);
+            }
         });
     }
 }
