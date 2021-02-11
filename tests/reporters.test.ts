@@ -36,7 +36,7 @@ describe("JestReporter", () => {
     });
 
     describe("initializeKelonio", () => {
-        it("deletes the state file if it exists", () => {
+        it("sets the state file to an empty object if it exists", () => {
             fs.writeFileSync(STATE_FILE, JSON.stringify({
                 foo: {
                     durations: [1, 2, 3],
@@ -44,12 +44,18 @@ describe("JestReporter", () => {
                 }
             }));
             JestReporter.initializeKelonio();
-            expect(fs.existsSync(STATE_FILE)).toBeFalsy();
+            expect(fs.existsSync(STATE_FILE)).toBeTruthy();
+
+            const serialized = JSON.parse(fs.readFileSync(STATE_FILE, "utf-8"));
+            expect(serialized).toEqual({});
         });
 
-        it("does nothing if the state file is nonexistent", () => {
+        it("sets the state file to an empty object if the state file is nonexistent", () => {
             JestReporter.initializeKelonio();
-            expect(fs.existsSync(STATE_FILE)).toBeFalsy();
+            expect(fs.existsSync(STATE_FILE)).toBeTruthy();
+
+            const serialized = JSON.parse(fs.readFileSync(STATE_FILE, "utf-8"));
+            expect(serialized).toEqual({});
         });
 
         it("registers a record callback that serializes data", async () => {
