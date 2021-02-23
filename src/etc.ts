@@ -32,6 +32,16 @@ export class BenchmarkFileState {
         fs.writeFileSync(STATE_FILE, JSON.stringify(data), "utf-8");
     }
 
+    append(data: object): void {
+        let previousData;
+        try {
+            previousData = this.read();
+        } catch {
+            previousData = {};
+        }
+        this.write({...previousData, ...data});
+    }
+
     delete(): void {
         try { fs.unlinkSync(STATE_FILE); } catch { }
     }

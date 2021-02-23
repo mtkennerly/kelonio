@@ -30,14 +30,22 @@ export class JestReporter implements jest.Reporter {
     }
     static initializeKelonio(): void {
         const state = new BenchmarkFileState();
-        state.write({});
+        if(process.env.KELONIO_KEEP_STATE_AT_START === "true") {
+            state.append({});
+        } else {
+            state.write({});
+        }
         benchmark.events.on("record", (description, measurement) => {
             const b = new Benchmark();
             if (state.exists()) {
                 b.data = state.read();
             }
             b.incorporate(description, measurement);
-            state.write(b.data);
+            if(process.env.KELONIO_KEEP_STATE_AT_START === "true") {
+                state.append(b.data);
+            } else {
+                state.write(b.data);
+            }
         });
     }
 

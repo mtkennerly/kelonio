@@ -42,3 +42,10 @@ nested:
     0.00392 ms (+/- 0.00068 ms) from 100 iterations
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 ```
+
+## Environment Variables
+
+| Name                        | Option | Description                                                                                |
+| :-------------------------- | :----- | :----------------------------------------------------------------------------------------- |
+| KELONIO_KEEP_STATE_AT_START | FALSE  | Generates a fresh ".kelonio.state.json" each time jest is executed                         |
+| KELONIO_KEEP_STATE_AT_START | TRUE   | Appends to the existing state file ".kelonio.state.json" instead of generating a fresh one |

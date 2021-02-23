@@ -47,7 +47,14 @@ describe("JestReporter", () => {
             expect(fs.existsSync(STATE_FILE)).toBeTruthy();
 
             const serialized = JSON.parse(fs.readFileSync(STATE_FILE, "utf-8"));
-            expect(serialized).toEqual({});
+            if(process.env.KELONIO_KEEP_STATE_AT_START === "true") {
+                expect(serialized).toEqual({foo: {
+                    durations: [1, 2, 3],
+                    children: {},
+                }});
+            } else {
+                expect(serialized).toEqual({});
+            }
         });
 
         it("sets the state file to an empty object if the state file is nonexistent", () => {
