@@ -20,8 +20,7 @@
     "docs": "npx typedoc ./src/index.ts --out docs --excludePrivate --excludeExternals",
     "lint": "npx tslint --fix src/*.ts tests/*.ts",
     "prepack": "npm run build",
-    "test": "npx jest --verbose --silent --coverage --runInBand",
-    "test:keepStateAtStart": "KELONIO_KEEP_STATE_AT_START=true npm test"
+    "test": "npx jest --verbose --silent --coverage --runInBand"
   },
   "dependencies": {
     "browser-process-hrtime": "^1.0.0",

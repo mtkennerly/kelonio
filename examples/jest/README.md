@@ -49,11 +49,11 @@ Default options consist of the following:
 
 | Name                        | Default Option |
 | :-------------------------- | :------------- |
-| KELONIO_KEEP_STATE_AT_START | FALSE          |
+| KELONIO_KEEP_STATE_AT_START | false          |
 
 The available options consist of the following:
 
 | Name                        | Option | Description                                                                                |
 | :-------------------------- | :----- | :----------------------------------------------------------------------------------------- |
-| KELONIO_KEEP_STATE_AT_START | FALSE  | Generates a fresh ".kelonio.state.json" each time jest is executed                         |
-| KELONIO_KEEP_STATE_AT_START | TRUE   | Appends to the existing state file ".kelonio.state.json" instead of generating a fresh one |
+| KELONIO_KEEP_STATE_AT_START | false  | Generates a fresh ".kelonio.state.json" each time jest is executed                         |
+| KELONIO_KEEP_STATE_AT_START | true   | Appends to the existing state file ".kelonio.state.json" instead of generating a fresh one |
