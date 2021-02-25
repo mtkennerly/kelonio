@@ -5,6 +5,7 @@
   * `npm run build`
 * Run tests:
   * `npm test`
+  * `npm run test:keepStateAtStart`
 * Run linting:
   * `npm run lint`
 * Activate pre-commit hooks (requires Python; some systems may use `pip3`
