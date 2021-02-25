@@ -45,6 +45,14 @@ nested:
 
 ## Environment Variables
 
+Default options consist of the following:
+
+| Name                        | Default Option |
+| :-------------------------- | :------------- |
+| KELONIO_KEEP_STATE_AT_START | FALSE          |
+
+The available options consist of the following:
+
 | Name                        | Option | Description                                                                                |
 | :-------------------------- | :----- | :----------------------------------------------------------------------------------------- |
 | KELONIO_KEEP_STATE_AT_START | FALSE  | Generates a fresh ".kelonio.state.json" each time jest is executed                         |
