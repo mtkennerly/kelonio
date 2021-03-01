@@ -37,7 +37,7 @@ export class JestReporter implements jest.Reporter {
                 b.data = state.read();
             }
             b.incorporate(description, measurement);
-                state.write(b.data);
+            state.write(b.data);
         });
     }
 
