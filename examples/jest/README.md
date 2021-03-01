@@ -8,6 +8,8 @@
       `.kelonio.state.json`, which will be deleted at the end of the tests.
     * Ensure no serialized results from a prior test run are present.
   * Enable Kelonio's Jest reporter. Available configuration:
+    * `keepStateAtStart` (boolean): Whether to retain the state file at the start of the test run,
+      instead of deleting it like normal. Default: false.
     * `keepStateAtEnd` (boolean): Whether to retain the state file at the end of the test run,
       instead of deleting it like normal. Default: false.
     * `printReportAtEnd` (boolean): Print the performance report at the end of the test run.

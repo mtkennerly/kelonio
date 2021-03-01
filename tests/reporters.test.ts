@@ -36,28 +36,6 @@ describe("JestReporter", () => {
     });
 
     describe("initializeKelonio", () => {
-        it("sets the state file to an empty object if it exists", () => {
-            fs.writeFileSync(STATE_FILE, JSON.stringify({
-                foo: {
-                    durations: [1, 2, 3],
-                    children: {},
-                }
-            }));
-            JestReporter.initializeKelonio();
-            expect(fs.existsSync(STATE_FILE)).toBeTruthy();
-
-            const serialized = JSON.parse(fs.readFileSync(STATE_FILE, "utf-8"));
-            expect(serialized).toEqual({});
-        });
-
-        it("sets the state file to an empty object if the state file is nonexistent", () => {
-            JestReporter.initializeKelonio();
-            expect(fs.existsSync(STATE_FILE)).toBeTruthy();
-
-            const serialized = JSON.parse(fs.readFileSync(STATE_FILE, "utf-8"));
-            expect(serialized).toEqual({});
-        });
-
         it("registers a record callback that serializes data", async () => {
             JestReporter.initializeKelonio();
             await benchmark.record("foo", () => { });
@@ -117,6 +95,58 @@ describe("JestReporter", () => {
         });
 
         describe("options", () => {
+            it("respects keepStateAtStart = true", () => {
+                JestReporter.initializeKelonio();
+                const reporter = new JestReporter({}, {keepStateAtStart: true});
+                fs.writeFileSync(STATE_FILE, JSON.stringify({
+                    foo: {
+                        durations: [1, 2, 3],
+                        children: {},
+                    }
+                }));
+                reporter.onRunStart();
+                benchmark.events.emit("record", ["bar"], new Measurement([4, 5, 6]));
+
+
+                const serialized = JSON.parse(fs.readFileSync(STATE_FILE, "utf-8"));
+                expect(serialized).toEqual(
+                    {
+                        foo: {
+                            durations: [1, 2, 3],
+                            children: {},
+                        },
+                        bar: {
+                            durations: [4, 5, 6],
+                            children: {},
+                        }
+                    }
+                );
+            });
+
+            it("respects keepStateAtStart = false", () => {
+                JestReporter.initializeKelonio();
+                const reporter = new JestReporter({}, {keepStateAtStart: false});
+                fs.writeFileSync(STATE_FILE, JSON.stringify({
+                    foo: {
+                        durations: [1, 2, 3],
+                        children: {},
+                    }
+                }));
+                reporter.onRunStart();
+                benchmark.events.emit("record", ["bar"], new Measurement([4, 5, 6]));
+
+
+                const serialized = JSON.parse(fs.readFileSync(STATE_FILE, "utf-8"));
+                expect(serialized).toEqual(
+                    {
+                        bar: {
+                            durations: [4, 5, 6],
+                            children: {},
+                        }
+                    }
+                );
+            });
+
             it("respects keepStateAtEnd = true", () => {
                 JestReporter.initializeKelonio();
                 const reporter = new JestReporter({}, {keepStateAtEnd: true});
