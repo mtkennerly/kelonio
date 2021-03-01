@@ -18,11 +18,12 @@ interface KarmaReporterOptions {
 }
 
 interface JestReporterOptions {
+    keepStateAtStart?: boolean;
     keepStateAtEnd?: boolean;
     printReportAtEnd?: boolean;
 }
 export class JestReporter implements jest.Reporter {
-    options: JestReporterOptions = { keepStateAtEnd: false, printReportAtEnd: true };
+    options: JestReporterOptions = { keepStateAtStart: false, keepStateAtEnd: false, printReportAtEnd: true };
     constructor(testData?: any, options?: JestReporterOptions) {
         if (options) {
             this.options = { ...this.options, ...options };
@@ -30,23 +31,23 @@ export class JestReporter implements jest.Reporter {
     }
     static initializeKelonio(): void {
         const state = new BenchmarkFileState();
-        if(process.env.KELONIO_KEEP_STATE_AT_START === "true") {
-            state.append({});
-        } else {
-            state.write({});
-        }
         benchmark.events.on("record", (description, measurement) => {
             const b = new Benchmark();
             if (state.exists()) {
                 b.data = state.read();
             }
             b.incorporate(description, measurement);
-            if(process.env.KELONIO_KEEP_STATE_AT_START === "true") {
-                state.append(b.data);
-            } else {
                 state.write(b.data);
-            }
         });
+    }
+
+    onRunStart(): void {
+        const state = new BenchmarkFileState();
+        if(this.options.keepStateAtStart) {
+            state.append({});
+        } else {
+            state.write({});
+        }
     }
 
     onRunComplete(): void {
