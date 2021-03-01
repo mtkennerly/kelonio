@@ -1,3 +1,8 @@
+## v0.6.0 (2021-03-01)
+
+* Added `keepStateAtStart` option for the Jest reporter.
+  ([Contributed by thomaschaplin](https://github.com/mtkennerly/kelonio/pull/7))
+
 ## v0.5.0 (2021-02-11)
 
 * Added `printReportAtEnd` reporter option.

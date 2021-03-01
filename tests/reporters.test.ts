@@ -107,7 +107,6 @@ describe("JestReporter", () => {
                 reporter.onRunStart();
                 benchmark.events.emit("record", ["bar"], new Measurement([4, 5, 6]));
 
-
                 const serialized = JSON.parse(fs.readFileSync(STATE_FILE, "utf-8"));
                 expect(serialized).toEqual(
                     {
@@ -134,7 +133,6 @@ describe("JestReporter", () => {
                 }));
                 reporter.onRunStart();
                 benchmark.events.emit("record", ["bar"], new Measurement([4, 5, 6]));
-
 
                 const serialized = JSON.parse(fs.readFileSync(STATE_FILE, "utf-8"));
                 expect(serialized).toEqual(
