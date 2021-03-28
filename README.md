@@ -22,7 +22,7 @@ any direct dependency on them:
 
 ## Usage
 Full API documentation:
-[https://mtkennerly.github.io/kelonio/modules/\_index\_.html](https://mtkennerly.github.io/kelonio/modules/_index_.html)
+[https://mtkennerly.github.io/kelonio/modules](https://mtkennerly.github.io/kelonio/modules)
 
 For simple, one-off checks, like in the console or a script, use the `measure`
 function:
