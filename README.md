@@ -35,9 +35,10 @@ measure(() => axios.get("http://www.httpbin.org/get"))
     .then(measurement => console.log(`Mean: ${measurement.mean} ms`));
 ```
 
+By default, the check is repeated 100 times, but you can customize this.
 If you measure a function that returns a promise, Kelonio will automatically
 measure the time until it's resolved as well. The resulting `measurement`
-exposes various stats, like maximum time and standard deviation.
+exposes various stats, like mean time, maximum time, and standard deviation.
 
 <!--
 For aggregating results from multiple measurements, create a `Benchmark` and
