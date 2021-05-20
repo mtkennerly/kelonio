@@ -1,3 +1,13 @@
+## Unreleased
+
+* Added:
+  * `Benchmark.measurements` getter for a list of `Measurement` from the raw
+    `Benchmark.data`.
+  * `Benchmark.find()` and `Criteria` to determine the fastest/slowest
+    measurement.
+  * `Measurement.description` field, which is used by `Benchmark.measurements`
+    and `Benchmark.find()` so that each measurement retains its context.
+
 ## v0.6.0 (2021-03-01)
 
 * Added `keepStateAtStart` option for the Jest reporter.

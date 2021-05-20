@@ -1,5 +1,5 @@
 import stripIndent from "strip-indent";
-import { Benchmark, measure, Measurement, PerformanceError } from "../src";
+import { Benchmark, Criteria, measure, Measurement, PerformanceError } from "../src";
 import { FOOTER, HEADER } from "../src/etc";
 
 // Using `await util.promisify(setTimeout)(500)` leads to this error in some tests:
@@ -283,6 +283,91 @@ describe("Benchmark", () => {
                     2 ms (+/- 0 ms) from 1 iterations
                 ${FOOTER}
             `));
+        });
+    });
+
+    describe("measurements", () => {
+        it("converts data with one level", () => {
+            benchmark.data = {
+                foo: { durations: [1], children: {} },
+                bar: { durations: [2],children: {} },
+            };
+            expect(benchmark.measurements).toEqual([
+                (() => { const m = new Measurement([1]); m.description = ["foo"]; return m; })(),
+                (() => { const m = new Measurement([2]); m.description = ["bar"]; return m; })(),
+            ]);
+        });
+
+        it("converts data with nested levels", () => {
+            benchmark.data = {
+                foo: {
+                    durations: [],
+                    children: {
+                        bar: {
+                            durations: [1],children: {}
+                        },
+                    }
+                },
+            };
+            expect(benchmark.measurements).toEqual([
+                (() => { const m = new Measurement([1]); m.description = ["foo", "bar"]; return m; })(),
+            ]);
+        });
+
+        it("handles empty data", () => {
+            expect(benchmark.measurements).toHaveLength(0);
+        });
+    });
+
+    describe("find", () => {
+        it("can find the fastest by the default field", async () => {
+            benchmark.data = {
+                foo: { durations: [1, 2], children: {} },
+                bar: { durations: [1.1, 1.2],children: {} },
+            };
+            const result = benchmark.find(Criteria.Fastest);
+            expect(result?.description).toEqual(["bar"]);
+            expect(result?.durations).toEqual([1.1, 1.2]);
+        });
+
+        it("can find the fastest by a custom field", async () => {
+            benchmark.data = {
+                foo: { durations: [1, 2], children: {} },
+                bar: { durations: [1.1, 1.2],children: {} },
+            };
+            const result = benchmark.find(Criteria.Fastest, m => m.min);
+            expect(result?.description).toEqual(["foo"]);
+        });
+
+        it("can find the slowest by the default field", async () => {
+            benchmark.data = {
+                foo: { durations: [1, 2], children: {} },
+                bar: { durations: [0.1, 0.1, 2.1],children: {} },
+            };
+            const result = benchmark.find(Criteria.Slowest);
+            expect(result?.description).toEqual(["foo"]);
+        });
+
+        it("can find the slowest by a custom field", async () => {
+            benchmark.data = {
+                foo: { durations: [1, 2], children: {} },
+                bar: { durations: [0.1, 0.1, 2.1],children: {} },
+            };
+            const result = benchmark.find(Criteria.Slowest, m => m.max);
+            expect(result?.description).toEqual(["bar"]);
+        });
+
+        it("returns the measurement when there is only one", async () => {
+            benchmark.data = {
+                foo: { durations: [1, 2], children: {} },
+            };
+            const result = benchmark.find(Criteria.Fastest);
+            expect(result?.description).toEqual(["foo"]);
+        });
+
+        it("returns null when there are no measurements", async () => {
+            const result = benchmark.find(Criteria.Fastest);
+            expect(result).toBeNull();
         });
     });
 });

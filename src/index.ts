@@ -30,6 +30,11 @@ export class PerformanceError extends Error {
  */
 export class Measurement {
     /**
+     * Optional name of the measurement, for use in reporting.
+     */
+    description: Array<string> = [];
+
+    /**
      *
      * @param durations - Durations measured, in milliseconds.
      *     The list must not be empty.
@@ -252,6 +257,11 @@ function verifyMeasurement(measurement: Measurement, options: MeasureOptions): v
     }
 }
 
+export enum Criteria {
+    Fastest,
+    Slowest,
+}
+
 /**
  * Aggregator for performance results of various tests.
  */
@@ -393,6 +403,50 @@ export class Benchmark {
         } else {
             return [HEADER, ...this.reportLevel(this.data, 0), FOOTER].join("\n");
         }
+    }
+
+    private getMeasurementsAtLevel(level: BenchmarkData, descriptions: Array<string>): Array<Measurement> {
+        let measurements: Array<Measurement> = [];
+        for (const [description, info] of Object.entries(level)) {
+            const localDescriptions = [...descriptions, description];
+            if (info.durations.length > 0) {
+                const measurement = new Measurement(info.durations);
+                measurement.description = localDescriptions;
+                measurements.push(measurement);
+            }
+            measurements = measurements.concat(this.getMeasurementsAtLevel(info.children, localDescriptions));
+        }
+        return measurements;
+    }
+
+    /**
+     * Get a list of [[Measurement]] based on [[Benchmark.data]].
+     */
+    get measurements(): Array<Measurement> {
+        return this.getMeasurementsAtLevel(this.data, []);
+    }
+
+    /**
+     * Find the measurement that meets some criteria.
+     * In the case of a tie, the first one found wins.
+     *
+     * @param criteria - Criteria by which to select a measurement.
+     * @param value - Callback to select a specific field of each measurement for comparison.
+     *     The default uses the mean plus the margin of error.
+     * @returns the matching measurement, or null if no measurements have been taken
+     */
+    find(criteria: Criteria, value: (m: Measurement) => number = m => m.mean + m.marginOfError): Measurement | null {
+        let candidate = null;
+        for (const measurement of this.measurements) {
+            if (candidate === null) {
+                candidate = measurement;
+            } else if (criteria === Criteria.Fastest && value(measurement) < value(candidate)) {
+                candidate = measurement;
+            } else if (criteria === Criteria.Slowest && value(measurement) > value(candidate)) {
+                candidate = measurement;
+            }
+        }
+        return candidate;
     }
 }
 
