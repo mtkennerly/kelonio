@@ -24,11 +24,10 @@
   },
   "dependencies": {
     "browser-process-hrtime": "^1.0.0",
-    "mathjs": "^6.2.3"
+    "mathjs": "^9.4.2"
   },
   "devDependencies": {
     "@types/jest": "^24.0.21",
-    "@types/mathjs": "^6.0.2",
     "@types/mocha": "^5.2.7",
     "@types/node": "^12.12.5",
     "gh-pages": "^2.1.1",
