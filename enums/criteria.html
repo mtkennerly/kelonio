@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>BenchmarkData | kelonio</title>
+	<title>Criteria | kelonio</title>
 	<meta name="description" content="Documentation for kelonio">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -53,10 +53,10 @@
 					<a href="../modules.html">kelonio</a>
 				</li>
 				<li>
-					<a href="benchmarkdata.html">BenchmarkData</a>
+					<a href="criteria.html">Criteria</a>
 				</li>
 			</ul>
-			<h1>Interface BenchmarkData</h1>
+			<h1>Enumeration Criteria</h1>
 		</div>
 	</div>
 </header>
@@ -66,45 +66,46 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Raw data collected from <a href="../classes/benchmark.html#record">Benchmark.record</a>.</p>
+						<p>Used for filtering benchmark data.</p>
 					</div>
 				</div>
 			</section>
-			<section class="tsd-panel tsd-hierarchy">
-				<h3>Hierarchy</h3>
-				<ul class="tsd-hierarchy">
-					<li>
-						<span class="target">BenchmarkData</span>
-					</li>
-				</ul>
-			</section>
-			<section class="tsd-panel tsd-kind-interface">
-				<h3 class="tsd-before-signature">Indexable</h3>
-				<div class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">[</span>description: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><span class="tsd-signature-symbol">{ </span>children<span class="tsd-signature-symbol">: </span><a href="benchmarkdata.html" class="tsd-signature-type" data-tsd-kind="Interface">BenchmarkData</a><span class="tsd-signature-symbol">; </span>durations<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> }</span></div>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Description passed to <a href="../classes/benchmark.html#record">Benchmark.record</a>.</p>
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>Enumeration members</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="criteria.html#fastest" class="tsd-kind-icon">Fastest</a></li>
+								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="criteria.html#slowest" class="tsd-kind-icon">Slowest</a></li>
+							</ul>
+						</section>
 					</div>
-				</div>
-				<ul class="tsd-parameters">
-					<li class="tsd-parameter">
-						<h5>children<span class="tsd-signature-symbol">: </span><a href="benchmarkdata.html" class="tsd-signature-type" data-tsd-kind="Interface">BenchmarkData</a></h5>
-						<div class="tsd-comment tsd-typography">
-							<div class="lead">
-								<p>Nested test data, such as when passing <code>[&quot;A&quot;, &quot;B&quot;]</code> as the
-								description to <a href="../classes/benchmark.html#record">Benchmark.record</a>.</p>
-							</div>
-						</div>
-					</li>
-					<li class="tsd-parameter">
-						<h5>durations<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span></h5>
-						<div class="tsd-comment tsd-typography">
-							<div class="lead">
-								<p>Durations of all measured iterations, in milliseconds.</p>
-							</div>
-						</div>
-					</li>
-				</ul>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Enumeration members</h2>
+				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
+					<a name="fastest" class="tsd-anchor"></a>
+					<h3>Fastest</h3>
+					<div class="tsd-signature tsd-kind-icon">Fastest<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = 0</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/mtkennerly/kelonio/blob/6843bf4/src/index.ts#L264">index.ts:264</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
+					<a name="slowest" class="tsd-anchor"></a>
+					<h3>Slowest</h3>
+					<div class="tsd-signature tsd-kind-icon">Slowest<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> = 1</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/mtkennerly/kelonio/blob/6843bf4/src/index.ts#L265">index.ts:265</a></li>
+						</ul>
+					</aside>
+				</section>
 			</section>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
@@ -117,9 +118,21 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-enum">
-						<a href="../enums/criteria.html" class="tsd-kind-icon">Criteria</a>
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-enum">
+						<a href="criteria.html" class="tsd-kind-icon">Criteria</a>
+						<ul>
+							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
+								<a href="criteria.html#fastest" class="tsd-kind-icon">Fastest</a>
+							</li>
+							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
+								<a href="criteria.html#slowest" class="tsd-kind-icon">Slowest</a>
+							</li>
+						</ul>
 					</li>
+				</ul>
+				<ul class="after-current">
 					<li class=" tsd-kind-class">
 						<a href="../classes/benchmark.html" class="tsd-kind-icon">Benchmark</a>
 					</li>
@@ -141,15 +154,11 @@
 					<li class=" tsd-kind-class">
 						<a href="../classes/performanceerror.html" class="tsd-kind-icon">Performance<wbr>Error</a>
 					</li>
-				</ul>
-				<ul class="current">
-					<li class="current tsd-kind-interface">
-						<a href="benchmarkdata.html" class="tsd-kind-icon">Benchmark<wbr>Data</a>
-					</li>
-				</ul>
-				<ul class="after-current">
 					<li class=" tsd-kind-interface">
-						<a href="measureoptions.html" class="tsd-kind-icon">Measure<wbr>Options</a>
+						<a href="../interfaces/benchmarkdata.html" class="tsd-kind-icon">Benchmark<wbr>Data</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/measureoptions.html" class="tsd-kind-icon">Measure<wbr>Options</a>
 					</li>
 					<li class=" tsd-kind-variable">
 						<a href="../modules.html#benchmark" class="tsd-kind-icon">benchmark</a>

@@ -96,8 +96,15 @@
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
+							<h3>Accessors</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="benchmark.html#measurements" class="tsd-kind-icon">measurements</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="benchmark.html#find" class="tsd-kind-icon">find</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="benchmark.html#incorporate" class="tsd-kind-icon">incorporate</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="benchmark.html#record" class="tsd-kind-icon">record</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="benchmark.html#report" class="tsd-kind-icon">report</a></li>
@@ -131,7 +138,7 @@
 					<div class="tsd-signature tsd-kind-icon">data<span class="tsd-signature-symbol">:</span> <a href="../interfaces/benchmarkdata.html" class="tsd-signature-type" data-tsd-kind="Interface">BenchmarkData</a><span class="tsd-signature-symbol"> = ...</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/mtkennerly/kelonio/blob/9c4b71b/src/index.ts#L262">index.ts:262</a></li>
+							<li>Defined in <a href="https://github.com/mtkennerly/kelonio/blob/6843bf4/src/index.ts#L275">index.ts:275</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -146,7 +153,7 @@
 					<div class="tsd-signature tsd-kind-icon">events<span class="tsd-signature-symbol">:</span> <a href="benchmarkeventemitter.html" class="tsd-signature-type" data-tsd-kind="Class">BenchmarkEventEmitter</a><span class="tsd-signature-symbol"> = ...</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/mtkennerly/kelonio/blob/9c4b71b/src/index.ts#L271">index.ts:271</a></li>
+							<li>Defined in <a href="https://github.com/mtkennerly/kelonio/blob/6843bf4/src/index.ts#L284">index.ts:284</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -161,7 +168,90 @@
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Accessors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
+					<a name="measurements" class="tsd-anchor"></a>
+					<h3>measurements</h3>
+					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> measurements<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="measurement.html" class="tsd-signature-type" data-tsd-kind="Class">Measurement</a><span class="tsd-signature-symbol">[]</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/mtkennerly/kelonio/blob/6843bf4/src/index.ts#L428">index.ts:428</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Get a list of <a href="measurement.html">Measurement</a> based on <a href="benchmark.html#data">Benchmark.data</a>.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <a href="measurement.html" class="tsd-signature-type" data-tsd-kind="Class">Measurement</a><span class="tsd-signature-symbol">[]</span></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="find" class="tsd-anchor"></a>
+					<h3>find</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">find<span class="tsd-signature-symbol">(</span>criteria<span class="tsd-signature-symbol">: </span><a href="../enums/criteria.html" class="tsd-signature-type" data-tsd-kind="Enumeration">Criteria</a>, value<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">(</span>m<span class="tsd-signature-symbol">: </span><a href="measurement.html" class="tsd-signature-type" data-tsd-kind="Class">Measurement</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><a href="measurement.html" class="tsd-signature-type" data-tsd-kind="Class">Measurement</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/mtkennerly/kelonio/blob/6843bf4/src/index.ts#L441">index.ts:441</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Find the measurement that meets some criteria.
+									In the case of a tie, the first one found wins.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>criteria: <a href="../enums/criteria.html" class="tsd-signature-type" data-tsd-kind="Enumeration">Criteria</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Criteria by which to select a measurement.</p>
+									</div>
+								</li>
+								<li>
+									<h5>value: <span class="tsd-signature-symbol">(</span>m<span class="tsd-signature-symbol">: </span><a href="measurement.html" class="tsd-signature-type" data-tsd-kind="Class">Measurement</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = ...</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Callback to select a specific field of each measurement for comparison.
+										The default uses the mean plus the margin of error.</p>
+									</div>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter-signature">
+											<ul class="tsd-signatures tsd-kind-type-literal">
+												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>m<span class="tsd-signature-symbol">: </span><a href="measurement.html" class="tsd-signature-type" data-tsd-kind="Class">Measurement</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+											</ul>
+											<ul class="tsd-descriptions">
+												<li class="tsd-description">
+													<h4 class="tsd-parameters-title">Parameters</h4>
+													<ul class="tsd-parameters">
+														<li>
+															<h5>m: <a href="measurement.html" class="tsd-signature-type" data-tsd-kind="Class">Measurement</a></h5>
+														</li>
+													</ul>
+													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><a href="measurement.html" class="tsd-signature-type" data-tsd-kind="Class">Measurement</a></h4>
+							<p>the matching measurement, or null if no measurements have been taken</p>
+						</li>
+					</ul>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 					<a name="incorporate" class="tsd-anchor"></a>
 					<h3>incorporate</h3>
@@ -172,7 +262,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/mtkennerly/kelonio/blob/9c4b71b/src/index.ts#L344">index.ts:344</a></li>
+									<li>Defined in <a href="https://github.com/mtkennerly/kelonio/blob/6843bf4/src/index.ts#L357">index.ts:357</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -211,7 +301,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/mtkennerly/kelonio/blob/9c4b71b/src/index.ts#L286">index.ts:286</a></li>
+									<li>Defined in <a href="https://github.com/mtkennerly/kelonio/blob/6843bf4/src/index.ts#L299">index.ts:299</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -257,7 +347,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/mtkennerly/kelonio/blob/9c4b71b/src/index.ts#L300">index.ts:300</a></li>
+									<li>Defined in <a href="https://github.com/mtkennerly/kelonio/blob/6843bf4/src/index.ts#L313">index.ts:313</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -318,7 +408,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/mtkennerly/kelonio/blob/9c4b71b/src/index.ts#L389">index.ts:389</a></li>
+									<li>Defined in <a href="https://github.com/mtkennerly/kelonio/blob/6843bf4/src/index.ts#L402">index.ts:402</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -342,6 +432,9 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-enum">
+						<a href="../enums/criteria.html" class="tsd-kind-icon">Criteria</a>
+					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-class">
@@ -355,6 +448,12 @@
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="benchmark.html#events" class="tsd-kind-icon">events</a>
+							</li>
+							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
+								<a href="benchmark.html#measurements" class="tsd-kind-icon">measurements</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="benchmark.html#find" class="tsd-kind-icon">find</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="benchmark.html#incorporate" class="tsd-kind-icon">incorporate</a>

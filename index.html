@@ -82,7 +82,7 @@
 					<h2>Usage</h2>
 				</a>
 				<p>Full API documentation:
-				<a href="https://mtkennerly.github.io/kelonio/modules/_index_.html">https://mtkennerly.github.io/kelonio/modules/_index_.html</a></p>
+				<a href="https://mtkennerly.github.io/kelonio/modules">https://mtkennerly.github.io/kelonio/modules</a></p>
 				<p>For simple, one-off checks, like in the console or a script, use the <code>measure</code>
 				function:</p>
 				<pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">measure</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;kelonio&quot;</span><span style="color: #000000">;</span>
@@ -91,11 +91,28 @@
 <span style="color: #795E26">measure</span><span style="color: #000000">(() </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">axios</span><span style="color: #000000">.</span><span style="color: #795E26">get</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;http://www.httpbin.org/get&quot;</span><span style="color: #000000">))</span>
 <span style="color: #000000">    .</span><span style="color: #795E26">then</span><span style="color: #000000">(</span><span style="color: #001080">measurement</span><span style="color: #000000"> </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #A31515">`Mean: </span><span style="color: #0000FF">${</span><span style="color: #001080">measurement</span><span style="color: #000000FF">.</span><span style="color: #001080">mean</span><span style="color: #0000FF">}</span><span style="color: #A31515"> ms`</span><span style="color: #000000">));</span>
 </code></pre>
-				<p>If you measure a function that returns a promise, Kelonio will automatically
+				<p>By default, the check is repeated 100 times, but you can customize this.
+					If you measure a function that returns a promise, Kelonio will automatically
 					measure the time until it&#39;s resolved as well. The resulting <code>measurement</code>
-				exposes various stats, like maximum time and standard deviation.</p>
-				<p>For aggregating results inside of a test framework, use <code>benchmark.record</code>.
-				Click to expand an example:</p>
+				exposes various stats, like mean time, maximum time, and standard deviation.</p>
+				<!--
+For aggregating results from multiple measurements, create a `Benchmark` and
+use its `record` method to store the state:
+
+```typescript
+import { Benchmark, Criteria } from "kelonio";
+
+const benchmark = new Benchmark();
+await benchmark.record("RegExp#test", () => /o/.test("Hello World"));
+await benchmark.record("String#indexOf", () => "Hello World!".indexOf("o") > -1);
+
+const fastest = benchmark.find(Criteria.Fastest);
+console.log(`Fastest: ${fastest?.description} with mean ${fastest?.mean} ms`);
+// Fastest: String#indexOf with mean 0.004199049999999999 ms
+```
+-->
+				<p>For aggregating results inside of a test framework, use the default <code>benchmark</code>
+				instance and its <code>record</code> method. Click to expand an example:</p>
 				<details>
 					<summary>Example: Jest</summary>
 					<div style="padding-left: 5px; border-left: 1px solid black;">
@@ -268,6 +285,9 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-enum">
+						<a href="enums/criteria.html" class="tsd-kind-icon">Criteria</a>
+					</li>
 					<li class=" tsd-kind-class">
 						<a href="classes/benchmark.html" class="tsd-kind-icon">Benchmark</a>
 					</li>
