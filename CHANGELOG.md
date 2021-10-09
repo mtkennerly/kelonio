@@ -1,4 +1,4 @@
-## Unreleased
+## v0.7.0 (2021-10-08)
 
 * Added:
   * `Benchmark.measurements` getter for a list of `Measurement` from the raw
@@ -7,6 +7,9 @@
     measurement.
   * `Measurement.description` field, which is used by `Benchmark.measurements`
     and `Benchmark.find()` so that each measurement retains its context.
+* Fixed:
+  * Updated mathjs dependency to resolve a security vulnerability.
+    ([Contributed by buge](https://github.com/mtkennerly/kelonio/pull/11))
 
 ## v0.6.0 (2021-03-01)
 

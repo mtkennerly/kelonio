@@ -257,6 +257,9 @@ function verifyMeasurement(measurement: Measurement, options: MeasureOptions): v
     }
 }
 
+/**
+ * Used for filtering benchmark data.
+ */
 export enum Criteria {
     Fastest,
     Slowest,
