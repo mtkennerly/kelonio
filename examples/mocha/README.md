@@ -1,6 +1,6 @@
 ## Overview
 * In `.mocharc.yaml`:
-  * Enable the [mocha-multi](https://www.npmjs.com/package/mocha-multi) reporter.
+  * Enable the [mocha-multi-reporters](https://www.npmjs.com/package/mocha-multi-reporters) reporter.
 * In `.mocha-multi.json`:
   * Enable Kelonio's Mocha reporter.
   * Enable (default) or disable test description inference. When enabled, the

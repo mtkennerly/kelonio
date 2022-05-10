@@ -70,14 +70,14 @@ export class Measurement {
      * Standard deviation of all durations measured, in milliseconds.
      */
     get standardDeviation(): number {
-        return mathjs.std(this.durations);
+        return mathjs.std(...this.durations);
     }
 
     /**
      * Margin of error at 95% confidence level, in milliseconds.
      */
     get marginOfError(): number {
-        return mathjs.sqrt(mathjs.variance(this.durations) / this.durations.length) * 1.96;
+        return mathjs.sqrt(mathjs.variance(...this.durations) / this.durations.length) * 1.96;
     }
 }
 
