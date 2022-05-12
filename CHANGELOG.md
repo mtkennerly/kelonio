@@ -1,4 +1,4 @@
-## Unreleased
+## v0.8.0 (2022-05-12)
 
 * Added:
   * Support for an `extensions` option in each reporter. Currently, this allows
