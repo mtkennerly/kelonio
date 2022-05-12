@@ -8,9 +8,14 @@
   * Enable (default) or disable browser inference. When enabled, the current
     browser name will be included in the performance report.
   * Enable (default) or disable printing the performance report at the end of the test run.
-  * Optionally configure some extra report callbacks
-    (of type `(benchmark: Benchmark) => string | void`),
-    which will be called after the main report and printed if they return something.
+  * Optionally configure some `extensions`.
+
+    Each item must be an object with the properties `module` (passed to `require()`)
+    and `extension` (name of an object from the module). The named extension object
+    may have these methods:
+
+    * `extraReport: (benchmark: Benchmark) => string | void` - This will be called after
+      the main report and printed if it returns something.
 * In `index.test.js` or any other test file:
   * Call `benchmark.record()`.
 

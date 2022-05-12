@@ -1,8 +1,8 @@
 ## Unreleased
 
 * Added:
-  * Support for `extraReports` in the reporters, which are printed after the
-    main report.
+  * Support for an `extensions` option in each reporter. Currently, this allows
+    printing extra reports after the main one.
 
 ## v0.7.0 (2021-10-08)
 

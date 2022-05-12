@@ -4,38 +4,38 @@ import { BenchmarkFileState } from "./etc";
 const MOCHA_EVENT_TEST_BEGIN = "test";
 const MOCHA_EVENT_RUN_END = "end";
 type KarmaLoggedRecord = { description: Array<string>, durations: Array<number> };
-type ExtraReportCallback = (benchmark: Benchmark) => string | void;
-type ExtraReports = Array<{ module: string, callback: string }>;
+type Extension = {
+    extraReport?: (benchmark: Benchmark) => string | void;
+};
+type ExtensionLookup = { module: string, extension: string };
 
 interface MochaReporterOptions {
     reporterOptions: {
         inferDescriptions?: boolean;
         printReportAtEnd?: boolean;
-        extraReports?: ExtraReports;
+        extensions?: Array<ExtensionLookup>;
     };
 }
 
 interface KarmaReporterOptions {
     inferBrowsers?: boolean;
     printReportAtEnd?: boolean;
-    extraReports?: ExtraReports;
+    extensions?: Array<ExtensionLookup>;
 }
 
 interface JestReporterOptions {
     keepStateAtStart?: boolean;
     keepStateAtEnd?: boolean;
     printReportAtEnd?: boolean;
-    extraReports?: ExtraReports;
+    extensions?: Array<ExtensionLookup>;
 }
 
-function handleExtraReports(extras: ExtraReports | undefined, benchmark: Benchmark, print: (report: string) => void): void {
-    for (const extra of (extras ?? [])) {
-        const callback: ExtraReportCallback | undefined = require(extra.module)?.[extra.callback];
-        if (callback) {
-            const report = callback(benchmark);
-            if (report) {
-                print(report);
-            }
+function handleExtraReports(lookups: Array<ExtensionLookup> | undefined, benchmark: Benchmark, print: (report: string) => void): void {
+    for (const lookup of (lookups ?? [])) {
+        const extension: Extension | undefined = require(lookup.module)?.[lookup.extension];
+        const report = extension?.extraReport?.(benchmark);
+        if (report) {
+            print(report);
         }
     }
 }
@@ -82,7 +82,7 @@ export class JestReporter implements jest.Reporter {
 
         if (this.options.printReportAtEnd) {
             console.log(`\n${b.report()}`);
-            handleExtraReports(this.options.extraReports, b, console.log);
+            handleExtraReports(this.options.extensions, b, console.log);
         }
 
         if (!this.options.keepStateAtEnd) {
@@ -117,7 +117,7 @@ export class KarmaReporter {
         this.onRunComplete = () => {
             if (activeConfig.printReportAtEnd) {
                 (<any>this).write(`${b.report()}\n`);
-                handleExtraReports(activeConfig.extraReports, b, msg => (<any>this).write(`${msg}\n`));
+                handleExtraReports(activeConfig.extensions, b, msg => (<any>this).write(`${msg}\n`));
             }
         };
     }
@@ -129,7 +129,7 @@ export class MochaReporter {
         let baseDescription: Array<string> = [];
         const inferDescriptions = options.reporterOptions.inferDescriptions ?? true;
         const printReportAtEnd = options.reporterOptions.printReportAtEnd ?? true;
-        const extraReports = options.reporterOptions.extraReports ?? [];
+        const extensions = options.reporterOptions.extensions ?? [];
 
         benchmark.events.on("record", (description, measurement) => {
             b.incorporate(baseDescription.concat(description), measurement);
@@ -142,7 +142,7 @@ export class MochaReporter {
         runner.once(MOCHA_EVENT_RUN_END, () => {
             if (printReportAtEnd) {
                 console.log(`\n${b.report()}`);
-                handleExtraReports(extraReports, b, console.log);
+                handleExtraReports(extensions, b, console.log);
             }
         });
     }

@@ -14,10 +14,12 @@
       instead of deleting it like normal. Default: false.
     * `printReportAtEnd` (boolean): Print the performance report at the end of the test run.
       Default: true.
-    * `extraReports` (array): Each item must be an object with the properties
-      `module` (passed to `require()`) and `callback` (a function name from the module).
-      The expected callback signature is `(benchmark: Benchmark) => string | void`.
-      They will be called after the main report and printed if they return something.
+    * `extensions` (array): Each item must be an object with the properties
+      `module` (passed to `require()`) and `extension` (name of an object from the module).
+      The named extension object may have these methods:
+
+      * `extraReport: (benchmark: Benchmark) => string | void` - This will be called after
+        the main report and printed if it returns something.
 * In `index.test.ts` or any other test file:
   * Call `benchmark.record()`.
 

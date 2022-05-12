@@ -25,8 +25,8 @@ module.exports = config => {
         kelonioReporter: {
             inferBrowsers: true,
             printReportAtEnd: true,
-            extraReports: [
-                { module: `${__dirname}/kelonioExtra.js`, callback: "extraReport" },
+            extensions: [
+                { module: `${__dirname}/extension.js`, extension: "extension" },
             ],
         },
     });

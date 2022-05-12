@@ -236,9 +236,9 @@ describe("JestReporter", () => {
                 expect(spy.mock.calls).toEqual([]);
             });
 
-            it("respects extraReports", () => {
+            it("handles extensions that print extra reports", () => {
                 JestReporter.initializeKelonio();
-                const reporter = new JestReporter({}, { extraReports: [{ module: `${__dirname}/kelonioExtra.js`, callback: "extraReport" }] });
+                const reporter = new JestReporter({}, { extensions: [{ module: `${__dirname}/extension.js`, extension: "extension" }] });
                 const spy = jest.spyOn(console, "log");
                 fs.writeFileSync(STATE_FILE, JSON.stringify({
                     foo: {
@@ -309,8 +309,8 @@ describe("KarmaReporter", () => {
         expect(writer.mock.calls).toEqual([]);
     });
 
-    it("prints extra reports when enabled", () => {
-        [writer, reporter] = makeKarmaReporter({ kelonioReporter: { extraReports: [{ module: `${__dirname}/kelonioExtra.js`, callback: "extraReport" }] } });
+    it("handles extensions that print extra reports", () => {
+        [writer, reporter] = makeKarmaReporter({ kelonioReporter: { extensions: [{ module: `${__dirname}/extension.js`, extension: "extension" }] } });
 
         // @ts-ignore
         reporter.onBrowserLog("any", `'{"description":["foo"],"durations":[1,2,3]}'`, "kelonio");
@@ -366,8 +366,8 @@ describe("MochaReporter", () => {
         expect(spy.mock.calls).toEqual([]);
     });
 
-    it("prints extra reports when enabled", () => {
-        const [runner, reporter] = makeMochaReporter({ extraReports: [{ module: `${__dirname}/kelonioExtra.js`, callback: "extraReport" }] });
+    it("handles extensions that print extra reports", () => {
+        const [runner, reporter] = makeMochaReporter({ extensions: [{ module: `${__dirname}/extension.js`, extension: "extension" }] });
         const spy = jest.spyOn(console, "log");
 
         runner.emit("test", { titlePath: () => ["A", "B"] });

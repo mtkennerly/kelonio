@@ -3,8 +3,8 @@
   "kelonioOutPluginMochaReporterReporterOptions": {
     "inferDescriptions": true,
     "printReportAtEnd": true,
-    "extraReports": [
-      {"module": "../examples/mocha/kelonioExtra.js", "callback": "extraReport"}
+    "extensions": [
+      {"module": "../examples/mocha/extension.js", "extension": "extension"}
     ]
   }
 }

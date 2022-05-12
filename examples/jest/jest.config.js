@@ -7,8 +7,8 @@ module.exports = {
                 keepStateAtStart: false,
                 keepStateAtEnd: false,
                 printReportAtEnd: true,
-                extraReports: [
-                    { module: `${__dirname}/kelonioExtra.js`, callback: "extraReport" },
+                extensions: [
+                    { module: `${__dirname}/extension.js`, extension: "extension" },
                 ],
             },
         ],
