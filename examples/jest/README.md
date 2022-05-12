@@ -14,6 +14,10 @@
       instead of deleting it like normal. Default: false.
     * `printReportAtEnd` (boolean): Print the performance report at the end of the test run.
       Default: true.
+    * `extraReports` (array): Each item must be an object with the properties
+      `module` (passed to `require()`) and `callback` (a function name from the module).
+      The expected callback signature is `(benchmark: Benchmark) => string | void`.
+      They will be called after the main report and printed if they return something.
 * In `index.test.ts` or any other test file:
   * Call `benchmark.record()`.
 
@@ -43,4 +47,8 @@ nested:
   description:
     0.00392 ms (+/- 0.00068 ms) from 100 iterations
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+= = Custom Report = =
+Fastest: "nested/description" (0.00392 ms)
+= = = = = = = = = = =
 ```

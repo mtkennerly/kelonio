@@ -8,6 +8,9 @@
     in the performance report, in addition to any more specific descriptions
     that you pass to `benchmark.record()`.
   * Enable (default) or disable printing the performance report at the end of the test run.
+  * Optionally configure some extra report callbacks
+    (of type `(benchmark: Benchmark) => string | void`),
+    which will be called after the main report and printed if they return something.
 * In `index.test.ts` or any other test file:
   * Call `benchmark.record()`.
 
@@ -41,4 +44,8 @@ A Mocha test:
       description:
         0.0037 ms (+/- 0.00071 ms) from 100 iterations
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+= = Custom Report = =
+Fastest: "A Mocha test/can use Kelonio with a nested description/nested/description" (0.0037 ms)
+= = = = = = = = = = =
 ```

@@ -8,6 +8,9 @@
   * Enable (default) or disable browser inference. When enabled, the current
     browser name will be included in the performance report.
   * Enable (default) or disable printing the performance report at the end of the test run.
+  * Optionally configure some extra report callbacks
+    (of type `(benchmark: Benchmark) => string | void`),
+    which will be called after the main report and printed if they return something.
 * In `index.test.js` or any other test file:
   * Call `benchmark.record()`.
 
@@ -33,4 +36,8 @@ Chrome 78.0.3904 (Windows 10.0.0):
     description:
       0.00935 ms (+/- 0.00149 ms) from 100 iterations
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+= = Custom Report = =
+Fastest: "Chrome 78.0.3904 (Windows 10.0.0)/nested/description" (0.00935 ms)
+= = = = = = = = = = =
 ```

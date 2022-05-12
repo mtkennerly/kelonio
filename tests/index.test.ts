@@ -290,7 +290,7 @@ describe("Benchmark", () => {
         it("converts data with one level", () => {
             benchmark.data = {
                 foo: { durations: [1], children: {} },
-                bar: { durations: [2],children: {} },
+                bar: { durations: [2], children: {} },
             };
             expect(benchmark.measurements).toEqual([
                 (() => { const m = new Measurement([1]); m.description = ["foo"]; return m; })(),
@@ -304,7 +304,7 @@ describe("Benchmark", () => {
                     durations: [],
                     children: {
                         bar: {
-                            durations: [1],children: {}
+                            durations: [1], children: {}
                         },
                     }
                 },
@@ -323,7 +323,7 @@ describe("Benchmark", () => {
         it("can find the fastest by the default field", async () => {
             benchmark.data = {
                 foo: { durations: [1, 2], children: {} },
-                bar: { durations: [1.1, 1.2],children: {} },
+                bar: { durations: [1.1, 1.2], children: {} },
             };
             const result = benchmark.find(Criteria.Fastest);
             expect(result?.description).toEqual(["bar"]);
@@ -333,7 +333,7 @@ describe("Benchmark", () => {
         it("can find the fastest by a custom field", async () => {
             benchmark.data = {
                 foo: { durations: [1, 2], children: {} },
-                bar: { durations: [1.1, 1.2],children: {} },
+                bar: { durations: [1.1, 1.2], children: {} },
             };
             const result = benchmark.find(Criteria.Fastest, m => m.min);
             expect(result?.description).toEqual(["foo"]);
@@ -342,7 +342,7 @@ describe("Benchmark", () => {
         it("can find the slowest by the default field", async () => {
             benchmark.data = {
                 foo: { durations: [1, 2], children: {} },
-                bar: { durations: [0.1, 0.1, 2.1],children: {} },
+                bar: { durations: [0.1, 0.1, 2.1], children: {} },
             };
             const result = benchmark.find(Criteria.Slowest);
             expect(result?.description).toEqual(["foo"]);
@@ -351,7 +351,7 @@ describe("Benchmark", () => {
         it("can find the slowest by a custom field", async () => {
             benchmark.data = {
                 foo: { durations: [1, 2], children: {} },
-                bar: { durations: [0.1, 0.1, 2.1],children: {} },
+                bar: { durations: [0.1, 0.1, 2.1], children: {} },
             };
             const result = benchmark.find(Criteria.Slowest, m => m.max);
             expect(result?.description).toEqual(["bar"]);

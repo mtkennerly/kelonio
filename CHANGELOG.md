@@ -1,3 +1,9 @@
+## Unreleased
+
+* Added:
+  * Support for `extraReports` in the reporters, which are printed after the
+    main report.
+
 ## v0.7.0 (2021-10-08)
 
 * Added:

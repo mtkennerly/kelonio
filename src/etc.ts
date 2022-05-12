@@ -39,7 +39,7 @@ export class BenchmarkFileState {
         } catch {
             previousData = {};
         }
-        this.write({...previousData, ...data});
+        this.write({ ...previousData, ...data });
     }
 
     delete(): void {

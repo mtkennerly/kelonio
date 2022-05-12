@@ -2,6 +2,9 @@
   "reporterEnabled": "spec, kelonio/out/plugin/mochaReporter",
   "kelonioOutPluginMochaReporterReporterOptions": {
     "inferDescriptions": true,
-    "printReportAtEnd": true
+    "printReportAtEnd": true,
+    "extraReports": [
+      {"module": "../examples/mocha/kelonioExtra.js", "callback": "extraReport"}
+    ]
   }
 }

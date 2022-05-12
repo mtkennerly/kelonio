@@ -97,7 +97,7 @@ describe("JestReporter", () => {
         describe("options", () => {
             it("respects keepStateAtStart = true", () => {
                 JestReporter.initializeKelonio();
-                const reporter = new JestReporter({}, {keepStateAtStart: true});
+                const reporter = new JestReporter({}, { keepStateAtStart: true });
                 fs.writeFileSync(STATE_FILE, JSON.stringify({
                     foo: {
                         durations: [1, 2, 3],
@@ -124,7 +124,7 @@ describe("JestReporter", () => {
 
             it("respects keepStateAtStart = false", () => {
                 JestReporter.initializeKelonio();
-                const reporter = new JestReporter({}, {keepStateAtStart: false});
+                const reporter = new JestReporter({}, { keepStateAtStart: false });
                 fs.writeFileSync(STATE_FILE, JSON.stringify({
                     foo: {
                         durations: [1, 2, 3],
@@ -147,7 +147,7 @@ describe("JestReporter", () => {
 
             it("respects keepStateAtEnd = true", () => {
                 JestReporter.initializeKelonio();
-                const reporter = new JestReporter({}, {keepStateAtEnd: true});
+                const reporter = new JestReporter({}, { keepStateAtEnd: true });
                 const spy = jest.spyOn(console, "log");
                 fs.writeFileSync(STATE_FILE, JSON.stringify({
                     foo: {
@@ -172,7 +172,7 @@ describe("JestReporter", () => {
 
             it("respects keepStateAtEnd = false", () => {
                 JestReporter.initializeKelonio();
-                const reporter = new JestReporter({}, {keepStateAtEnd: false});
+                const reporter = new JestReporter({}, { keepStateAtEnd: false });
                 const spy = jest.spyOn(console, "log");
                 fs.writeFileSync(STATE_FILE, JSON.stringify({
                     foo: {
@@ -197,7 +197,7 @@ describe("JestReporter", () => {
 
             it("respects printReportAtEnd = true", () => {
                 JestReporter.initializeKelonio();
-                const reporter = new JestReporter({}, {printReportAtEnd: true});
+                const reporter = new JestReporter({}, { printReportAtEnd: true });
                 const spy = jest.spyOn(console, "log");
                 fs.writeFileSync(STATE_FILE, JSON.stringify({
                     foo: {
@@ -221,7 +221,7 @@ describe("JestReporter", () => {
 
             it("respects printReportAtEnd = false", () => {
                 JestReporter.initializeKelonio();
-                const reporter = new JestReporter({}, {printReportAtEnd: false});
+                const reporter = new JestReporter({}, { printReportAtEnd: false });
                 const spy = jest.spyOn(console, "log");
                 fs.writeFileSync(STATE_FILE, JSON.stringify({
                     foo: {
@@ -234,6 +234,23 @@ describe("JestReporter", () => {
                 reporter.onRunComplete();
 
                 expect(spy.mock.calls).toEqual([]);
+            });
+
+            it("respects extraReports", () => {
+                JestReporter.initializeKelonio();
+                const reporter = new JestReporter({}, { extraReports: [{ module: `${__dirname}/kelonioExtra.js`, callback: "extraReport" }] });
+                const spy = jest.spyOn(console, "log");
+                fs.writeFileSync(STATE_FILE, JSON.stringify({
+                    foo: {
+                        durations: [1, 2, 3],
+                        children: {},
+                    }
+                }));
+                benchmark.events.emit("record", ["bar"], new Measurement([4, 5, 6]));
+
+                reporter.onRunComplete();
+
+                expect(spy.mock.calls[1][0]).toBe('Fastest: "foo" (2 ms)');
             });
         });
     });
@@ -291,6 +308,16 @@ describe("KarmaReporter", () => {
         reporter.onRunComplete();
         expect(writer.mock.calls).toEqual([]);
     });
+
+    it("prints extra reports when enabled", () => {
+        [writer, reporter] = makeKarmaReporter({ kelonioReporter: { extraReports: [{ module: `${__dirname}/kelonioExtra.js`, callback: "extraReport" }] } });
+
+        // @ts-ignore
+        reporter.onBrowserLog("any", `'{"description":["foo"],"durations":[1,2,3]}'`, "kelonio");
+        // @ts-ignore
+        reporter.onRunComplete();
+        expect(writer.mock.calls[1][0]).toBe('Fastest: "any/foo" (2 ms)\n');
+    });
 });
 
 describe("MochaReporter", () => {
@@ -337,5 +364,16 @@ describe("MochaReporter", () => {
         runner.emit("end");
 
         expect(spy.mock.calls).toEqual([]);
+    });
+
+    it("prints extra reports when enabled", () => {
+        const [runner, reporter] = makeMochaReporter({ extraReports: [{ module: `${__dirname}/kelonioExtra.js`, callback: "extraReport" }] });
+        const spy = jest.spyOn(console, "log");
+
+        runner.emit("test", { titlePath: () => ["A", "B"] });
+        benchmark.events.emit("record", ["foo"], new Measurement([1, 2, 3]));
+        runner.emit("end");
+
+        expect(spy.mock.calls[1][0]).toBe('Fastest: "A/B/foo" (2 ms)');
     });
 });
