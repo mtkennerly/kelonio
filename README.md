@@ -40,7 +40,6 @@ If you measure a function that returns a promise, Kelonio will automatically
 measure the time until it's resolved as well. The resulting `measurement`
 exposes various stats, like mean time, maximum time, and standard deviation.
 
-<!--
 For aggregating results from multiple measurements, create a `Benchmark` and
 use its `record` method to store the state:
 
@@ -55,7 +54,6 @@ const fastest = benchmark.find(Criteria.Fastest);
 console.log(`Fastest: ${fastest?.description} with mean ${fastest?.mean} ms`);
 // Fastest: String#indexOf with mean 0.004199049999999999 ms
 ```
--->
 
 For aggregating results inside of a test framework, use the default `benchmark`
 instance and its `record` method. Click to expand an example:
