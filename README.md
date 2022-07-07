@@ -1,7 +1,4 @@
 # Kelonio
-[![Version](https://img.shields.io/npm/v/kelonio)](https://www.npmjs.com/package/kelonio)
-[![License: MIT](https://img.shields.io/badge/license-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
 Kelonio is a performance testing library for Node.js, written in TypeScript.
 Whereas many similar projects are test frameworks in and of themselves, Kelonio
 is fundamentally a **library** and therefore aims to integrate with existing
