@@ -110,7 +110,7 @@ export class KarmaReporter {
             if (type === "kelonio") {
                 const parsed: KarmaLoggedRecord = JSON.parse(log.slice(1, -1));
                 const browserDescription = activeConfig.inferBrowsers ? [browser] : [];
-                b.incorporate([...browserDescription, ...parsed.description], new Measurement(parsed.durations));
+                b.incorporate([...browserDescription, ...parsed.description], new Measurement(parsed.durations, 0));
             }
         };
 
