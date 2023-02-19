@@ -94,6 +94,27 @@ describe("JestReporter", () => {
             expect(fs.existsSync(STATE_FILE)).toBeFalsy();
         });
 
+        it("handles overridden totalDuration", () => {
+            const spy = jest.spyOn(console, "log");
+            fs.writeFileSync(STATE_FILE, JSON.stringify({
+                foo: {
+                    durations: [1, 2, 3],
+                    totalDuration: 101,
+                    children: {},
+                }
+            }));
+
+            reporter.onRunComplete();
+
+            expect(spy.mock.calls[0][0]).toBe(stripIndent(`
+                ${HEADER}
+                foo:
+                  2 ms (+/- 1.13161 ms) from 3 iterations (101 ms total)
+                ${FOOTER}
+            `).trimRight());
+            expect(fs.existsSync(STATE_FILE)).toBeFalsy();
+        });
+
         describe("options", () => {
             it("respects keepStateAtStart = true", () => {
                 JestReporter.initializeKelonio();
@@ -321,6 +342,21 @@ describe("KarmaReporter", () => {
         reporter.onRunComplete();
         expect(writer.mock.calls[1][0]).toBe('Fastest: "any/foo" (2 ms)\n');
     });
+
+    it("handles overridden totalDuration", () => {
+        [writer, reporter] = makeKarmaReporter({ kelonioReporter: { inferBrowsers: false } });
+
+        // @ts-ignore
+        reporter.onBrowserLog("any", `'{"description":["foo"],"durations":[1,2,3],"totalDuration":101}'`, "kelonio");
+        // @ts-ignore
+        reporter.onRunComplete();
+        expect(writer.mock.calls[0][0]).toBe(stripIndent(`
+            ${HEADER}
+            foo:
+              2 ms (+/- 1.13161 ms) from 3 iterations (101 ms total)
+            ${FOOTER}
+        `).trim() + "\n");
+    });
 });
 
 describe("MochaReporter", () => {
@@ -378,5 +414,21 @@ describe("MochaReporter", () => {
         runner.emit("end");
 
         expect(spy.mock.calls[1][0]).toBe('Fastest: "A/B/foo" (2 ms)');
+    });
+
+    it("handles overridden totalDuration", () => {
+        const [runner, reporter] = makeMochaReporter({ inferDescriptions: false });
+        const spy = jest.spyOn(console, "log");
+
+        runner.emit("test", { titlePath: () => ["A", "B"] });
+        benchmark.events.emit("record", ["foo"], new Measurement([1, 2, 3], 101));
+        runner.emit("end");
+
+        expect(spy.mock.calls[0][0]).toBe(stripIndent(`
+            ${HEADER}
+            foo:
+              2 ms (+/- 1.13161 ms) from 3 iterations (101 ms total)
+            ${FOOTER}
+        `).trimRight());
     });
 });

@@ -3,7 +3,7 @@ import { BenchmarkFileState } from "./etc";
 
 const MOCHA_EVENT_TEST_BEGIN = "test";
 const MOCHA_EVENT_RUN_END = "end";
-type KarmaLoggedRecord = { description: Array<string>, durations: Array<number> };
+type KarmaLoggedRecord = { description: Array<string>, durations: Array<number>, totalDuration: number };
 type Extension = {
     extraReport?: (benchmark: Benchmark) => string | void;
 };
@@ -97,7 +97,7 @@ export class KarmaReporter {
 
     static initializeKelonio(): void {
         benchmark.events.on("record", (description, measurement) => {
-            (<any>window).__karma__.log("kelonio", [JSON.stringify({ description, durations: measurement.durations })]);
+            (<any>window).__karma__.log("kelonio", [JSON.stringify({ description, durations: measurement.durations, totalDuration: measurement.totalDuration })]);
         });
     }
 
@@ -110,7 +110,7 @@ export class KarmaReporter {
             if (type === "kelonio") {
                 const parsed: KarmaLoggedRecord = JSON.parse(log.slice(1, -1));
                 const browserDescription = activeConfig.inferBrowsers ? [browser] : [];
-                b.incorporate([...browserDescription, ...parsed.description], new Measurement(parsed.durations));
+                b.incorporate([...browserDescription, ...parsed.description], new Measurement(parsed.durations, parsed.totalDuration));
             }
         };
 
