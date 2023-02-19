@@ -1,3 +1,10 @@
+## v0.9.0 (2023-02-19)
+
+* Added:
+  * A `totalDuration` field in the `Measurement` class and related output in the reporting.
+    This is mainly useful when `serial` is false, so you can see the total real time spent.
+    ([Contributed by stephenh](https://github.com/mtkennerly/kelonio/pull/12))
+
 ## v0.8.0 (2022-05-12)
 
 * Added:
