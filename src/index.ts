@@ -211,8 +211,6 @@ export async function measure(fn: () => any, options: Partial<MeasureOptions> = 
     const durations: Array<number> = [];
     let calls: Array<Function> = [];
 
-    const measureStart = hrtime();
-
     for (let i = 0; i < mergedOptions.iterations; i++) {
         calls.push(async () => {
             if (mergedOptions.beforeEach !== undefined) {
@@ -229,6 +227,8 @@ export async function measure(fn: () => any, options: Partial<MeasureOptions> = 
             }
         });
     }
+
+    const measureStart = hrtime();
 
     if (mergedOptions.serial) {
         for (const call of calls) {
