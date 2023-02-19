@@ -1,356 +1,136 @@
-<!doctype html>
-<html class="default no-js">
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>kelonio</title>
-	<meta name="description" content="Documentation for kelonio">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="assets/css/main.css">
-	<script async src="assets/js/search.js" id="search-script"></script>
-</head>
-<body>
-<header>
-	<div class="tsd-page-toolbar">
-		<div class="container">
-			<div class="table-wrap">
-				<div class="table-cell" id="tsd-search" data-index="assets/js/search.json" data-base=".">
-					<div class="field">
-						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
-						<input id="tsd-search-field" type="text" />
-					</div>
-					<ul class="results">
-						<li class="state loading">Preparing search index...</li>
-						<li class="state failure">The search index is not available</li>
-					</ul>
-					<a href="index.html" class="title">kelonio</a>
-				</div>
-				<div class="table-cell" id="tsd-widgets">
-					<div id="tsd-filter">
-						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
-						<div class="tsd-filter-group">
-							<div class="tsd-select" id="tsd-filter-visibility">
-								<span class="tsd-select-label">All</span>
-								<ul class="tsd-select-list">
-									<li data-value="public">Public</li>
-									<li data-value="protected">Public/Protected</li>
-									<li data-value="private" class="selected">All</li>
-								</ul>
-							</div>
-							<input type="checkbox" id="tsd-filter-inherited" checked />
-							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
-						</div>
-					</div>
-					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="tsd-page-title">
-		<div class="container">
-			<h1>kelonio</h1>
-		</div>
-	</div>
-</header>
-<div class="container container-main">
-	<div class="row">
-		<div class="col-8 col-content">
-			<div class="tsd-panel tsd-typography">
-				<a href="#kelonio" id="kelonio" style="color: inherit; text-decoration: none;">
-					<h1>Kelonio</h1>
-				</a>
-				<p><a href="https://www.npmjs.com/package/kelonio"><img src="https://img.shields.io/npm/v/kelonio" alt="Version"></a>
-				<a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/license-MIT-yellow.svg" alt="License: MIT"></a></p>
-				<p>Kelonio is a performance testing library for Node.js, written in TypeScript.
-					Whereas many similar projects are test frameworks in and of themselves, Kelonio
-					is fundamentally a <strong>library</strong> and therefore aims to integrate with existing
-					test frameworks seamlessly instead of reinventing the wheel. You can use it
-					inside of your existing tests from frameworks such as Jest and Mocha (along
-					with any loaders like <a href="https://www.npmjs.com/package/ts-jest">ts-jest</a>),
-				and you can use it in the console and scripts as well.</p>
-				<p>Kelonio also works in the browser (as long as you use a tool like
-					<a href="https://www.npmjs.com/package/webpack">Webpack</a> or
-					<a href="https://www.npmjs.com/package/browserify">Browserify</a>),
-					and it comes with built-in reporters for the following test frameworks without
-				any direct dependency on them:</p>
-				<ul>
-					<li><a href="https://www.npmjs.com/package/jest">Jest</a></li>
-					<li><a href="https://www.npmjs.com/package/mocha">Mocha</a></li>
-					<li><a href="https://www.npmjs.com/package/karma">Karma</a></li>
-				</ul>
-				<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
-					<h2>Usage</h2>
-				</a>
-				<p>Full API documentation:
-				<a href="https://mtkennerly.github.io/kelonio/modules">https://mtkennerly.github.io/kelonio/modules</a></p>
-				<p>For simple, one-off checks, like in the console or a script, use the <code>measure</code>
-				function:</p>
-				<pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">measure</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;kelonio&quot;</span><span style="color: #000000">;</span>
-<span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">axios</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;axios&quot;</span><span style="color: #000000">;</span>
+<!DOCTYPE html><html class="default"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>kelonio</title><meta name="description" content="Documentation for kelonio"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="assets/style.css"/><link rel="stylesheet" href="assets/highlight.css"/><script async src="assets/search.js" id="search-script"></script></head><body><script>document.body.classList.add(localStorage.getItem("tsd-theme") || "os")</script><header><div class="tsd-page-toolbar"><div class="container"><div class="table-wrap"><div class="table-cell" id="tsd-search" data-base="."><div class="field"><label for="tsd-search-field" class="tsd-widget search no-caption">Search</label><input type="text" id="tsd-search-field"/></div><ul class="results"><li class="state loading">Preparing search index...</li><li class="state failure">The search index is not available</li></ul><a href="index.html" class="title">kelonio</a></div><div class="table-cell" id="tsd-widgets"><div id="tsd-filter"><a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a><div class="tsd-filter-group"><div class="tsd-select" id="tsd-filter-visibility"><span class="tsd-select-label">All</span><ul class="tsd-select-list"><li data-value="public">Public</li><li data-value="protected">Public/Protected</li><li data-value="private" class="selected">All</li></ul></div> <input type="checkbox" id="tsd-filter-inherited" checked/><label class="tsd-widget" for="tsd-filter-inherited">Inherited</label></div></div><a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a></div></div></div></div><div class="tsd-page-title"><div class="container"><h1>kelonio </h1></div></div></header><div class="container container-main"><div class="row"><div class="col-8 col-content"><div class="tsd-panel tsd-typography">
+<a href="#kelonio" id="kelonio" style="color: inherit; text-decoration: none;">
+  <h1>Kelonio</h1>
+</a>
+<p>Kelonio is a performance testing library for Node.js, written in TypeScript.
+Whereas many similar projects are test frameworks in and of themselves, Kelonio
+is fundamentally a <strong>library</strong> and therefore aims to integrate with existing
+test frameworks seamlessly instead of reinventing the wheel. You can use it
+inside of your existing tests from frameworks such as Jest and Mocha (along
+with any loaders like <a href="https://www.npmjs.com/package/ts-jest">ts-jest</a>),
+and you can use it in the console and scripts as well.</p>
+<p>Kelonio also works in the browser (as long as you use a tool like
+<a href="https://www.npmjs.com/package/webpack">Webpack</a> or
+<a href="https://www.npmjs.com/package/browserify">Browserify</a>),
+and it comes with built-in reporters for the following test frameworks without
+any direct dependency on them:</p>
+<ul>
+<li><a href="https://www.npmjs.com/package/jest">Jest</a></li>
+<li><a href="https://www.npmjs.com/package/mocha">Mocha</a></li>
+<li><a href="https://www.npmjs.com/package/karma">Karma</a></li>
+</ul>
 
-<span style="color: #795E26">measure</span><span style="color: #000000">(() </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">axios</span><span style="color: #000000">.</span><span style="color: #795E26">get</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;http://www.httpbin.org/get&quot;</span><span style="color: #000000">))</span>
-<span style="color: #000000">    .</span><span style="color: #795E26">then</span><span style="color: #000000">(</span><span style="color: #001080">measurement</span><span style="color: #000000"> </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #A31515">`Mean: </span><span style="color: #0000FF">${</span><span style="color: #001080">measurement</span><span style="color: #000000FF">.</span><span style="color: #001080">mean</span><span style="color: #0000FF">}</span><span style="color: #A31515"> ms`</span><span style="color: #000000">));</span>
+<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
+  <h2>Usage</h2>
+</a>
+<p>Full API documentation:
+<a href="https://mtkennerly.github.io/kelonio/modules">https://mtkennerly.github.io/kelonio/modules</a></p>
+<p>For simple, one-off checks, like in the console or a script, use the <code>measure</code>
+function:</p>
+<pre><code class="language-typescript"><span class="hl-0">import</span><span class="hl-1"> { </span><span class="hl-2">measure</span><span class="hl-1"> } </span><span class="hl-0">from</span><span class="hl-1"> </span><span class="hl-3">&quot;kelonio&quot;</span><span class="hl-1">;</span><br/><span class="hl-0">import</span><span class="hl-1"> </span><span class="hl-2">axios</span><span class="hl-1"> </span><span class="hl-0">from</span><span class="hl-1"> </span><span class="hl-3">&quot;axios&quot;</span><span class="hl-1">;</span><br/><br/><span class="hl-4">measure</span><span class="hl-1">(() </span><span class="hl-5">=&gt;</span><span class="hl-1"> </span><span class="hl-2">axios</span><span class="hl-1">.</span><span class="hl-4">get</span><span class="hl-1">(</span><span class="hl-3">&quot;http://www.httpbin.org/get&quot;</span><span class="hl-1">))</span><br/><span class="hl-1">    .</span><span class="hl-4">then</span><span class="hl-1">(</span><span class="hl-2">measurement</span><span class="hl-1"> </span><span class="hl-5">=&gt;</span><span class="hl-1"> </span><span class="hl-2">console</span><span class="hl-1">.</span><span class="hl-4">log</span><span class="hl-1">(</span><span class="hl-3">`Mean: </span><span class="hl-5">${</span><span class="hl-2">measurement</span><span class="hl-6">.</span><span class="hl-2">mean</span><span class="hl-5">}</span><span class="hl-3"> ms`</span><span class="hl-1">));</span>
 </code></pre>
-				<p>By default, the check is repeated 100 times, but you can customize this.
-					If you measure a function that returns a promise, Kelonio will automatically
-					measure the time until it&#39;s resolved as well. The resulting <code>measurement</code>
-				exposes various stats, like mean time, maximum time, and standard deviation.</p>
-				<!--
-For aggregating results from multiple measurements, create a `Benchmark` and
-use its `record` method to store the state:
-
-```typescript
-import { Benchmark, Criteria } from "kelonio";
-
-const benchmark = new Benchmark();
-await benchmark.record("RegExp#test", () => /o/.test("Hello World"));
-await benchmark.record("String#indexOf", () => "Hello World!".indexOf("o") > -1);
-
-const fastest = benchmark.find(Criteria.Fastest);
-console.log(`Fastest: ${fastest?.description} with mean ${fastest?.mean} ms`);
-// Fastest: String#indexOf with mean 0.004199049999999999 ms
-```
--->
-				<p>For aggregating results inside of a test framework, use the default <code>benchmark</code>
-				instance and its <code>record</code> method. Click to expand an example:</p>
-				<details>
-					<summary>Example: Jest</summary>
-					<div style="padding-left: 5px; border-left: 1px solid black;">
-						<p>  Jest doesn&#39;t currently expose a way to get each individual test&#39;s name
-						while running, so you have to provide a description to <code>record()</code>.</p>
-						<p>  Tests:</p>
-						<pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">benchmark</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;kelonio&quot;</span><span style="color: #000000">;</span>
-<span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">axios</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;axios&quot;</span><span style="color: #000000">;</span>
-
-<span style="color: #795E26">describe</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;An HTTP client&quot;</span><span style="color: #000000">, () </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
-<span style="color: #000000">    </span><span style="color: #795E26">it</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;can send GET requests&quot;</span><span style="color: #000000">, </span><span style="color: #0000FF">async</span><span style="color: #000000"> () </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
-<span style="color: #000000">        </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">benchmark</span><span style="color: #000000">.</span><span style="color: #795E26">record</span><span style="color: #000000">(</span>
-<span style="color: #000000">            [</span><span style="color: #A31515">&quot;HTTP client&quot;</span><span style="color: #000000">, </span><span style="color: #A31515">&quot;GET&quot;</span><span style="color: #000000">],</span>
-<span style="color: #000000">            () </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">axios</span><span style="color: #000000">.</span><span style="color: #795E26">get</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;http://www.httpbin.org/get&quot;</span><span style="color: #000000">)</span>
-<span style="color: #000000">        );</span>
-<span style="color: #000000">    }, </span><span style="color: #098658">30_000</span><span style="color: #000000">);</span>
-
-<span style="color: #000000">    </span><span style="color: #795E26">it</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;can send POST requests&quot;</span><span style="color: #000000">, </span><span style="color: #0000FF">async</span><span style="color: #000000"> () </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
-<span style="color: #000000">        </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">benchmark</span><span style="color: #000000">.</span><span style="color: #795E26">record</span><span style="color: #000000">(</span>
-<span style="color: #000000">            [</span><span style="color: #A31515">&quot;HTTP client&quot;</span><span style="color: #000000">, </span><span style="color: #A31515">&quot;POST&quot;</span><span style="color: #000000">],</span>
-<span style="color: #000000">            () </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">axios</span><span style="color: #000000">.</span><span style="color: #795E26">post</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;http://www.httpbin.org/post&quot;</span><span style="color: #000000">),</span>
-<span style="color: #000000">            { </span><span style="color: #001080">iterations:</span><span style="color: #000000"> </span><span style="color: #098658">10</span><span style="color: #000000">, </span><span style="color: #001080">meanUnder:</span><span style="color: #000000"> </span><span style="color: #098658">10</span><span style="color: #000000"> },</span>
-<span style="color: #000000">        );</span>
-<span style="color: #000000">    }, </span><span style="color: #098658">30_000</span><span style="color: #000000">);</span>
-<span style="color: #000000">});</span>
+<p>By default, the check is repeated 100 times, but you can customize this.
+If you measure a function that returns a promise, Kelonio will automatically
+measure the time until it&#39;s resolved as well. The resulting <code>measurement</code>
+exposes various stats, like mean time, maximum time, and standard deviation.</p>
+<p>For aggregating results from multiple measurements, create a <code>Benchmark</code> and
+use its <code>record</code> method to store the state:</p>
+<pre><code class="language-typescript"><span class="hl-0">import</span><span class="hl-1"> { </span><span class="hl-2">Benchmark</span><span class="hl-1">, </span><span class="hl-2">Criteria</span><span class="hl-1"> } </span><span class="hl-0">from</span><span class="hl-1"> </span><span class="hl-3">&quot;kelonio&quot;</span><span class="hl-1">;</span><br/><br/><span class="hl-5">const</span><span class="hl-1"> </span><span class="hl-7">benchmark</span><span class="hl-1"> = </span><span class="hl-5">new</span><span class="hl-1"> </span><span class="hl-4">Benchmark</span><span class="hl-1">();</span><br/><span class="hl-0">await</span><span class="hl-1"> </span><span class="hl-2">benchmark</span><span class="hl-1">.</span><span class="hl-4">record</span><span class="hl-1">(</span><span class="hl-3">&quot;RegExp#test&quot;</span><span class="hl-1">, () </span><span class="hl-5">=&gt;</span><span class="hl-8"> /o/</span><span class="hl-1">.</span><span class="hl-4">test</span><span class="hl-1">(</span><span class="hl-3">&quot;Hello World&quot;</span><span class="hl-1">));</span><br/><span class="hl-0">await</span><span class="hl-1"> </span><span class="hl-2">benchmark</span><span class="hl-1">.</span><span class="hl-4">record</span><span class="hl-1">(</span><span class="hl-3">&quot;String#indexOf&quot;</span><span class="hl-1">, () </span><span class="hl-5">=&gt;</span><span class="hl-1"> </span><span class="hl-3">&quot;Hello World!&quot;</span><span class="hl-1">.</span><span class="hl-4">indexOf</span><span class="hl-1">(</span><span class="hl-3">&quot;o&quot;</span><span class="hl-1">) &gt; -</span><span class="hl-9">1</span><span class="hl-1">);</span><br/><br/><span class="hl-5">const</span><span class="hl-1"> </span><span class="hl-7">fastest</span><span class="hl-1"> = </span><span class="hl-2">benchmark</span><span class="hl-1">.</span><span class="hl-4">find</span><span class="hl-1">(</span><span class="hl-2">Criteria</span><span class="hl-1">.</span><span class="hl-2">Fastest</span><span class="hl-1">);</span><br/><span class="hl-2">console</span><span class="hl-1">.</span><span class="hl-4">log</span><span class="hl-1">(</span><span class="hl-3">`Fastest: </span><span class="hl-5">${</span><span class="hl-2">fastest</span><span class="hl-6">?.</span><span class="hl-2">description</span><span class="hl-5">}</span><span class="hl-3"> with mean </span><span class="hl-5">${</span><span class="hl-2">fastest</span><span class="hl-6">?.</span><span class="hl-2">mean</span><span class="hl-5">}</span><span class="hl-3"> ms`</span><span class="hl-1">);</span><br/><span class="hl-10">// Fastest: String#indexOf with mean 0.004199049999999999 ms</span>
 </code></pre>
-						<p>  Output:</p>
-						<pre><code><span style="color: #0070C1">FAIL</span><span style="color: #000000"> ./</span><span style="color: #001080">index</span><span style="color: #000000">.</span><span style="color: #001080">test</span><span style="color: #000000">.</span><span style="color: #795E26">ts</span><span style="color: #000000"> (16.576</span><span style="color: #001080">s</span><span style="color: #000000">)</span>
-<span style="color: #000000">  </span><span style="color: #001080">An</span><span style="color: #000000"> </span><span style="color: #0070C1">HTTP</span><span style="color: #000000"> </span><span style="color: #001080">client</span>
-<span style="color: #000000">    √ </span><span style="color: #001080">can</span><span style="color: #000000"> </span><span style="color: #001080">send</span><span style="color: #000000"> </span><span style="color: #0070C1">GET</span><span style="color: #000000"> </span><span style="color: #795E26">requests</span><span style="color: #000000"> (8332</span><span style="color: #001080">ms</span><span style="color: #000000">)</span>
-<span style="color: #000000">    × </span><span style="color: #001080">can</span><span style="color: #000000"> </span><span style="color: #001080">send</span><span style="color: #000000"> </span><span style="color: #0070C1">POST</span><span style="color: #000000"> </span><span style="color: #795E26">requests</span><span style="color: #000000"> (508</span><span style="color: #001080">ms</span><span style="color: #000000">)</span>
+<p>For aggregating results inside of a test framework, use the default <code>benchmark</code>
+instance and its <code>record</code> method. Click to expand an example:</p>
+<details>
+  <summary>Example: Jest</summary>
+  <div style="padding-left: 5px; border-left: 1px solid black;">
 
-<span style="color: #000000">  ● </span><span style="color: #001080">An</span><span style="color: #000000"> </span><span style="color: #0070C1">HTTP</span><span style="color: #000000"> </span><span style="color: #001080">client</span><span style="color: #000000"> › </span><span style="color: #001080">can</span><span style="color: #000000"> </span><span style="color: #001080">send</span><span style="color: #000000"> </span><span style="color: #0070C1">POST</span><span style="color: #000000"> </span><span style="color: #001080">requests</span>
-
-<span style="color: #000000">    </span><span style="color: #001080">Mean</span><span style="color: #000000"> </span><span style="color: #001080">time</span><span style="color: #000000"> </span><span style="color: #0000FF">of</span><span style="color: #000000"> </span><span style="color: #098658">49.43073600000001</span><span style="color: #000000"> </span><span style="color: #001080">ms</span><span style="color: #000000"> </span><span style="color: #001080">exceeded</span><span style="color: #000000"> </span><span style="color: #001080">threshold</span><span style="color: #000000"> </span><span style="color: #0000FF">of</span><span style="color: #000000"> </span><span style="color: #098658">10</span><span style="color: #000000"> </span><span style="color: #001080">ms</span>
-
-<span style="color: #001080">Test</span><span style="color: #000000"> Suites: </span><span style="color: #098658">1</span><span style="color: #000000"> </span><span style="color: #001080">failed</span><span style="color: #000000">, </span><span style="color: #098658">1</span><span style="color: #000000"> </span><span style="color: #001080">total</span>
-<span style="color: #000000">Tests:       </span><span style="color: #098658">1</span><span style="color: #000000"> </span><span style="color: #001080">failed</span><span style="color: #000000">, </span><span style="color: #098658">1</span><span style="color: #000000"> </span><span style="color: #001080">passed</span><span style="color: #000000">, </span><span style="color: #098658">2</span><span style="color: #000000"> </span><span style="color: #001080">total</span>
-<span style="color: #000000">Snapshots:   </span><span style="color: #098658">0</span><span style="color: #000000"> </span><span style="color: #001080">total</span>
-<span style="color: #000000">Time:        18.296</span><span style="color: #001080">s</span>
-
-<span style="color: #000000">- - - - - - - - - - - - - - - - - </span><span style="color: #001080">Performance</span><span style="color: #000000"> - - - - - - - - - - - - - - - - -</span>
-<span style="color: #0070C1">HTTP</span><span style="color: #000000"> client:</span>
-<span style="color: #000000">  GET:</span>
-<span style="color: #000000">    </span><span style="color: #098658">83.25152</span><span style="color: #000000"> </span><span style="color: #795E26">ms</span><span style="color: #000000"> (+/- </span><span style="color: #098658">58.77542</span><span style="color: #000000"> </span><span style="color: #001080">ms</span><span style="color: #000000">) </span><span style="color: #001080">from</span><span style="color: #000000"> </span><span style="color: #098658">100</span><span style="color: #000000"> </span><span style="color: #001080">iterations</span>
-<span style="color: #000000">  POST:</span>
-<span style="color: #000000">    </span><span style="color: #098658">49.43074</span><span style="color: #000000"> </span><span style="color: #795E26">ms</span><span style="color: #000000"> (+/- </span><span style="color: #098658">2.39217</span><span style="color: #000000"> </span><span style="color: #001080">ms</span><span style="color: #000000">) </span><span style="color: #001080">from</span><span style="color: #000000"> </span><span style="color: #098658">10</span><span style="color: #000000"> </span><span style="color: #001080">iterations</span>
-<span style="color: #000000">- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span>
+<p>  Jest doesn&#39;t currently expose a way to get each individual test&#39;s name
+  while running, so you have to provide a description to <code>record()</code>.</p>
+<p>  Tests:</p>
+<pre><code class="language-typescript"><span class="hl-0">import</span><span class="hl-1"> { </span><span class="hl-2">benchmark</span><span class="hl-1"> } </span><span class="hl-0">from</span><span class="hl-1"> </span><span class="hl-3">&quot;kelonio&quot;</span><span class="hl-1">;</span><br/><span class="hl-0">import</span><span class="hl-1"> </span><span class="hl-2">axios</span><span class="hl-1"> </span><span class="hl-0">from</span><span class="hl-1"> </span><span class="hl-3">&quot;axios&quot;</span><span class="hl-1">;</span><br/><br/><span class="hl-4">describe</span><span class="hl-1">(</span><span class="hl-3">&quot;An HTTP client&quot;</span><span class="hl-1">, () </span><span class="hl-5">=&gt;</span><span class="hl-1"> {</span><br/><span class="hl-1">    </span><span class="hl-4">it</span><span class="hl-1">(</span><span class="hl-3">&quot;can send GET requests&quot;</span><span class="hl-1">, </span><span class="hl-5">async</span><span class="hl-1"> () </span><span class="hl-5">=&gt;</span><span class="hl-1"> {</span><br/><span class="hl-1">        </span><span class="hl-0">await</span><span class="hl-1"> </span><span class="hl-2">benchmark</span><span class="hl-1">.</span><span class="hl-4">record</span><span class="hl-1">(</span><br/><span class="hl-1">            [</span><span class="hl-3">&quot;HTTP client&quot;</span><span class="hl-1">, </span><span class="hl-3">&quot;GET&quot;</span><span class="hl-1">],</span><br/><span class="hl-1">            () </span><span class="hl-5">=&gt;</span><span class="hl-1"> </span><span class="hl-2">axios</span><span class="hl-1">.</span><span class="hl-4">get</span><span class="hl-1">(</span><span class="hl-3">&quot;http://www.httpbin.org/get&quot;</span><span class="hl-1">)</span><br/><span class="hl-1">        );</span><br/><span class="hl-1">    }, </span><span class="hl-9">30_000</span><span class="hl-1">);</span><br/><br/><span class="hl-1">    </span><span class="hl-4">it</span><span class="hl-1">(</span><span class="hl-3">&quot;can send POST requests&quot;</span><span class="hl-1">, </span><span class="hl-5">async</span><span class="hl-1"> () </span><span class="hl-5">=&gt;</span><span class="hl-1"> {</span><br/><span class="hl-1">        </span><span class="hl-0">await</span><span class="hl-1"> </span><span class="hl-2">benchmark</span><span class="hl-1">.</span><span class="hl-4">record</span><span class="hl-1">(</span><br/><span class="hl-1">            [</span><span class="hl-3">&quot;HTTP client&quot;</span><span class="hl-1">, </span><span class="hl-3">&quot;POST&quot;</span><span class="hl-1">],</span><br/><span class="hl-1">            () </span><span class="hl-5">=&gt;</span><span class="hl-1"> </span><span class="hl-2">axios</span><span class="hl-1">.</span><span class="hl-4">post</span><span class="hl-1">(</span><span class="hl-3">&quot;http://www.httpbin.org/post&quot;</span><span class="hl-1">),</span><br/><span class="hl-1">            { </span><span class="hl-2">iterations:</span><span class="hl-1"> </span><span class="hl-9">10</span><span class="hl-1">, </span><span class="hl-2">meanUnder:</span><span class="hl-1"> </span><span class="hl-9">10</span><span class="hl-1"> },</span><br/><span class="hl-1">        );</span><br/><span class="hl-1">    }, </span><span class="hl-9">30_000</span><span class="hl-1">);</span><br/><span class="hl-1">});</span>
 </code></pre>
-						<p>  The first time on each line is the mean duration, and the <code>+/-</code> time is
-						the margin of error at a 95% confidence level.</p>
-					</div>
-				</details>
-				<details>
-					<summary>Example: Mocha</summary>
-					<div style="padding-left: 5px; border-left: 1px solid black;">
-						<p>  The Mocha reporter can automatically infer the descriptions from the test
-							names, but you&#39;re still free to pass additional descriptions to <code>record()</code>,
-						such as if one test performs several different measurements.</p>
-						<p>  Tests:</p>
-						<pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">benchmark</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;kelonio&quot;</span><span style="color: #000000">;</span>
-<span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">axios</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;axios&quot;</span><span style="color: #000000">;</span>
-
-<span style="color: #795E26">describe</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;An HTTP client&quot;</span><span style="color: #000000">, () </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
-<span style="color: #000000">    </span><span style="color: #795E26">it</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;can send GET requests&quot;</span><span style="color: #000000">, </span><span style="color: #0000FF">async</span><span style="color: #000000"> </span><span style="color: #0000FF">function</span><span style="color: #000000"> (</span><span style="color: #0000FF">this</span><span style="color: #000000">: </span><span style="color: #267F99">Mocha</span><span style="color: #000000">.</span><span style="color: #267F99">Test</span><span style="color: #000000">) {</span>
-<span style="color: #000000">        </span><span style="color: #0000FF">this</span><span style="color: #000000">.</span><span style="color: #795E26">timeout</span><span style="color: #000000">(</span><span style="color: #098658">30_000</span><span style="color: #000000">);</span>
-<span style="color: #000000">        </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">benchmark</span><span style="color: #000000">.</span><span style="color: #795E26">record</span><span style="color: #000000">(() </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">axios</span><span style="color: #000000">.</span><span style="color: #795E26">get</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;http://www.httpbin.org/get&quot;</span><span style="color: #000000">));</span>
-<span style="color: #000000">    });</span>
-
-<span style="color: #000000">    </span><span style="color: #795E26">it</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;can send POST requests&quot;</span><span style="color: #000000">, </span><span style="color: #0000FF">async</span><span style="color: #000000"> </span><span style="color: #0000FF">function</span><span style="color: #000000"> (</span><span style="color: #0000FF">this</span><span style="color: #000000">: </span><span style="color: #267F99">Mocha</span><span style="color: #000000">.</span><span style="color: #267F99">Test</span><span style="color: #000000">) {</span>
-<span style="color: #000000">        </span><span style="color: #0000FF">this</span><span style="color: #000000">.</span><span style="color: #795E26">timeout</span><span style="color: #000000">(</span><span style="color: #098658">30_000</span><span style="color: #000000">);</span>
-<span style="color: #000000">        </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">benchmark</span><span style="color: #000000">.</span><span style="color: #795E26">record</span><span style="color: #000000">(</span>
-<span style="color: #000000">            () </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">axios</span><span style="color: #000000">.</span><span style="color: #795E26">post</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;http://www.httpbin.org/post&quot;</span><span style="color: #000000">),</span>
-<span style="color: #000000">            { </span><span style="color: #001080">iterations:</span><span style="color: #000000"> </span><span style="color: #098658">10</span><span style="color: #000000">, </span><span style="color: #001080">meanUnder:</span><span style="color: #000000"> </span><span style="color: #098658">10</span><span style="color: #000000"> },</span>
-<span style="color: #000000">        );</span>
-<span style="color: #000000">    });</span>
-<span style="color: #000000">});</span>
+<p>  Output:</p>
+<pre><code><span class="hl-7">FAIL</span><span class="hl-1"> ./</span><span class="hl-2">index</span><span class="hl-1">.</span><span class="hl-2">test</span><span class="hl-1">.</span><span class="hl-4">ts</span><span class="hl-1"> (16.576</span><span class="hl-2">s</span><span class="hl-1">)</span><br/><span class="hl-1">  </span><span class="hl-2">An</span><span class="hl-1"> </span><span class="hl-7">HTTP</span><span class="hl-1"> </span><span class="hl-2">client</span><br/><span class="hl-1">    √ </span><span class="hl-2">can</span><span class="hl-1"> </span><span class="hl-2">send</span><span class="hl-1"> </span><span class="hl-7">GET</span><span class="hl-1"> </span><span class="hl-4">requests</span><span class="hl-1"> (8332</span><span class="hl-2">ms</span><span class="hl-1">)</span><br/><span class="hl-1">    × </span><span class="hl-2">can</span><span class="hl-1"> </span><span class="hl-2">send</span><span class="hl-1"> </span><span class="hl-7">POST</span><span class="hl-1"> </span><span class="hl-4">requests</span><span class="hl-1"> (508</span><span class="hl-2">ms</span><span class="hl-1">)</span><br/><br/><span class="hl-1">  ● </span><span class="hl-2">An</span><span class="hl-1"> </span><span class="hl-7">HTTP</span><span class="hl-1"> </span><span class="hl-2">client</span><span class="hl-1"> › </span><span class="hl-2">can</span><span class="hl-1"> </span><span class="hl-2">send</span><span class="hl-1"> </span><span class="hl-7">POST</span><span class="hl-1"> </span><span class="hl-2">requests</span><br/><br/><span class="hl-1">    </span><span class="hl-2">Mean</span><span class="hl-1"> </span><span class="hl-2">time</span><span class="hl-1"> </span><span class="hl-5">of</span><span class="hl-1"> </span><span class="hl-9">49.43073600000001</span><span class="hl-1"> </span><span class="hl-2">ms</span><span class="hl-1"> </span><span class="hl-2">exceeded</span><span class="hl-1"> </span><span class="hl-2">threshold</span><span class="hl-1"> </span><span class="hl-5">of</span><span class="hl-1"> </span><span class="hl-9">10</span><span class="hl-1"> </span><span class="hl-2">ms</span><br/><br/><span class="hl-2">Test</span><span class="hl-1"> </span><span class="hl-11">Suites</span><span class="hl-1">: </span><span class="hl-9">1</span><span class="hl-1"> </span><span class="hl-2">failed</span><span class="hl-1">, </span><span class="hl-9">1</span><span class="hl-1"> </span><span class="hl-2">total</span><br/><span class="hl-11">Tests</span><span class="hl-1">:       </span><span class="hl-9">1</span><span class="hl-1"> </span><span class="hl-2">failed</span><span class="hl-1">, </span><span class="hl-9">1</span><span class="hl-1"> </span><span class="hl-2">passed</span><span class="hl-1">, </span><span class="hl-9">2</span><span class="hl-1"> </span><span class="hl-2">total</span><br/><span class="hl-11">Snapshots</span><span class="hl-1">:   </span><span class="hl-9">0</span><span class="hl-1"> </span><span class="hl-2">total</span><br/><span class="hl-11">Time</span><span class="hl-1">:        18.296</span><span class="hl-2">s</span><br/><br/><span class="hl-1">- - - - - - - - - - - - - - - - - </span><span class="hl-2">Performance</span><span class="hl-1"> - - - - - - - - - - - - - - - - -</span><br/><span class="hl-7">HTTP</span><span class="hl-1"> </span><span class="hl-11">client</span><span class="hl-1">:</span><br/><span class="hl-1">  </span><span class="hl-11">GET</span><span class="hl-1">:</span><br/><span class="hl-1">    </span><span class="hl-9">83.25152</span><span class="hl-1"> </span><span class="hl-4">ms</span><span class="hl-1"> (+/- </span><span class="hl-9">58.77542</span><span class="hl-1"> </span><span class="hl-2">ms</span><span class="hl-1">) </span><span class="hl-2">from</span><span class="hl-1"> </span><span class="hl-9">100</span><span class="hl-1"> </span><span class="hl-2">iterations</span><br/><span class="hl-1">  </span><span class="hl-11">POST</span><span class="hl-1">:</span><br/><span class="hl-1">    </span><span class="hl-9">49.43074</span><span class="hl-1"> </span><span class="hl-4">ms</span><span class="hl-1"> (+/- </span><span class="hl-9">2.39217</span><span class="hl-1"> </span><span class="hl-2">ms</span><span class="hl-1">) </span><span class="hl-2">from</span><span class="hl-1"> </span><span class="hl-9">10</span><span class="hl-1"> </span><span class="hl-2">iterations</span><br/><span class="hl-1">- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span>
 </code></pre>
-						<p>  Output:</p>
-						<pre><code><span style="color: #000000">  </span><span style="color: #001080">An</span><span style="color: #000000"> </span><span style="color: #0070C1">HTTP</span><span style="color: #000000"> </span><span style="color: #001080">client</span>
-<span style="color: #000000">    √ </span><span style="color: #001080">can</span><span style="color: #000000"> </span><span style="color: #001080">send</span><span style="color: #000000"> </span><span style="color: #0070C1">GET</span><span style="color: #000000"> </span><span style="color: #001080">requests</span>
-<span style="color: #000000">    </span><span style="color: #098658">1</span><span style="color: #000000">) </span><span style="color: #001080">can</span><span style="color: #000000"> </span><span style="color: #001080">send</span><span style="color: #000000"> </span><span style="color: #0070C1">POST</span><span style="color: #000000"> </span><span style="color: #001080">requests</span>
+<p>  The first time on each line is the mean duration, and the <code>+/-</code> time is
+  the margin of error at a 95% confidence level.</p>
+  </div>
+</details>
 
+<details>
+  <summary>Example: Mocha</summary>
+  <div style="padding-left: 5px; border-left: 1px solid black;">
 
-<span style="color: #000000">  </span><span style="color: #098658">1</span><span style="color: #000000"> </span><span style="color: #795E26">passing</span><span style="color: #000000"> (8332</span><span style="color: #001080">ms</span><span style="color: #000000">)</span>
-<span style="color: #000000">  </span><span style="color: #098658">1</span><span style="color: #000000"> </span><span style="color: #001080">failing</span>
-
-<span style="color: #000000">  </span><span style="color: #098658">1</span><span style="color: #000000">) </span><span style="color: #001080">An</span><span style="color: #000000"> </span><span style="color: #0070C1">HTTP</span><span style="color: #000000"> </span><span style="color: #001080">client</span>
-<span style="color: #000000">      </span><span style="color: #001080">can</span><span style="color: #000000"> </span><span style="color: #001080">send</span><span style="color: #000000"> </span><span style="color: #0070C1">POST</span><span style="color: #000000"> requests:</span>
-<span style="color: #000000">    Error: </span><span style="color: #001080">Mean</span><span style="color: #000000"> </span><span style="color: #001080">time</span><span style="color: #000000"> </span><span style="color: #0000FF">of</span><span style="color: #000000"> </span><span style="color: #098658">49.43073600000001</span><span style="color: #000000"> </span><span style="color: #001080">ms</span><span style="color: #000000"> </span><span style="color: #001080">exceeded</span><span style="color: #000000"> </span><span style="color: #001080">threshold</span><span style="color: #000000"> </span><span style="color: #0000FF">of</span><span style="color: #000000"> </span><span style="color: #098658">10</span><span style="color: #000000"> </span><span style="color: #001080">ms</span>
-
-
-<span style="color: #000000">- - - - - - - - - - - - - - - - - </span><span style="color: #001080">Performance</span><span style="color: #000000"> - - - - - - - - - - - - - - - - -</span>
-<span style="color: #001080">An</span><span style="color: #000000"> </span><span style="color: #0070C1">HTTP</span><span style="color: #000000"> client:</span>
-<span style="color: #000000">  </span><span style="color: #001080">can</span><span style="color: #000000"> </span><span style="color: #001080">send</span><span style="color: #000000"> </span><span style="color: #0070C1">GET</span><span style="color: #000000"> requests:</span>
-<span style="color: #000000">    </span><span style="color: #098658">83.25152</span><span style="color: #000000"> </span><span style="color: #795E26">ms</span><span style="color: #000000"> (+/- </span><span style="color: #098658">58.77542</span><span style="color: #000000"> </span><span style="color: #001080">ms</span><span style="color: #000000">) </span><span style="color: #001080">from</span><span style="color: #000000"> </span><span style="color: #098658">100</span><span style="color: #000000"> </span><span style="color: #001080">iterations</span>
-<span style="color: #000000">  </span><span style="color: #001080">can</span><span style="color: #000000"> </span><span style="color: #001080">send</span><span style="color: #000000"> </span><span style="color: #0070C1">POST</span><span style="color: #000000"> requests:</span>
-<span style="color: #000000">    </span><span style="color: #098658">49.43074</span><span style="color: #000000"> </span><span style="color: #795E26">ms</span><span style="color: #000000"> (+/- </span><span style="color: #098658">2.39217</span><span style="color: #000000"> </span><span style="color: #001080">ms</span><span style="color: #000000">) </span><span style="color: #001080">from</span><span style="color: #000000"> </span><span style="color: #098658">10</span><span style="color: #000000"> </span><span style="color: #001080">iterations</span>
-<span style="color: #000000">- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span>
+<p>  The Mocha reporter can automatically infer the descriptions from the test
+  names, but you&#39;re still free to pass additional descriptions to <code>record()</code>,
+  such as if one test performs several different measurements.</p>
+<p>  Tests:</p>
+<pre><code class="language-typescript"><span class="hl-0">import</span><span class="hl-1"> { </span><span class="hl-2">benchmark</span><span class="hl-1"> } </span><span class="hl-0">from</span><span class="hl-1"> </span><span class="hl-3">&quot;kelonio&quot;</span><span class="hl-1">;</span><br/><span class="hl-0">import</span><span class="hl-1"> </span><span class="hl-2">axios</span><span class="hl-1"> </span><span class="hl-0">from</span><span class="hl-1"> </span><span class="hl-3">&quot;axios&quot;</span><span class="hl-1">;</span><br/><br/><span class="hl-4">describe</span><span class="hl-1">(</span><span class="hl-3">&quot;An HTTP client&quot;</span><span class="hl-1">, () </span><span class="hl-5">=&gt;</span><span class="hl-1"> {</span><br/><span class="hl-1">    </span><span class="hl-4">it</span><span class="hl-1">(</span><span class="hl-3">&quot;can send GET requests&quot;</span><span class="hl-1">, </span><span class="hl-5">async</span><span class="hl-1"> </span><span class="hl-5">function</span><span class="hl-1"> (</span><span class="hl-5">this</span><span class="hl-1">: </span><span class="hl-12">Mocha</span><span class="hl-1">.</span><span class="hl-12">Test</span><span class="hl-1">) {</span><br/><span class="hl-1">        </span><span class="hl-5">this</span><span class="hl-1">.</span><span class="hl-4">timeout</span><span class="hl-1">(</span><span class="hl-9">30_000</span><span class="hl-1">);</span><br/><span class="hl-1">        </span><span class="hl-0">await</span><span class="hl-1"> </span><span class="hl-2">benchmark</span><span class="hl-1">.</span><span class="hl-4">record</span><span class="hl-1">(() </span><span class="hl-5">=&gt;</span><span class="hl-1"> </span><span class="hl-2">axios</span><span class="hl-1">.</span><span class="hl-4">get</span><span class="hl-1">(</span><span class="hl-3">&quot;http://www.httpbin.org/get&quot;</span><span class="hl-1">));</span><br/><span class="hl-1">    });</span><br/><br/><span class="hl-1">    </span><span class="hl-4">it</span><span class="hl-1">(</span><span class="hl-3">&quot;can send POST requests&quot;</span><span class="hl-1">, </span><span class="hl-5">async</span><span class="hl-1"> </span><span class="hl-5">function</span><span class="hl-1"> (</span><span class="hl-5">this</span><span class="hl-1">: </span><span class="hl-12">Mocha</span><span class="hl-1">.</span><span class="hl-12">Test</span><span class="hl-1">) {</span><br/><span class="hl-1">        </span><span class="hl-5">this</span><span class="hl-1">.</span><span class="hl-4">timeout</span><span class="hl-1">(</span><span class="hl-9">30_000</span><span class="hl-1">);</span><br/><span class="hl-1">        </span><span class="hl-0">await</span><span class="hl-1"> </span><span class="hl-2">benchmark</span><span class="hl-1">.</span><span class="hl-4">record</span><span class="hl-1">(</span><br/><span class="hl-1">            () </span><span class="hl-5">=&gt;</span><span class="hl-1"> </span><span class="hl-2">axios</span><span class="hl-1">.</span><span class="hl-4">post</span><span class="hl-1">(</span><span class="hl-3">&quot;http://www.httpbin.org/post&quot;</span><span class="hl-1">),</span><br/><span class="hl-1">            { </span><span class="hl-2">iterations:</span><span class="hl-1"> </span><span class="hl-9">10</span><span class="hl-1">, </span><span class="hl-2">meanUnder:</span><span class="hl-1"> </span><span class="hl-9">10</span><span class="hl-1"> },</span><br/><span class="hl-1">        );</span><br/><span class="hl-1">    });</span><br/><span class="hl-1">});</span>
 </code></pre>
-						<p>  The first time on each line is the mean duration, and the <code>+/-</code> time is
-						the margin of error at a 95% confidence level.</p>
-					</div>
-				</details>
-				<p>Refer to the <code>examples</code> folder for sample projects that integrate Kelonio with
-				different test frameworks.</p>
-				<a href="#versioning" id="versioning" style="color: inherit; text-decoration: none;">
-					<h2>Versioning</h2>
-				</a>
-				<p>This project uses <a href="https://semver.org">Semantic Versioning</a>. Public API:</p>
-				<ul>
-					<li>All items that can be imported <code>from &quot;kelonio&quot;</code> and their public attributes.</li>
-					<li>The location of reporter modules:<ul>
-							<li><code>node_modules/kelonio/out/plugin/jestReporter.js</code>.<ul>
-									<li><code>node_modules/kelonio/out/plugin/jestReporterSetup.js</code>.</li>
-								</ul>
-							</li>
-							<li><code>node_modules/kelonio/out/plugin/karmaReporter.js</code>.<ul>
-									<li><code>node_modules/kelonio/out/plugin/karmaReporterSetup.js</code>.</li>
-								</ul>
-							</li>
-							<li><code>node_modules/kelonio/out/plugin/mochaReporter.js</code>.</li>
-						</ul>
-					</li>
-				</ul>
-				<a href="#comparison-with-other-tools" id="comparison-with-other-tools" style="color: inherit; text-decoration: none;">
-					<h2>Comparison with other tools</h2>
-				</a>
-				<ul>
-					<li><a href="https://www.npmjs.com/package/benchmark">Benchmark</a>:<ul>
-							<li>Requires defining tests in its own framework.</li>
-							<li>Doesn&#39;t provide a default report format, so you have to write your own
-							reporting in callbacks.</li>
-							<li>Callbacks must be classic <code>function () {}</code> style because they need access
-								to <code>this</code>, which is not accounted for by
-							<a href="https://www.npmjs.com/package/@types/benchmark">@types/benchmark</a>.</li>
-						</ul>
-					</li>
-					<li><a href="https://www.npmjs.com/package/nanobench">Nanobench</a>:<ul>
-							<li>Requires defining tests in its own framework.</li>
-							<li>The CLI can only handle JavaScript code, so in a TypeScript project,
-								you either have to compile the tests in addition to the main source
-							or you have to use <code>ts-node</code> (which appears to degrade the performance results).</li>
-							<li>No typings available for TypeScript.</li>
-						</ul>
-					</li>
-					<li><a href="https://www.npmjs.com/package/matcha">Matcha</a>:<ul>
-							<li>Requires defining tests in its own framework.</li>
-							<li>The CLI can only handle JavaScript code, so in a TypeScript project,
-								you either have to compile the tests instead of just the main source
-							or you have to use <code>ts-node</code> (which appears to degrade the performance results).</li>
-							<li>No typings available for TypeScript.</li>
-							<li>Depends on <a href="https://www.npmjs.com/package/electron">Electron</a>.</li>
-						</ul>
-					</li>
-				</ul>
-				<a href="#development" id="development" style="color: inherit; text-decoration: none;">
-					<h2>Development</h2>
-				</a>
-				<p>Please refer to <a href="./CONTRIBUTING.md">CONTRIBUTING.md</a>.</p>
-			</div>
-		</div>
-		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
-			<nav class="tsd-navigation primary">
-				<ul>
-					<li class=" ">
-						<a href="modules.html">Exports</a>
-					</li>
-				</ul>
-			</nav>
-			<nav class="tsd-navigation secondary menu-sticky">
-				<ul class="before-current">
-					<li class=" tsd-kind-enum">
-						<a href="enums/criteria.html" class="tsd-kind-icon">Criteria</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="classes/benchmark.html" class="tsd-kind-icon">Benchmark</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="classes/benchmarkeventemitter.html" class="tsd-kind-icon">Benchmark<wbr>Event<wbr>Emitter</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="classes/jestreporter.html" class="tsd-kind-icon">Jest<wbr>Reporter</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="classes/karmareporter.html" class="tsd-kind-icon">Karma<wbr>Reporter</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="classes/measurement.html" class="tsd-kind-icon">Measurement</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="classes/mochareporter.html" class="tsd-kind-icon">Mocha<wbr>Reporter</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="classes/performanceerror.html" class="tsd-kind-icon">Performance<wbr>Error</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="interfaces/benchmarkdata.html" class="tsd-kind-icon">Benchmark<wbr>Data</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="interfaces/measureoptions.html" class="tsd-kind-icon">Measure<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="modules.html#benchmark" class="tsd-kind-icon">benchmark</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="modules.html#measure" class="tsd-kind-icon">measure</a>
-					</li>
-				</ul>
-			</nav>
-		</div>
-	</div>
-</div>
-<footer class="with-border-bottom">
-	<div class="container">
-		<h2>Legend</h2>
-		<div class="tsd-legend-group">
-			<ul class="tsd-legend">
-				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
-				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
-			</ul>
-		</div>
-	</div>
-</footer>
-<div class="container tsd-generator">
-	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
-</div>
-<div class="overlay"></div>
-<script src="assets/js/main.js"></script>
-</body>
-</html>
+<p>  Output:</p>
+<pre><code><span class="hl-1">  </span><span class="hl-2">An</span><span class="hl-1"> </span><span class="hl-7">HTTP</span><span class="hl-1"> </span><span class="hl-2">client</span><br/><span class="hl-1">    √ </span><span class="hl-2">can</span><span class="hl-1"> </span><span class="hl-2">send</span><span class="hl-1"> </span><span class="hl-7">GET</span><span class="hl-1"> </span><span class="hl-2">requests</span><br/><span class="hl-1">    </span><span class="hl-9">1</span><span class="hl-1">) </span><span class="hl-2">can</span><span class="hl-1"> </span><span class="hl-2">send</span><span class="hl-1"> </span><span class="hl-7">POST</span><span class="hl-1"> </span><span class="hl-2">requests</span><br/><br/><br/><span class="hl-1">  </span><span class="hl-9">1</span><span class="hl-1"> </span><span class="hl-4">passing</span><span class="hl-1"> (8332</span><span class="hl-2">ms</span><span class="hl-1">)</span><br/><span class="hl-1">  </span><span class="hl-9">1</span><span class="hl-1"> </span><span class="hl-2">failing</span><br/><br/><span class="hl-1">  </span><span class="hl-9">1</span><span class="hl-1">) </span><span class="hl-2">An</span><span class="hl-1"> </span><span class="hl-7">HTTP</span><span class="hl-1"> </span><span class="hl-2">client</span><br/><span class="hl-1">      </span><span class="hl-2">can</span><span class="hl-1"> </span><span class="hl-2">send</span><span class="hl-1"> </span><span class="hl-7">POST</span><span class="hl-1"> </span><span class="hl-11">requests</span><span class="hl-1">:</span><br/><span class="hl-1">    </span><span class="hl-11">Error</span><span class="hl-1">: </span><span class="hl-2">Mean</span><span class="hl-1"> </span><span class="hl-2">time</span><span class="hl-1"> </span><span class="hl-5">of</span><span class="hl-1"> </span><span class="hl-9">49.43073600000001</span><span class="hl-1"> </span><span class="hl-2">ms</span><span class="hl-1"> </span><span class="hl-2">exceeded</span><span class="hl-1"> </span><span class="hl-2">threshold</span><span class="hl-1"> </span><span class="hl-5">of</span><span class="hl-1"> </span><span class="hl-9">10</span><span class="hl-1"> </span><span class="hl-2">ms</span><br/><br/><br/><span class="hl-1">- - - - - - - - - - - - - - - - - </span><span class="hl-2">Performance</span><span class="hl-1"> - - - - - - - - - - - - - - - - -</span><br/><span class="hl-2">An</span><span class="hl-1"> </span><span class="hl-7">HTTP</span><span class="hl-1"> </span><span class="hl-11">client</span><span class="hl-1">:</span><br/><span class="hl-1">  </span><span class="hl-2">can</span><span class="hl-1"> </span><span class="hl-2">send</span><span class="hl-1"> </span><span class="hl-7">GET</span><span class="hl-1"> </span><span class="hl-11">requests</span><span class="hl-1">:</span><br/><span class="hl-1">    </span><span class="hl-9">83.25152</span><span class="hl-1"> </span><span class="hl-4">ms</span><span class="hl-1"> (+/- </span><span class="hl-9">58.77542</span><span class="hl-1"> </span><span class="hl-2">ms</span><span class="hl-1">) </span><span class="hl-2">from</span><span class="hl-1"> </span><span class="hl-9">100</span><span class="hl-1"> </span><span class="hl-2">iterations</span><br/><span class="hl-1">  </span><span class="hl-2">can</span><span class="hl-1"> </span><span class="hl-2">send</span><span class="hl-1"> </span><span class="hl-7">POST</span><span class="hl-1"> </span><span class="hl-11">requests</span><span class="hl-1">:</span><br/><span class="hl-1">    </span><span class="hl-9">49.43074</span><span class="hl-1"> </span><span class="hl-4">ms</span><span class="hl-1"> (+/- </span><span class="hl-9">2.39217</span><span class="hl-1"> </span><span class="hl-2">ms</span><span class="hl-1">) </span><span class="hl-2">from</span><span class="hl-1"> </span><span class="hl-9">10</span><span class="hl-1"> </span><span class="hl-2">iterations</span><br/><span class="hl-1">- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span>
+</code></pre>
+<p>  The first time on each line is the mean duration, and the <code>+/-</code> time is
+  the margin of error at a 95% confidence level.</p>
+  </div>
+</details>
+
+<p>Refer to the <code>examples</code> folder for sample projects that integrate Kelonio with
+different test frameworks.</p>
+
+<a href="#versioning" id="versioning" style="color: inherit; text-decoration: none;">
+  <h2>Versioning</h2>
+</a>
+<p>This project uses <a href="https://semver.org">Semantic Versioning</a>. Public API:</p>
+<ul>
+<li>All items that can be imported <code>from &quot;kelonio&quot;</code> and their public attributes.</li>
+<li>The location of reporter modules:<ul>
+<li><code>node_modules/kelonio/out/plugin/jestReporter.js</code>.<ul>
+<li><code>node_modules/kelonio/out/plugin/jestReporterSetup.js</code>.</li>
+</ul>
+</li>
+<li><code>node_modules/kelonio/out/plugin/karmaReporter.js</code>.<ul>
+<li><code>node_modules/kelonio/out/plugin/karmaReporterSetup.js</code>.</li>
+</ul>
+</li>
+<li><code>node_modules/kelonio/out/plugin/mochaReporter.js</code>.</li>
+</ul>
+</li>
+</ul>
+
+<a href="#comparison-with-other-tools" id="comparison-with-other-tools" style="color: inherit; text-decoration: none;">
+  <h2>Comparison with other tools</h2>
+</a>
+<ul>
+<li><a href="https://www.npmjs.com/package/benchmark">Benchmark</a>:<ul>
+<li>Requires defining tests in its own framework.</li>
+<li>Doesn&#39;t provide a default report format, so you have to write your own
+reporting in callbacks.</li>
+<li>Callbacks must be classic <code>function () {}</code> style because they need access
+to <code>this</code>, which is not accounted for by
+<a href="https://www.npmjs.com/package/@types/benchmark">@types/benchmark</a>.</li>
+</ul>
+</li>
+<li><a href="https://www.npmjs.com/package/nanobench">Nanobench</a>:<ul>
+<li>Requires defining tests in its own framework.</li>
+<li>The CLI can only handle JavaScript code, so in a TypeScript project,
+you either have to compile the tests in addition to the main source
+or you have to use <code>ts-node</code> (which appears to degrade the performance results).</li>
+<li>No typings available for TypeScript.</li>
+</ul>
+</li>
+<li><a href="https://www.npmjs.com/package/matcha">Matcha</a>:<ul>
+<li>Requires defining tests in its own framework.</li>
+<li>The CLI can only handle JavaScript code, so in a TypeScript project,
+you either have to compile the tests instead of just the main source
+or you have to use <code>ts-node</code> (which appears to degrade the performance results).</li>
+<li>No typings available for TypeScript.</li>
+<li>Depends on <a href="https://www.npmjs.com/package/electron">Electron</a>.</li>
+</ul>
+</li>
+</ul>
+
+<a href="#development" id="development" style="color: inherit; text-decoration: none;">
+  <h2>Development</h2>
+</a>
+<p>Please refer to <a href="./CONTRIBUTING.md">CONTRIBUTING.md</a>.</p>
+</div></div><div class="col-4 col-menu menu-sticky-wrap menu-highlight"><nav class="tsd-navigation primary"><ul><li class="current"><a href="modules.html">Exports</a></li></ul></nav><nav class="tsd-navigation secondary menu-sticky"><ul><li class="tsd-kind-enum"><a href="enums/Criteria.html" class="tsd-kind-icon">Criteria</a></li><li class="tsd-kind-class"><a href="classes/Benchmark.html" class="tsd-kind-icon">Benchmark</a></li><li class="tsd-kind-class"><a href="classes/BenchmarkEventEmitter.html" class="tsd-kind-icon">Benchmark<wbr/>Event<wbr/>Emitter</a></li><li class="tsd-kind-class"><a href="classes/JestReporter.html" class="tsd-kind-icon">Jest<wbr/>Reporter</a></li><li class="tsd-kind-class"><a href="classes/KarmaReporter.html" class="tsd-kind-icon">Karma<wbr/>Reporter</a></li><li class="tsd-kind-class"><a href="classes/Measurement.html" class="tsd-kind-icon">Measurement</a></li><li class="tsd-kind-class"><a href="classes/MochaReporter.html" class="tsd-kind-icon">Mocha<wbr/>Reporter</a></li><li class="tsd-kind-class"><a href="classes/PerformanceError.html" class="tsd-kind-icon">Performance<wbr/>Error</a></li><li class="tsd-kind-interface"><a href="interfaces/BenchmarkData.html" class="tsd-kind-icon">Benchmark<wbr/>Data</a></li><li class="tsd-kind-interface"><a href="interfaces/MeasureOptions.html" class="tsd-kind-icon">Measure<wbr/>Options</a></li><li class="tsd-kind-variable"><a href="modules.html#benchmark" class="tsd-kind-icon">benchmark</a></li><li class="tsd-kind-function"><a href="modules.html#measure" class="tsd-kind-icon">measure</a></li></ul></nav></div></div></div><footer class="with-border-bottom"><div class="container"><h2>Legend</h2><div class="tsd-legend-group"><ul class="tsd-legend"><li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li><li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li><li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li></ul><ul class="tsd-legend"><li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li><li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li></ul><ul class="tsd-legend"><li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li></ul><ul class="tsd-legend"><li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li></ul></div><h2>Settings</h2><p>Theme <select id="theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></p></div></footer><div class="container tsd-generator"><p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></div><div class="overlay"></div><script src="assets/main.js"></script></body></html>
