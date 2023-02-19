@@ -35,15 +35,23 @@ export class Measurement {
     description: Array<string> = [];
 
     /**
+     * Total duration of the benchmark, i.e. for throughput.
+     * This includes time spent on any configured `beforeEach`/`afterEach` callbacks.
+     * When `serial` is false, this number will be lower.
+     */
+    totalDuration: number;
+
+    /**
      *
      * @param durations - Durations measured, in milliseconds.
      *     The list must not be empty.
      * @param totalDuration - Duration of the entire measurement, in milliseconds.
      */
-    constructor(public durations: Array<number>, public totalDuration: number) {
+    constructor(public durations: Array<number>, totalDuration?: number) {
         if (durations.length === 0) {
             throw new Error("The list of durations must not be empty");
         }
+        this.totalDuration = totalDuration ?? mathjs.sum(durations);
     }
 
     /**
@@ -169,8 +177,9 @@ export interface BenchmarkData {
 
         /**
          * Total duration of the benchmark, i.e. for throughput.
+         * This is nullable for compatibility with older serialized data from the Jest reporter.
          */
-        totalDuration: number;
+        totalDuration?: number;
 
         /**
          * Nested test data, such as when passing `["A", "B"]` as the
@@ -379,7 +388,7 @@ export class Benchmark {
 
         if (categories.length === 1) {
             data[categories[0]].durations = data[categories[0]].durations.concat(durations);
-            data[categories[0]].totalDuration += totalDuration;
+            data[categories[0]].totalDuration = (data[categories[0]].totalDuration ?? 0) + totalDuration;
         } else {
             this.addBenchmarkDurations(data[categories[0]].children, categories.slice(1), durations, totalDuration);
         }
@@ -396,7 +405,8 @@ export class Benchmark {
                 const mean = round(measurement.mean);
                 const moe = round(measurement.marginOfError);
                 const iterations = measurement.durations.length;
-                lines.push(`${"  ".repeat(depth + 1)}${mean} ms (+/- ${moe} ms) from ${iterations} iterations (${round(info.totalDuration)} ms total)`);
+                const totalDuration = round(measurement.totalDuration);
+                lines.push(`${"  ".repeat(depth + 1)}${mean} ms (+/- ${moe} ms) from ${iterations} iterations (${totalDuration} ms total)`);
             }
             if (showMeasurement && showChildren) {
                 lines.push("");

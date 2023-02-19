@@ -64,7 +64,7 @@ describe("JestReporter", () => {
             expect(spy.mock.calls[0][0]).toBe(stripIndent(`
                 ${HEADER}
                 foo:
-                  2 ms (+/- 1.13161 ms) from 3 iterations
+                  2 ms (+/- 1.13161 ms) from 3 iterations (6 ms total)
                 ${FOOTER}
             `).trimRight());
             expect(fs.existsSync(STATE_FILE)).toBeFalsy();
@@ -86,9 +86,9 @@ describe("JestReporter", () => {
             expect(spy.mock.calls[0][0]).toBe(stripIndent(`
                 ${HEADER}
                 foo:
-                  2 ms (+/- 1.13161 ms) from 3 iterations
+                  2 ms (+/- 1.13161 ms) from 3 iterations (6 ms total)
                 bar:
-                  5 ms (+/- 1.13161 ms) from 3 iterations
+                  5 ms (+/- 1.13161 ms) from 3 iterations (15 ms total)
                 ${FOOTER}
             `).trimRight());
             expect(fs.existsSync(STATE_FILE)).toBeFalsy();
@@ -112,10 +112,12 @@ describe("JestReporter", () => {
                     {
                         foo: {
                             durations: [1, 2, 3],
+                            totalDuration: undefined,
                             children: {},
                         },
                         bar: {
                             durations: [4, 5, 6],
+                            totalDuration: 15,
                             children: {},
                         }
                     }
@@ -139,6 +141,7 @@ describe("JestReporter", () => {
                     {
                         bar: {
                             durations: [4, 5, 6],
+                            totalDuration: 15,
                             children: {},
                         }
                     }
@@ -162,9 +165,9 @@ describe("JestReporter", () => {
                 expect(spy.mock.calls[0][0]).toBe(stripIndent(`
                     ${HEADER}
                     foo:
-                      2 ms (+/- 1.13161 ms) from 3 iterations
+                      2 ms (+/- 1.13161 ms) from 3 iterations (6 ms total)
                     bar:
-                      5 ms (+/- 1.13161 ms) from 3 iterations
+                      5 ms (+/- 1.13161 ms) from 3 iterations (15 ms total)
                     ${FOOTER}
                 `).trimRight());
                 expect(fs.existsSync(STATE_FILE)).toBeTruthy();
@@ -187,9 +190,9 @@ describe("JestReporter", () => {
                 expect(spy.mock.calls[0][0]).toBe(stripIndent(`
                     ${HEADER}
                     foo:
-                      2 ms (+/- 1.13161 ms) from 3 iterations
+                      2 ms (+/- 1.13161 ms) from 3 iterations (6 ms total)
                     bar:
-                      5 ms (+/- 1.13161 ms) from 3 iterations
+                      5 ms (+/- 1.13161 ms) from 3 iterations (15 ms total)
                     ${FOOTER}
                 `).trimRight());
                 expect(fs.existsSync(STATE_FILE)).toBeFalsy();
@@ -212,9 +215,9 @@ describe("JestReporter", () => {
                 expect(spy.mock.calls[0][0]).toBe(stripIndent(`
                     ${HEADER}
                     foo:
-                      2 ms (+/- 1.13161 ms) from 3 iterations
+                      2 ms (+/- 1.13161 ms) from 3 iterations (6 ms total)
                     bar:
-                      5 ms (+/- 1.13161 ms) from 3 iterations
+                      5 ms (+/- 1.13161 ms) from 3 iterations (15 ms total)
                     ${FOOTER}
                 `).trimRight());
             });
@@ -279,7 +282,7 @@ describe("KarmaReporter", () => {
             ${HEADER}
             any:
               foo:
-                2 ms (+/- 1.13161 ms) from 3 iterations
+                2 ms (+/- 1.13161 ms) from 3 iterations (6 ms total)
             ${FOOTER}
         `).trim() + "\n");
     });
@@ -294,7 +297,7 @@ describe("KarmaReporter", () => {
         expect(writer.mock.calls[0][0]).toBe(stripIndent(`
             ${HEADER}
             foo:
-              2 ms (+/- 1.13161 ms) from 3 iterations
+              2 ms (+/- 1.13161 ms) from 3 iterations (6 ms total)
             ${FOOTER}
         `).trim() + "\n");
     });
@@ -334,7 +337,7 @@ describe("MochaReporter", () => {
             A:
               B:
                 foo:
-                  2 ms (+/- 1.13161 ms) from 3 iterations
+                  2 ms (+/- 1.13161 ms) from 3 iterations (6 ms total)
             ${FOOTER}
         `).trimRight());
     });
@@ -350,7 +353,7 @@ describe("MochaReporter", () => {
         expect(spy.mock.calls[0][0]).toBe(stripIndent(`
             ${HEADER}
             foo:
-              2 ms (+/- 1.13161 ms) from 3 iterations
+              2 ms (+/- 1.13161 ms) from 3 iterations (6 ms total)
             ${FOOTER}
         `).trimRight());
     });

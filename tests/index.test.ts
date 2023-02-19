@@ -209,13 +209,14 @@ describe("Benchmark", () => {
             benchmark.data = {
                 foo: {
                     durations: [1, 2, 3, 4],
+                    totalDuration: 101,
                     children: {},
                 }
             };
             expect(benchmark.report()).toBe(normalize(`
                 - - - - - - - - - - - - - - - - - Performance - - - - - - - - - - - - - - - - -
                 foo:
-                  2.5 ms (+/- 1.26517 ms) from 4 iterations
+                  2.5 ms (+/- 1.26517 ms) from 4 iterations (101 ms total)
                 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
             `));
         });
@@ -224,19 +225,21 @@ describe("Benchmark", () => {
             benchmark.data = {
                 foo: {
                     durations: [1],
+                    totalDuration: 101,
                     children: {},
                 },
                 bar: {
                     durations: [2],
+                    totalDuration: 102,
                     children: {},
                 }
             };
             expect(benchmark.report()).toBe(normalize(`
                 ${HEADER}
                 foo:
-                  1 ms (+/- 0 ms) from 1 iterations
+                  1 ms (+/- 0 ms) from 1 iterations (101 ms total)
                 bar:
-                  2 ms (+/- 0 ms) from 1 iterations
+                  2 ms (+/- 0 ms) from 1 iterations (102 ms total)
                 ${FOOTER}
             `));
         });
@@ -245,9 +248,11 @@ describe("Benchmark", () => {
             benchmark.data = {
                 foo: {
                     durations: [1],
+                    totalDuration: 101,
                     children: {
                         bar: {
                             durations: [2],
+                            totalDuration: 102,
                             children: {},
                         }
                     },
@@ -256,10 +261,10 @@ describe("Benchmark", () => {
             expect(benchmark.report()).toBe(normalize(`
                 ${HEADER}
                 foo:
-                  1 ms (+/- 0 ms) from 1 iterations
+                  1 ms (+/- 0 ms) from 1 iterations (101 ms total)
 
                   bar:
-                    2 ms (+/- 0 ms) from 1 iterations
+                    2 ms (+/- 0 ms) from 1 iterations (102 ms total)
                 ${FOOTER}
             `));
         });
@@ -268,9 +273,11 @@ describe("Benchmark", () => {
             benchmark.data = {
                 foo: {
                     durations: [],
+                    totalDuration: 0,
                     children: {
                         bar: {
                             durations: [2],
+                            totalDuration: 102,
                             children: {},
                         }
                     },
@@ -280,7 +287,7 @@ describe("Benchmark", () => {
                 ${HEADER}
                 foo:
                   bar:
-                    2 ms (+/- 0 ms) from 1 iterations
+                    2 ms (+/- 0 ms) from 1 iterations (102 ms total)
                 ${FOOTER}
             `));
         });
@@ -289,12 +296,12 @@ describe("Benchmark", () => {
     describe("measurements", () => {
         it("converts data with one level", () => {
             benchmark.data = {
-                foo: { durations: [1], children: {} },
-                bar: { durations: [2], children: {} },
+                foo: { durations: [1], totalDuration: 101, children: {} },
+                bar: { durations: [2], totalDuration: 102, children: {} },
             };
             expect(benchmark.measurements).toEqual([
-                (() => { const m = new Measurement([1]); m.description = ["foo"]; return m; })(),
-                (() => { const m = new Measurement([2]); m.description = ["bar"]; return m; })(),
+                (() => { const m = new Measurement([1], 101); m.description = ["foo"]; return m; })(),
+                (() => { const m = new Measurement([2], 102); m.description = ["bar"]; return m; })(),
             ]);
         });
 
@@ -302,15 +309,16 @@ describe("Benchmark", () => {
             benchmark.data = {
                 foo: {
                     durations: [],
+                    totalDuration: 0,
                     children: {
                         bar: {
-                            durations: [1], children: {}
+                            durations: [1], totalDuration: 101, children: {}
                         },
                     }
                 },
             };
             expect(benchmark.measurements).toEqual([
-                (() => { const m = new Measurement([1]); m.description = ["foo", "bar"]; return m; })(),
+                (() => { const m = new Measurement([1], 101); m.description = ["foo", "bar"]; return m; })(),
             ]);
         });
 
@@ -322,8 +330,8 @@ describe("Benchmark", () => {
     describe("find", () => {
         it("can find the fastest by the default field", async () => {
             benchmark.data = {
-                foo: { durations: [1, 2], children: {} },
-                bar: { durations: [1.1, 1.2], children: {} },
+                foo: { durations: [1, 2], totalDuration: 101, children: {} },
+                bar: { durations: [1.1, 1.2], totalDuration: 102, children: {} },
             };
             const result = benchmark.find(Criteria.Fastest);
             expect(result?.description).toEqual(["bar"]);
@@ -332,8 +340,8 @@ describe("Benchmark", () => {
 
         it("can find the fastest by a custom field", async () => {
             benchmark.data = {
-                foo: { durations: [1, 2], children: {} },
-                bar: { durations: [1.1, 1.2], children: {} },
+                foo: { durations: [1, 2], totalDuration: 101, children: {} },
+                bar: { durations: [1.1, 1.2], totalDuration: 102, children: {} },
             };
             const result = benchmark.find(Criteria.Fastest, m => m.min);
             expect(result?.description).toEqual(["foo"]);
@@ -341,8 +349,8 @@ describe("Benchmark", () => {
 
         it("can find the slowest by the default field", async () => {
             benchmark.data = {
-                foo: { durations: [1, 2], children: {} },
-                bar: { durations: [0.1, 0.1, 2.1], children: {} },
+                foo: { durations: [1, 2], totalDuration: 101, children: {} },
+                bar: { durations: [0.1, 0.1, 2.1], totalDuration: 102, children: {} },
             };
             const result = benchmark.find(Criteria.Slowest);
             expect(result?.description).toEqual(["foo"]);
@@ -350,8 +358,8 @@ describe("Benchmark", () => {
 
         it("can find the slowest by a custom field", async () => {
             benchmark.data = {
-                foo: { durations: [1, 2], children: {} },
-                bar: { durations: [0.1, 0.1, 2.1], children: {} },
+                foo: { durations: [1, 2], totalDuration: 101, children: {} },
+                bar: { durations: [0.1, 0.1, 2.1], totalDuration: 102, children: {} },
             };
             const result = benchmark.find(Criteria.Slowest, m => m.max);
             expect(result?.description).toEqual(["bar"]);
@@ -359,7 +367,7 @@ describe("Benchmark", () => {
 
         it("returns the measurement when there is only one", async () => {
             benchmark.data = {
-                foo: { durations: [1, 2], children: {} },
+                foo: { durations: [1, 2], totalDuration: 101, children: {} },
             };
             const result = benchmark.find(Criteria.Fastest);
             expect(result?.description).toEqual(["foo"]);
