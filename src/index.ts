@@ -35,14 +35,23 @@ export class Measurement {
     description: Array<string> = [];
 
     /**
+     * Total duration of the benchmark, i.e. for throughput.
+     * This includes time spent on any configured `beforeEach`/`afterEach` callbacks.
+     * When `serial` is false, this number will be lower.
+     */
+    totalDuration: number;
+
+    /**
      *
      * @param durations - Durations measured, in milliseconds.
      *     The list must not be empty.
+     * @param totalDuration - Duration of the entire measurement, in milliseconds.
      */
-    constructor(public durations: Array<number>) {
+    constructor(public durations: Array<number>, totalDuration?: number) {
         if (durations.length === 0) {
             throw new Error("The list of durations must not be empty");
         }
+        this.totalDuration = totalDuration ?? mathjs.sum(durations);
     }
 
     /**
@@ -167,6 +176,12 @@ export interface BenchmarkData {
         durations: Array<number>,
 
         /**
+         * Total duration of the benchmark, i.e. for throughput.
+         * This is nullable for compatibility with older serialized data from the Jest reporter.
+         */
+        totalDuration?: number;
+
+        /**
          * Nested test data, such as when passing `["A", "B"]` as the
          * description to [[Benchmark.record]].
          */
@@ -213,6 +228,8 @@ export async function measure(fn: () => any, options: Partial<MeasureOptions> = 
         });
     }
 
+    const measureStart = hrtime();
+
     if (mergedOptions.serial) {
         for (const call of calls) {
             await call();
@@ -221,7 +238,10 @@ export async function measure(fn: () => any, options: Partial<MeasureOptions> = 
         await Promise.all(calls.map(x => x()));
     }
 
-    const measurement = new Measurement(durations);
+    const [measureSec, measureNano] = hrtime(measureStart);
+    const totalDuration = measureSec * 1e3 + measureNano / 1e6;
+
+    const measurement = new Measurement(durations, totalDuration);
     verifyMeasurement(measurement, mergedOptions);
     return measurement;
 }
@@ -358,18 +378,19 @@ export class Benchmark {
         if ((description.length === 0)) {
             throw new Error("The description must not be empty");
         }
-        this.addBenchmarkDurations(this.data, description, measurement.durations);
+        this.addBenchmarkDurations(this.data, description, measurement.durations, measurement.totalDuration);
     }
 
-    private addBenchmarkDurations(data: BenchmarkData, categories: Array<string>, durations: Array<number>): void {
+    private addBenchmarkDurations(data: BenchmarkData, categories: Array<string>, durations: Array<number>, totalDuration: number): void {
         if (!(categories[0] in data)) {
-            data[categories[0]] = { durations: [], children: {} };
+            data[categories[0]] = { durations: [], children: {}, totalDuration: 0 };
         }
 
         if (categories.length === 1) {
             data[categories[0]].durations = data[categories[0]].durations.concat(durations);
+            data[categories[0]].totalDuration = (data[categories[0]].totalDuration ?? 0) + totalDuration;
         } else {
-            this.addBenchmarkDurations(data[categories[0]].children, categories.slice(1), durations);
+            this.addBenchmarkDurations(data[categories[0]].children, categories.slice(1), durations, totalDuration);
         }
     }
 
@@ -380,11 +401,12 @@ export class Benchmark {
             const showChildren = Object.keys(info.children).length > 0;
             lines.push(`${"  ".repeat(depth)}${description}:`);
             if (showMeasurement) {
-                const measurement = new Measurement(info.durations);
+                const measurement = new Measurement(info.durations, info.totalDuration);
                 const mean = round(measurement.mean);
                 const moe = round(measurement.marginOfError);
                 const iterations = measurement.durations.length;
-                lines.push(`${"  ".repeat(depth + 1)}${mean} ms (+/- ${moe} ms) from ${iterations} iterations`);
+                const totalDuration = round(measurement.totalDuration);
+                lines.push(`${"  ".repeat(depth + 1)}${mean} ms (+/- ${moe} ms) from ${iterations} iterations (${totalDuration} ms total)`);
             }
             if (showMeasurement && showChildren) {
                 lines.push("");
@@ -404,7 +426,7 @@ export class Benchmark {
         if (lines.length === 0) {
             return "";
         } else {
-            return [HEADER, ...this.reportLevel(this.data, 0), FOOTER].join("\n");
+            return [HEADER, ...lines, FOOTER].join("\n");
         }
     }
 
@@ -413,7 +435,7 @@ export class Benchmark {
         for (const [description, info] of Object.entries(level)) {
             const localDescriptions = [...descriptions, description];
             if (info.durations.length > 0) {
-                const measurement = new Measurement(info.durations);
+                const measurement = new Measurement(info.durations, info.totalDuration);
                 measurement.description = localDescriptions;
                 measurements.push(measurement);
             }
