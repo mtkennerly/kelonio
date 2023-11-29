@@ -23,7 +23,8 @@
     "test": "npx jest --verbose --silent --coverage --runInBand"
   },
   "dependencies": {
-    "browser-process-hrtime": "^1.0.0",
+    "browser-hrtime": "^1.1.8",
+    "eventemitter3": "^4.0.7",
     "mathjs": "^10.5.2"
   },
   "devDependencies": {
