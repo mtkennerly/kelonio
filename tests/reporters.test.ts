@@ -1,8 +1,11 @@
 import { EventEmitter } from "events";
 import fs from "fs";
 import stripIndent from "strip-indent";
-import { benchmark, JestReporter, KarmaReporter, Measurement, MochaReporter } from "../src";
-import { FOOTER, HEADER, STATE_FILE } from "../src/etc";
+import { benchmark, Measurement } from "../src";
+import { JestReporter, STATE_FILE } from "../src/reporters/jest";
+import { KarmaReporter } from "../src/reporters/karma";
+import { MochaReporter } from "../src/reporters/mocha";
+import { FOOTER, HEADER } from "../src/reporters/utils";
 
 function makeMochaReporter(reporterOptions: any = {}): [EventEmitter, MochaReporter] {
     const runner = new EventEmitter();

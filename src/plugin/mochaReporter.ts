@@ -1,3 +1,3 @@
-import { MochaReporter } from "..";
+import { MochaReporter } from "../reporters/mocha";
 
 export = MochaReporter;

@@ -1,3 +1,3 @@
-import { KarmaReporter } from "..";
+import { KarmaReporter } from "../reporters/karma";
 
 KarmaReporter.initializeKelonio();
