@@ -1,4 +1,4 @@
-import hrtime from "browser-process-hrtime";
+import hrtime from "browser-hrtime";
 import { EventEmitter } from "eventemitter3";
 import * as mathjs from "mathjs";
 import { FOOTER, HEADER } from "./reporters/utils";
