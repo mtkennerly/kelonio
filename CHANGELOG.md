@@ -1,4 +1,4 @@
-## Unreleased
+## v0.10.0 (2023-12-04)
 
 * Changed:
   * A few improvements were made to avoid the need for Node polyfills in the browser:
