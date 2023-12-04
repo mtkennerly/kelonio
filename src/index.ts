@@ -1,10 +1,7 @@
 import hrtime from "browser-process-hrtime";
 import { EventEmitter } from "events";
 import * as mathjs from "mathjs";
-import { FOOTER, HEADER } from "./etc";
-import { JestReporter, KarmaReporter, MochaReporter } from "./reporters";
-
-export { JestReporter, KarmaReporter, MochaReporter };
+import { FOOTER, HEADER } from "./reporters/utils";
 
 export declare interface BenchmarkEventEmitter {
     emit(event: "record", description: Array<string>, measurement: Measurement): boolean;

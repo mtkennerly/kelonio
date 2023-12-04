@@ -1,3 +1,3 @@
-import { JestReporter } from "..";
+import { JestReporter } from "../reporters/jest";
 
 export = JestReporter;

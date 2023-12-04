@@ -1,6 +1,6 @@
 import stripIndent from "strip-indent";
 import { Benchmark, Criteria, measure, Measurement, PerformanceError } from "../src";
-import { FOOTER, HEADER } from "../src/etc";
+import { FOOTER, HEADER } from "../src/reporters/utils";
 
 // Using `await util.promisify(setTimeout)(500)` leads to this error in some tests:
 // "Async callback was not invoked within the 5000ms timeout"
