@@ -1,24 +1,10 @@
-import * as fsModule from "fs";
+import * as fs from "fs";
 import { Benchmark, benchmark } from '../index'
 import { ExtensionLookup, handleExtraReports } from "./utils";
 
 export const STATE_FILE = ".kelonio.state.json";
 
-let fs: typeof fsModule;
-let canUseFs = true;
-try {
-    fs = require("fs");
-} catch {
-    canUseFs = false;
-}
-
 export class BenchmarkFileState {
-    constructor() {
-        if (!canUseFs) {
-            throw new Error("Unable to access file system");
-        }
-    }
-
     exists(): boolean {
         return fs.existsSync(STATE_FILE);
     }
