@@ -1,3 +1,14 @@
+## Unreleased
+
+* Changed:
+  * A few improvements were made to avoid the need for Node polyfills in the browser:
+
+    * Replaced `browser-process-hrtime` with `browser-hrtime`
+    * Replaced `events` with `eventemitter3`
+    * Removed reporter re-exports from root module (because Jest reporter requires `fs`)
+
+    ([Contributed by haven2world](https://github.com/mtkennerly/kelonio/pull/14))
+
 ## v0.9.0 (2023-02-19)
 
 * Added:

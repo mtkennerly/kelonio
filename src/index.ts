@@ -1,5 +1,5 @@
 import hrtime from "browser-process-hrtime";
-import { EventEmitter } from "events";
+import { EventEmitter } from "eventemitter3";
 import * as mathjs from "mathjs";
 import { FOOTER, HEADER } from "./reporters/utils";
 
@@ -9,7 +9,7 @@ export declare interface BenchmarkEventEmitter {
     once(event: "record", listener: (description: Array<string>, measurement: Measurement) => void): this;
 }
 
-export class BenchmarkEventEmitter extends EventEmitter { }
+export class BenchmarkEventEmitter extends EventEmitter<"record"> { }
 
 /**
  * Base error for benchmark failures, such as a function taking too long
