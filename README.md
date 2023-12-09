@@ -1,17 +1,17 @@
 # Kelonio
 Kelonio is a performance testing library for Node.js, written in TypeScript.
-Whereas many similar projects are test frameworks in and of themselves, Kelonio
-is fundamentally a **library** and therefore aims to integrate with existing
-test frameworks seamlessly instead of reinventing the wheel. You can use it
-inside of your existing tests from frameworks such as Jest and Mocha (along
-with any loaders like [ts-jest](https://www.npmjs.com/package/ts-jest)),
+Whereas many similar projects are test frameworks in and of themselves,
+Kelonio is fundamentally a **library** and therefore aims to integrate
+with existing test frameworks seamlessly instead of reinventing the wheel.
+You can use it inside of your existing tests from frameworks such as Jest and Mocha
+(along with any loaders like [ts-jest](https://www.npmjs.com/package/ts-jest)),
 and you can use it in the console and scripts as well.
 
 Kelonio also works in the browser (as long as you use a tool like
 [Webpack](https://www.npmjs.com/package/webpack) or
 [Browserify](https://www.npmjs.com/package/browserify)),
-and it comes with built-in reporters for the following test frameworks without
-any direct dependency on them:
+and it comes with built-in reporters for the following test frameworks
+without any direct dependency on them:
 
 * [Jest](https://www.npmjs.com/package/jest)
 * [Mocha](https://www.npmjs.com/package/mocha)
@@ -21,8 +21,7 @@ any direct dependency on them:
 Full API documentation:
 [https://mtkennerly.github.io/kelonio/modules](https://mtkennerly.github.io/kelonio/modules)
 
-For simple, one-off checks, like in the console or a script, use the `measure`
-function:
+For simple, one-off checks, like in the console or a script, use the `measure` function:
 
 ```typescript
 import { measure } from "kelonio";
@@ -33,12 +32,13 @@ measure(() => axios.get("http://www.httpbin.org/get"))
 ```
 
 By default, the check is repeated 100 times, but you can customize this.
-If you measure a function that returns a promise, Kelonio will automatically
-measure the time until it's resolved as well. The resulting `measurement`
-exposes various stats, like mean time, maximum time, and standard deviation.
+If you measure a function that returns a promise,
+Kelonio will automatically measure the time until it's resolved as well.
+The resulting `measurement` exposes various stats,
+like mean time, maximum time, and standard deviation.
 
-For aggregating results from multiple measurements, create a `Benchmark` and
-use its `record` method to store the state:
+For aggregating results from multiple measurements,
+create a `Benchmark` and use its `record` method to store the state:
 
 ```typescript
 import { Benchmark, Criteria } from "kelonio";
@@ -52,15 +52,16 @@ console.log(`Fastest: ${fastest?.description} with mean ${fastest?.mean} ms`);
 // Fastest: String#indexOf with mean 0.004199049999999999 ms
 ```
 
-For aggregating results inside of a test framework, use the default `benchmark`
-instance and its `record` method. Click to expand an example:
+For aggregating results inside of a test framework,
+use the default `benchmark` instance and its `record` method.
+Click to expand an example:
 
 <details>
   <summary>Example: Jest</summary>
   <div style="padding-left: 5px; border-left: 1px solid black;">
 
-  Jest doesn't currently expose a way to get each individual test's name
-  while running, so you have to provide a description to `record()`.
+  Jest doesn't currently expose a way to get each individual test's name while running,
+  so you have to provide a description to `record()`.
 
   Tests:
 
@@ -112,8 +113,8 @@ instance and its `record` method. Click to expand an example:
   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   ```
 
-  The first time on each line is the mean duration, and the `+/-` time is
-  the margin of error at a 95% confidence level.
+  The first time on each line is the mean duration,
+  and the `+/-` time is the margin of error at a 95% confidence level.
 
   </div>
 </details>
@@ -122,8 +123,8 @@ instance and its `record` method. Click to expand an example:
   <summary>Example: Mocha</summary>
   <div style="padding-left: 5px; border-left: 1px solid black;">
 
-  The Mocha reporter can automatically infer the descriptions from the test
-  names, but you're still free to pass additional descriptions to `record()`,
+  The Mocha reporter can automatically infer the descriptions from the test names,
+  but you're still free to pass additional descriptions to `record()`,
   such as if one test performs several different measurements.
 
   Tests:
@@ -173,14 +174,14 @@ instance and its `record` method. Click to expand an example:
   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   ```
 
-  The first time on each line is the mean duration, and the `+/-` time is
-  the margin of error at a 95% confidence level.
+  The first time on each line is the mean duration,
+  and the `+/-` time is the margin of error at a 95% confidence level.
 
   </div>
 </details>
 
-Refer to the `examples` folder for sample projects that integrate Kelonio with
-different test frameworks.
+Refer to the `examples` folder for sample projects
+that integrate Kelonio with different test frameworks.
 
 ## Versioning
 This project uses [Semantic Versioning](https://semver.org). Public API:
@@ -196,10 +197,10 @@ This project uses [Semantic Versioning](https://semver.org). Public API:
 ## Comparison with other tools
 * [Benchmark](https://www.npmjs.com/package/benchmark):
   * Requires defining tests in its own framework.
-  * Doesn't provide a default report format, so you have to write your own
-    reporting in callbacks.
-  * Callbacks must be classic `function () {}` style because they need access
-    to `this`, which is not accounted for by
+  * Doesn't provide a default report format,
+    so you have to write your own reporting in callbacks.
+  * Callbacks must be classic `function () {}` style because they need access to `this`,
+    which is not accounted for by
     [@types/benchmark](https://www.npmjs.com/package/@types/benchmark).
 * [Nanobench](https://www.npmjs.com/package/nanobench):
   * Requires defining tests in its own framework.
