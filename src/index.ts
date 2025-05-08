@@ -142,7 +142,13 @@ export interface MeasureOptions<Measured = any, BeforeEach = any> {
      * Callback to invoke after each iteration.
      */
     afterEach?: (context: {
+        /**
+         * The return value of the measured function for the current iteration.
+         */
         measured: Awaited<Measured>,
+        /**
+         * The return value of the `beforeEach` function for the current iteration.
+         */
         beforeEach: Awaited<BeforeEach>,
     }) => any;
 
@@ -201,7 +207,12 @@ function round(value: number, places: number = 5): number {
  * @param options - Options to customize the measurement.
  */
 export async function measure<Measured = undefined, BeforeEach = undefined>(
-    fn: (context: { beforeEach: Awaited<BeforeEach> }) => Measured,
+    fn: (context: {
+        /**
+         * The return value of the `beforeEach` function for the current iteration.
+         */
+        beforeEach: Awaited<BeforeEach>
+    }) => Measured,
     options: Partial<MeasureOptions<Measured, BeforeEach>> = {}
 ): Promise<Measurement> {
     const mergedOptions = { ...defaultMeasureOptions, ...options };
