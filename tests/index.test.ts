@@ -75,12 +75,12 @@ describe("measure", () => {
     });
 
     it("provides result of beforeEach to function", async () => {
-        await measure((value) => { 
+        await measure((value) => {
             if (value !== 1) {
                 throw new Error("error");
             }
         }, {
-            beforeEach: () => 1 
+            beforeEach: () => 1
         });
     });
 
