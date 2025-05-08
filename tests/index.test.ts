@@ -74,10 +74,33 @@ describe("measure", () => {
         expect(count).toBe(100);
     });
 
+    it("provides result of beforeEach to function", async () => {
+        await measure((value) => { 
+            if (value !== 1) {
+                throw new Error("error");
+            }
+        }, {
+            beforeEach: () => 1 
+        });
+    });
+
     it("supports an afterEach callback", async () => {
         let count = 0;
         await measure(() => { }, { afterEach: () => count++ });
         expect(count).toBe(100);
+    });
+
+    it("provides result of beforeEach and function to afterEach", async () => {
+        await measure(() => {
+            return 2;
+        }, {
+            beforeEach: () => 1,
+            afterEach: (beforeValue, functionValue) => {
+                if (beforeValue !== 1 || functionValue !== 2) {
+                    throw new Error("error");
+                }
+            }
+        });
     });
 });
 

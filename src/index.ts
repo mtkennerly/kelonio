@@ -90,7 +90,7 @@ export class Measurement {
 /**
  * Options for Benchmark.measure().
  */
-export interface MeasureOptions {
+export interface MeasureOptions<BeforeEachReturnType = any, FunctionReturnType = any> {
     /**
      * The number of times to call the function and measure its duration.
      * @default 100
@@ -136,12 +136,12 @@ export interface MeasureOptions {
     /**
      * Callback to invoke before each iteration.
      */
-    beforeEach?: () => any;
+    beforeEach?: () => BeforeEachReturnType;
 
     /**
      * Callback to invoke after each iteration.
      */
-    afterEach?: () => any;
+    afterEach?: (beforeEachValue: Awaited<BeforeEachReturnType>, functionValue: Awaited<FunctionReturnType>) => any;
 
     /**
      * Whether to make use of the options like `meanUnder` and `minUnder`.
@@ -186,12 +186,6 @@ export interface BenchmarkData {
     };
 }
 
-async function maybePromise(fn: () => any): Promise<void> {
-    const ret = fn();
-    if (ret instanceof Promise) {
-        await ret;
-    }
-}
 
 function round(value: number, places: number = 5): number {
     return mathjs.round(value, places) as number;
@@ -203,24 +197,28 @@ function round(value: number, places: number = 5): number {
  * @param fn - Function to measure.
  * @param options - Options to customize the measurement.
  */
-export async function measure(fn: () => any, options: Partial<MeasureOptions> = {}): Promise<Measurement> {
+export async function measure<BeforeEachReturnType = any, FunctionReturnType = any>(
+    fn: (beforeEachValue: Awaited<BeforeEachReturnType>) => FunctionReturnType,
+    options: Partial<MeasureOptions<BeforeEachReturnType, FunctionReturnType>> = {}
+): Promise<Measurement> {
     const mergedOptions = { ...defaultMeasureOptions, ...options };
     const durations: Array<number> = [];
     let calls: Array<Function> = [];
 
     for (let i = 0; i < mergedOptions.iterations; i++) {
         calls.push(async () => {
+            let beforeEachValue: BeforeEachReturnType | undefined = undefined;
             if (mergedOptions.beforeEach !== undefined) {
-                await maybePromise(mergedOptions.beforeEach);
+                beforeEachValue = await mergedOptions.beforeEach();
             }
 
             const startTime = hrtime();
-            await maybePromise(fn);
+            const functionValue = await fn(beforeEachValue as Awaited<BeforeEachReturnType>);
             const [durationSec, durationNano] = hrtime(startTime);
             durations.push(durationSec * 1e3 + durationNano / 1e6);
 
             if (mergedOptions.afterEach !== undefined) {
-                await maybePromise(mergedOptions.afterEach);
+                await mergedOptions.afterEach(beforeEachValue as Awaited<BeforeEachReturnType>, functionValue as Awaited<FunctionReturnType>);
             }
         });
     }
