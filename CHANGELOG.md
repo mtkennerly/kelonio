@@ -1,3 +1,11 @@
+## Unreleased
+
+* Added:
+  * In `measure()`,
+    the measured function now has access to the return value of `beforeEach()`,
+    and `afterEach()` now has access to the return values of `beforeEach()` and the measured function.
+    ([Contributed by berndfuhrmann](https://github.com/mtkennerly/kelonio/pull/18))
+
 ## v0.10.0 (2023-12-04)
 
 * Changed:

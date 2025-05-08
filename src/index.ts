@@ -90,7 +90,7 @@ export class Measurement {
 /**
  * Options for Benchmark.measure().
  */
-export interface MeasureOptions<BeforeEachReturnType = any, FunctionReturnType = any> {
+export interface MeasureOptions<Measured = any, BeforeEach = any> {
     /**
      * The number of times to call the function and measure its duration.
      * @default 100
@@ -136,12 +136,15 @@ export interface MeasureOptions<BeforeEachReturnType = any, FunctionReturnType =
     /**
      * Callback to invoke before each iteration.
      */
-    beforeEach?: () => BeforeEachReturnType;
+    beforeEach?: () => BeforeEach;
 
     /**
      * Callback to invoke after each iteration.
      */
-    afterEach?: (beforeEachValue: Awaited<BeforeEachReturnType>, functionValue: Awaited<FunctionReturnType>) => any;
+    afterEach?: (context: {
+        measured: Awaited<Measured>,
+        beforeEach: Awaited<BeforeEach>,
+    }) => any;
 
     /**
      * Whether to make use of the options like `meanUnder` and `minUnder`.
@@ -197,9 +200,9 @@ function round(value: number, places: number = 5): number {
  * @param fn - Function to measure.
  * @param options - Options to customize the measurement.
  */
-export async function measure<BeforeEachReturnType = any, FunctionReturnType = any>(
-    fn: (beforeEachValue: Awaited<BeforeEachReturnType>) => FunctionReturnType,
-    options: Partial<MeasureOptions<BeforeEachReturnType, FunctionReturnType>> = {}
+export async function measure<Measured = undefined, BeforeEach = undefined>(
+    fn: (context: { beforeEach: Awaited<BeforeEach> }) => Measured,
+    options: Partial<MeasureOptions<Measured, BeforeEach>> = {}
 ): Promise<Measurement> {
     const mergedOptions = { ...defaultMeasureOptions, ...options };
     const durations: Array<number> = [];
@@ -207,18 +210,18 @@ export async function measure<BeforeEachReturnType = any, FunctionReturnType = a
 
     for (let i = 0; i < mergedOptions.iterations; i++) {
         calls.push(async () => {
-            let beforeEachValue: BeforeEachReturnType | undefined = undefined;
+            let beforeEachValue: BeforeEach | undefined = undefined;
             if (mergedOptions.beforeEach !== undefined) {
                 beforeEachValue = await mergedOptions.beforeEach();
             }
 
             const startTime = hrtime();
-            const functionValue = await fn(beforeEachValue as Awaited<BeforeEachReturnType>);
+            const measuredValue = await fn({ beforeEach: beforeEachValue as Awaited<BeforeEach> });
             const [durationSec, durationNano] = hrtime(startTime);
             durations.push(durationSec * 1e3 + durationNano / 1e6);
 
             if (mergedOptions.afterEach !== undefined) {
-                await mergedOptions.afterEach(beforeEachValue as Awaited<BeforeEachReturnType>, functionValue as Awaited<FunctionReturnType>);
+                await mergedOptions.afterEach({ beforeEach: beforeEachValue as Awaited<BeforeEach>, measured: measuredValue as Awaited<Measured> });
             }
         });
     }

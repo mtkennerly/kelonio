@@ -75,10 +75,8 @@ describe("measure", () => {
     });
 
     it("provides result of beforeEach to function", async () => {
-        await measure((value) => {
-            if (value !== 1) {
-                throw new Error("error");
-            }
+        await measure(({ beforeEach }) => {
+            expect(beforeEach).toBe(1);
         }, {
             beforeEach: () => 1
         });
@@ -95,10 +93,9 @@ describe("measure", () => {
             return 2;
         }, {
             beforeEach: () => 1,
-            afterEach: (beforeValue, functionValue) => {
-                if (beforeValue !== 1 || functionValue !== 2) {
-                    throw new Error("error");
-                }
+            afterEach: ({ beforeEach, measured }) => {
+                expect(beforeEach).toBe(1);
+                expect(measured).toBe(2);
             }
         });
     });
