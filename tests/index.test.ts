@@ -99,6 +99,19 @@ describe("measure", () => {
             }
         });
     });
+
+    it("warms up if requested", async () => {
+        const pattern = /bar/;
+        const measurement = await measure(
+            async () => {
+                pattern.exec("foo bar foo");
+            },
+            { warmups: 10 },
+        );
+
+        // Without warmup: 0.0018645127625720181, with warmup: 0.0002320872882117737
+        expect(measurement.marginOfError).toBeLessThan(0.0005);
+    });
 });
 
 describe("Measurement", () => {

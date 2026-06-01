@@ -98,6 +98,12 @@ export interface MeasureOptions<Measured = any, BeforeEach = any> {
     iterations: number;
 
     /**
+     * The number of times to call the function before measuring it.
+     * This may help in cases where a function is slow only on its first few calls.
+     */
+    warmups?: number;
+
+    /**
      * Whether to wait for each iteration to finish before starting the next.
      * @default true
      */
@@ -217,6 +223,31 @@ export async function measure<Measured = undefined, BeforeEach = undefined>(
 ): Promise<Measurement> {
     const mergedOptions = { ...defaultMeasureOptions, ...options };
     const durations: Array<number> = [];
+
+    let warmups: Array<Function> = [];
+    for (let i = 0; i < (mergedOptions.warmups ?? 0); i++) {
+        warmups.push(async () => {
+            let beforeEachValue: BeforeEach | undefined = undefined;
+            if (mergedOptions.beforeEach !== undefined) {
+                beforeEachValue = await mergedOptions.beforeEach();
+            }
+
+            const measuredValue = await fn({ beforeEach: beforeEachValue as Awaited<BeforeEach> });
+
+            if (mergedOptions.afterEach !== undefined) {
+                await mergedOptions.afterEach({ beforeEach: beforeEachValue as Awaited<BeforeEach>, measured: measuredValue as Awaited<Measured> });
+            }
+        });
+
+        if (mergedOptions.serial) {
+            for (const call of warmups) {
+                await call();
+            }
+        } else {
+            await Promise.all(warmups.map(x => x()));
+        }
+    }
+
     let calls: Array<Function> = [];
 
     for (let i = 0; i < mergedOptions.iterations; i++) {

@@ -1,3 +1,8 @@
+## Unreleased
+
+* Added:
+  * `MeasureOptions.warmups`, a number of times to run the function before measuring its performance.
+
 ## v0.11.0 (2025-05-08)
 
 * Added:
